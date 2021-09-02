@@ -1,0 +1,39 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ * @var \App\Model\Entity\Job $job
+ * @var \Cake\Collection\CollectionInterface|string[] $customers
+ * @var \Cake\Collection\CollectionInterface|string[] $allocation
+ */
+?>
+<div class="row">
+    <aside class="column">
+        <div class="side-nav">
+            <h4 class="heading"><?= __('Actions') ?></h4>
+            <?= $this->Html->link(__('List Jobs'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+        </div>
+    </aside>
+    <div class="column-responsive column-80">
+        <div class="jobs form content">
+            <?= $this->Form->create($job) ?>
+            <fieldset>
+                <legend><?= __('Add Job') ?></legend>
+                <?php
+                    echo $this->Form->control('customer_id', ['options' => $customers]);
+                    echo $this->Form->control('allocation_id', ['options' => $allocation]);
+                    echo $this->Form->control('status');
+                    echo $this->Form->control('moving_from');
+                    echo $this->Form->control('moving_to');
+                    echo $this->Form->control('list_of_item');
+                    echo $this->Form->control('size');
+                    echo $this->Form->control('date');
+                    echo $this->Form->control('deposit_status');
+                    echo $this->Form->control('total_paid');
+                    echo $this->Form->control('total_remaining');
+                ?>
+            </fieldset>
+            <?= $this->Form->button(__('Submit')) ?>
+            <?= $this->Form->end() ?>
+        </div>
+    </div>
+</div>
