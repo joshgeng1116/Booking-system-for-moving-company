@@ -3,26 +3,33 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Job[]|\Cake\Collection\CollectionInterface $jobs
  */
+
+echo $this->Html->css('vendor/datatables/dataTables.bootstrap4.min.css',['block'=>true]);
+echo $this->Html->script('/vendor/datatables/jquery.dataTables.min.js',['block'=>true]);
+echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js',['block'=>true]);
 ?>
 <div class="jobs index content">
-    <?= $this->Html->link(__('New Job'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Jobs') ?></h3>
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800"><?= __('Jobs') ?></h1>
+        <a href="<?=$this->Url->build(['action'=>'add'])?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                class="fas fa-plus fa-sm text-white-50"></i> New Job</a>
+    </div>
     <div class="table-responsive">
-        <table>
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('customer_id') ?></th>
-                    <th><?= $this->Paginator->sort('allocation_id') ?></th>
-                    <th><?= $this->Paginator->sort('status') ?></th>
-                    <th><?= $this->Paginator->sort('moving_from') ?></th>
-                    <th><?= $this->Paginator->sort('moving_to') ?></th>
-                    <th><?= $this->Paginator->sort('list_of_item') ?></th>
-                    <th><?= $this->Paginator->sort('size') ?></th>
-                    <th><?= $this->Paginator->sort('date') ?></th>
-                    <th><?= $this->Paginator->sort('deposit_status') ?></th>
-                    <th><?= $this->Paginator->sort('total_paid') ?></th>
-                    <th><?= $this->Paginator->sort('total_remaining') ?></th>
+                    <th><?= h('id') ?></th>
+                    <th><?= h('customer_id') ?></th>
+                    <th><?= h('allocation_id') ?></th>
+                    <th><?= h('status') ?></th>
+                    <th><?= h('moving_from') ?></th>
+                    <th><?= h('moving_to') ?></th>
+                    <th><?= h('list_of_item') ?></th>
+                    <th><?= h('size') ?></th>
+                    <th><?= h('date') ?></th>
+                    <th><?= h('deposit_status') ?></th>
+                    <th><?= h('total_paid') ?></th>
+                    <th><?= h('total_remaining') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -51,14 +58,10 @@
             </tbody>
         </table>
     </div>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
-    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#dataTable').DataTable();
+        });
+    </script>
 </div>
