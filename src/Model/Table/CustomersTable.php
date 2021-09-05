@@ -11,8 +11,6 @@ use Cake\Validation\Validator;
 /**
  * Customers Model
  *
- * @property \App\Model\Table\JobsTable&\Cake\ORM\Association\HasMany $Jobs
- *
  * @method \App\Model\Entity\Customer newEmptyEntity()
  * @method \App\Model\Entity\Customer newEntity(array $data, array $options = [])
  * @method \App\Model\Entity\Customer[] newEntities(array $data, array $options = [])
@@ -42,10 +40,6 @@ class CustomersTable extends Table
         $this->setTable('customers');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
-
-        $this->hasMany('Jobs', [
-            'foreignKey' => 'customer_id',
-        ]);
     }
 
     /**

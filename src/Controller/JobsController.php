@@ -19,7 +19,7 @@ class JobsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Customers', 'Allocation'],
+            'contain' => ['Allocation'],
         ];
         $jobs = $this->paginate($this->Jobs);
 
@@ -36,7 +36,7 @@ class JobsController extends AppController
     public function view($id = null)
     {
         $job = $this->Jobs->get($id, [
-            'contain' => ['Customers', 'Allocation'],
+            'contain' => ['Allocation'],
         ]);
 
         $this->set(compact('job'));
@@ -57,11 +57,11 @@ class JobsController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
+
             $this->Flash->error(__('The job could not be saved. Please, try again.'));
         }
-        $customers = $this->Jobs->Customers->find('list', ['limit' => 200]);
         $allocation = $this->Jobs->Allocation->find('list', ['limit' => 200]);
-        $this->set(compact('job', 'customers', 'allocation'));
+        $this->set(compact('job', 'allocation'));
     }
 
     /**
@@ -85,9 +85,8 @@ class JobsController extends AppController
             }
             $this->Flash->error(__('The job could not be saved. Please, try again.'));
         }
-        $customers = $this->Jobs->Customers->find('list', ['limit' => 200]);
         $allocation = $this->Jobs->Allocation->find('list', ['limit' => 200]);
-        $this->set(compact('job', 'customers', 'allocation'));
+        $this->set(compact('job', 'allocation'));
     }
 
     /**

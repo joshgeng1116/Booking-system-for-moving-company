@@ -18,8 +18,11 @@ class JobsFixture extends TestFixture
     // phpcs:disable
     public $fields = [
         'id' => ['type' => 'integer', 'length' => null, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
-        'customer_id' => ['type' => 'integer', 'length' => null, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
-        'allocation_id' => ['type' => 'integer', 'length' => null, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'customer_first_name' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
+        'customer_last_name' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
+        'customer_phone' => ['type' => 'integer', 'length' => null, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'customer_email' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
+        'allocation_id' => ['type' => 'integer', 'length' => null, 'unsigned' => false, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'status' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
         'moving_from' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
         'moving_to' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
@@ -34,9 +37,7 @@ class JobsFixture extends TestFixture
         ],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
-            'customer_id' => ['type' => 'unique', 'columns' => ['customer_id'], 'length' => []],
             'jobs_ibfk_2' => ['type' => 'foreign', 'columns' => ['allocation_id'], 'references' => ['allocation', 'id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
-            'jobs_ibfk_1' => ['type' => 'foreign', 'columns' => ['customer_id'], 'references' => ['customers', 'id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -54,14 +55,17 @@ class JobsFixture extends TestFixture
         $this->records = [
             [
                 'id' => 1,
-                'customer_id' => 1,
+                'customer_first_name' => 'Lorem ipsum dolor sit amet',
+                'customer_last_name' => 'Lorem ipsum dolor sit amet',
+                'customer_phone' => 1,
+                'customer_email' => 'Lorem ipsum dolor sit amet',
                 'allocation_id' => 1,
                 'status' => 'Lorem ipsum dolor sit amet',
                 'moving_from' => 'Lorem ipsum dolor sit amet',
                 'moving_to' => 'Lorem ipsum dolor sit amet',
                 'list_of_item' => 'Lorem ipsum dolor sit amet',
                 'size' => 'Lorem ipsum dolor sit amet',
-                'date' => '2021-09-02',
+                'date' => '2021-09-05',
                 'deposit_status' => 'Lorem ipsum dolor sit amet',
                 'total_paid' => 1,
                 'total_remaining' => 1,

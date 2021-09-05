@@ -19,8 +19,16 @@
             <h3><?= h($job->id) ?></h3>
             <table>
                 <tr>
-                    <th><?= __('Customer') ?></th>
-                    <td><?= $job->has('customer') ? $this->Html->link($job->customer->id, ['controller' => 'Customers', 'action' => 'view', $job->customer->id]) : '' ?></td>
+                    <th><?= __('Customer First Name') ?></th>
+                    <td><?= h($job->customer_first_name) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Customer Last Name') ?></th>
+                    <td><?= h($job->customer_last_name) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Customer Email') ?></th>
+                    <td><?= h($job->customer_email) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Allocation') ?></th>
@@ -28,7 +36,23 @@
                 </tr>
                 <tr>
                     <th><?= __('Status') ?></th>
-                    <td><?= h($job->status) ?></td>
+                    <td>
+                        <?php if($job->status == 1):?>
+                            Enquiry
+                        <?php elseif($job->status == 2):?>
+                            Offer
+                        <?php elseif($job->status == 3):?>
+                            Job
+                        <?php elseif($job->status == 4):?>
+                            Picked_Up
+                        <?php elseif($job->status == 5):?>
+                            In-Transit
+                        <?php elseif($job->status == 6):?>
+                            Delivery
+                        <?php elseif($job->status == 7):?>
+                            Completed
+                        <?php endif;?>
+                    </td>
                 </tr>
                 <tr>
                     <th><?= __('Moving From') ?></th>
@@ -48,11 +72,21 @@
                 </tr>
                 <tr>
                     <th><?= __('Deposit Status') ?></th>
-                    <td><?= h($job->deposit_status) ?></td>
+                    <td>
+                        <?php if($job->deposit_status == 1):?>
+                            Waiting
+                        <?php elseif($job->deposit_status == 2):?>
+                            Confirmed
+                        <?php endif;?>
+                    </td>
                 </tr>
                 <tr>
                     <th><?= __('Id') ?></th>
                     <td><?= $this->Number->format($job->id) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Customer Phone') ?></th>
+                    <td><?= $this->Number->format($job->customer_phone) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Total Paid') ?></th>

@@ -11,7 +11,6 @@ use Cake\Validation\Validator;
 /**
  * Jobs Model
  *
- * @property \App\Model\Table\CustomersTable&\Cake\ORM\Association\BelongsTo $Customers
  * @property \App\Model\Table\AllocationTable&\Cake\ORM\Association\BelongsTo $Allocation
  *
  * @method \App\Model\Entity\Job newEmptyEntity()
@@ -44,13 +43,8 @@ class JobsTable extends Table
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
-        $this->belongsTo('Customers', [
-            'foreignKey' => 'customer_id',
-            'joinType' => 'INNER',
-        ]);
         $this->belongsTo('Allocation', [
             'foreignKey' => 'allocation_id',
-            'joinType' => 'INNER',
         ]);
     }
 
@@ -65,6 +59,29 @@ class JobsTable extends Table
         $validator
             ->integer('id')
             ->allowEmptyString('id', null, 'create');
+
+        $validator
+            ->scalar('customer_first_name')
+            ->maxLength('customer_first_name', 255)
+            ->requirePresence('customer_first_name', 'create')
+            ->notEmptyString('customer_first_name');
+
+        $validator
+            ->scalar('customer_last_name')
+            ->maxLength('customer_last_name', 255)
+            ->requirePresence('customer_last_name', 'create')
+            ->notEmptyString('customer_last_name');
+
+        $validator
+            ->integer('customer_phone')
+            ->requirePresence('customer_phone', 'create')
+            ->notEmptyString('customer_phone');
+
+        $validator
+            ->scalar('customer_email')
+            ->maxLength('customer_email', 255)
+            ->requirePresence('customer_email', 'create')
+            ->notEmptyString('customer_email');
 
         $validator
             ->scalar('status')
@@ -127,7 +144,6 @@ class JobsTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->existsIn(['customer_id'], 'Customers'), ['errorField' => 'customer_id']);
         $rules->add($rules->existsIn(['allocation_id'], 'Allocation'), ['errorField' => 'allocation_id']);
 
         return $rules;

@@ -42,46 +42,52 @@
             <div class="related">
                 <h4><?= __('Related Jobs') ?></h4>
                 <?php if (!empty($customer->jobs)) : ?>
-                <div class="table-responsive">
-                    <table>
-                        <tr>
-                            <th><?= __('Id') ?></th>
-                            <th><?= __('Customer Id') ?></th>
-                            <th><?= __('Allocation Id') ?></th>
-                            <th><?= __('Status') ?></th>
-                            <th><?= __('Moving From') ?></th>
-                            <th><?= __('Moving To') ?></th>
-                            <th><?= __('List Of Item') ?></th>
-                            <th><?= __('Size') ?></th>
-                            <th><?= __('Date') ?></th>
-                            <th><?= __('Deposit Status') ?></th>
-                            <th><?= __('Total Paid') ?></th>
-                            <th><?= __('Total Remaining') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
-                        </tr>
-                        <?php foreach ($customer->jobs as $jobs) : ?>
-                        <tr>
-                            <td><?= h($jobs->id) ?></td>
-                            <td><?= h($jobs->customer_id) ?></td>
-                            <td><?= h($jobs->allocation_id) ?></td>
-                            <td><?= h($jobs->status) ?></td>
-                            <td><?= h($jobs->moving_from) ?></td>
-                            <td><?= h($jobs->moving_to) ?></td>
-                            <td><?= h($jobs->list_of_item) ?></td>
-                            <td><?= h($jobs->size) ?></td>
-                            <td><?= h($jobs->date) ?></td>
-                            <td><?= h($jobs->deposit_status) ?></td>
-                            <td><?= h($jobs->total_paid) ?></td>
-                            <td><?= h($jobs->total_remaining) ?></td>
-                            <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Jobs', 'action' => 'view', $jobs->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Jobs', 'action' => 'edit', $jobs->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Jobs', 'action' => 'delete', $jobs->id], ['confirm' => __('Are you sure you want to delete # {0}?', $jobs->id)]) ?>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </table>
-                </div>
+                    <div class="table-responsive">
+                        <table>
+                            <tr>
+                                <th><?= __('Id') ?></th>
+                                <th><?= __('Customer First Name') ?></th>
+                                <th><?= __('Customer Last Name') ?></th>
+                                <th><?= __('Customer Phone') ?></th>
+                                <th><?= __('Customer Email') ?></th>
+                                <th><?= __('Allocation Id') ?></th>
+                                <th><?= __('Status') ?></th>
+                                <th><?= __('Moving From') ?></th>
+                                <th><?= __('Moving To') ?></th>
+                                <th><?= __('List Of Item') ?></th>
+                                <th><?= __('Size') ?></th>
+                                <th><?= __('Date') ?></th>
+                                <th><?= __('Deposit Status') ?></th>
+                                <th><?= __('Total Paid') ?></th>
+                                <th><?= __('Total Remaining') ?></th>
+                                <th class="actions"><?= __('Actions') ?></th>
+                            </tr>
+                            <?php foreach ($customer->jobs as $jobs) : ?>
+                                <tr>
+                                    <td><?= h($jobs->id) ?></td>
+                                    <td><?= h($jobs->customer_first_name) ?></td>
+                                    <td><?= h($jobs->customer_last_name) ?></td>
+                                    <td><?= h($jobs->customer_phone) ?></td>
+                                    <td><?= h($jobs->customer_email) ?></td>
+                                    <td><?= h($jobs->allocation_id) ?></td>
+                                    <td><?= h($jobs->status) ?></td>
+                                    <td><?= h($jobs->moving_from) ?></td>
+                                    <td><?= h($jobs->moving_to) ?></td>
+                                    <td><?= h($jobs->list_of_item) ?></td>
+                                    <td><?= h($jobs->size) ?></td>
+                                    <td><?= h($jobs->date) ?></td>
+                                    <td><?= h($jobs->deposit_status) ?></td>
+                                    <td><?= h($jobs->total_paid) ?></td>
+                                    <td><?= h($jobs->total_remaining) ?></td>
+                                    <td class="actions">
+                                        <?= $this->Html->link(__('View'), ['controller' => 'Jobs', 'action' => 'view', $jobs->id]) ?>
+                                        <?= $this->Html->link(__('Edit'), ['controller' => 'Jobs', 'action' => 'edit', $jobs->id]) ?>
+                                        <?= $this->Form->postLink(__('Delete'), ['controller' => 'Jobs', 'action' => 'delete', $jobs->id], ['confirm' => __('Are you sure you want to delete # {0}?', $jobs->id)]) ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </table>
+                    </div>
                 <?php endif; ?>
             </div>
         </div>
