@@ -9,8 +9,11 @@ use Cake\ORM\Entity;
  * Job Entity
  *
  * @property int $id
- * @property int $customer_id
- * @property int $allocation_id
+ * @property string $customer_first_name
+ * @property string $customer_last_name
+ * @property int $customer_phone
+ * @property string $customer_email
+ * @property int|null $allocation_id
  * @property string $status
  * @property string $moving_from
  * @property string $moving_to
@@ -21,7 +24,6 @@ use Cake\ORM\Entity;
  * @property float|null $total_paid
  * @property float|null $total_remaining
  *
- * @property \App\Model\Entity\Customer $customer
  * @property \App\Model\Entity\Allocation $allocation
  */
 class Job extends Entity
@@ -36,7 +38,10 @@ class Job extends Entity
      * @var array
      */
     protected $_accessible = [
-        'customer_id' => true,
+        'customer_first_name' => true,
+        'customer_last_name' => true,
+        'customer_phone' => true,
+        'customer_email' => true,
         'allocation_id' => true,
         'status' => true,
         'moving_from' => true,
@@ -47,7 +52,6 @@ class Job extends Entity
         'deposit_status' => true,
         'total_paid' => true,
         'total_remaining' => true,
-        'customer' => true,
         'allocation' => true,
     ];
 }

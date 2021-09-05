@@ -46,7 +46,10 @@
                     <table>
                         <tr>
                             <th><?= __('Id') ?></th>
-                            <th><?= __('Customer Id') ?></th>
+                            <th><?= __('Customer First Name') ?></th>
+                            <th><?= __('Customer Last Name') ?></th>
+                            <th><?= __('Customer Phone') ?></th>
+                            <th><?= __('Customer Email') ?></th>
                             <th><?= __('Allocation Id') ?></th>
                             <th><?= __('Status') ?></th>
                             <th><?= __('Moving From') ?></th>
@@ -62,7 +65,10 @@
                         <?php foreach ($customer->jobs as $jobs) : ?>
                         <tr>
                             <td><?= h($jobs->id) ?></td>
-                            <td><?= h($jobs->customer_id) ?></td>
+                            <td><?= h($jobs->customer_first_name) ?></td>
+                            <td><?= h($jobs->customer_last_name) ?></td>
+                            <td><?= h($jobs->customer_phone) ?></td>
+                            <td><?= h($jobs->customer_email) ?></td>
                             <td><?= h($jobs->allocation_id) ?></td>
                             <td><?= h($jobs->status) ?></td>
                             <td><?= h($jobs->moving_from) ?></td>

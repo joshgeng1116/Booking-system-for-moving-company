@@ -57,12 +57,7 @@
                 <i class="fas fa-fw fa-chart-area"></i>
                 <span>Jobs</span></a>
         </li>
-
-        <li class="nav-item">
-            <a class="nav-link" href="<?=$this->Url->build(['controller'=>'Customers','action'=>'index'])?>">
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>Customers</span></a>
-        </li>
+        
 
         <li class="nav-item">
             <a class="nav-link" href="<?=$this->Url->build(['controller'=>'Staffs','action'=>'index'])?>">

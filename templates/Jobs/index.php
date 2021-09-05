@@ -3,7 +3,6 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Job[]|\Cake\Collection\CollectionInterface $jobs
  */
-
 echo $this->Html->css('vendor/datatables/dataTables.bootstrap4.min.css',['block'=>true]);
 echo $this->Html->script('/vendor/datatables/jquery.dataTables.min.js',['block'=>true]);
 echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js',['block'=>true]);
@@ -18,18 +17,21 @@ echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js',['blo
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
                 <tr>
-                    <th><?= h('id') ?></th>
-                    <th><?= h('customer_id') ?></th>
-                    <th><?= h('allocation_id') ?></th>
-                    <th><?= h('status') ?></th>
-                    <th><?= h('moving_from') ?></th>
-                    <th><?= h('moving_to') ?></th>
-                    <th><?= h('list_of_item') ?></th>
-                    <th><?= h('size') ?></th>
-                    <th><?= h('date') ?></th>
-                    <th><?= h('deposit_status') ?></th>
-                    <th><?= h('total_paid') ?></th>
-                    <th><?= h('total_remaining') ?></th>
+                    <th><?= $this->Paginator->sort('id') ?></th>
+                    <th><?= $this->Paginator->sort('customer_first_name') ?></th>
+                    <th><?= $this->Paginator->sort('customer_last_name') ?></th>
+                    <th><?= $this->Paginator->sort('customer_phone') ?></th>
+                    <th><?= $this->Paginator->sort('customer_email') ?></th>
+                    <th><?= $this->Paginator->sort('allocation_id') ?></th>
+                    <th><?= $this->Paginator->sort('status') ?></th>
+                    <th><?= $this->Paginator->sort('moving_from') ?></th>
+                    <th><?= $this->Paginator->sort('moving_to') ?></th>
+                    <th><?= $this->Paginator->sort('list_of_item') ?></th>
+                    <th><?= $this->Paginator->sort('size') ?></th>
+                    <th><?= $this->Paginator->sort('date') ?></th>
+                    <th><?= $this->Paginator->sort('deposit_status') ?></th>
+                    <th><?= $this->Paginator->sort('total_paid') ?></th>
+                    <th><?= $this->Paginator->sort('total_remaining') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -37,7 +39,10 @@ echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js',['blo
                 <?php foreach ($jobs as $job): ?>
                 <tr>
                     <td><?= $this->Number->format($job->id) ?></td>
-                    <td><?= $job->has('customer') ? $this->Html->link($job->customer->id, ['controller' => 'Customers', 'action' => 'view', $job->customer->id]) : '' ?></td>
+                    <td><?= h($job->customer_first_name) ?></td>
+                    <td><?= h($job->customer_last_name) ?></td>
+                    <td><?= $this->Number->format($job->customer_phone) ?></td>
+                    <td><?= h($job->customer_email) ?></td>
                     <td><?= $job->has('allocation') ? $this->Html->link($job->allocation->id, ['controller' => 'Allocation', 'action' => 'view', $job->allocation->id]) : '' ?></td>
                     <td><?= h($job->status) ?></td>
                     <td><?= h($job->moving_from) ?></td>
@@ -58,7 +63,16 @@ echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js',['blo
             </tbody>
         </table>
     </div>
-
+    <div class="paginator">
+        <ul class="pagination">
+            <?= $this->Paginator->first('<< ' . __('first')) ?>
+            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->numbers() ?>
+            <?= $this->Paginator->next(__('next') . ' >') ?>
+            <?= $this->Paginator->last(__('last') . ' >>') ?>
+        </ul>
+        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
+    </div>
     <script>
         $(document).ready(function() {
             $('#dataTable').DataTable();

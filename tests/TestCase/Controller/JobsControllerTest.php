@@ -23,7 +23,6 @@ class JobsControllerTest extends TestCase
      */
     protected $fixtures = [
         'app.Jobs',
-        'app.Customers',
         'app.Allocation',
     ];
 
