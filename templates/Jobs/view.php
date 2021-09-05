@@ -36,7 +36,23 @@
                 </tr>
                 <tr>
                     <th><?= __('Status') ?></th>
-                    <td><?= h($job->status) ?></td>
+                    <td>
+                        <?php if($job->status == 1):?>
+                            Enquiry
+                        <?php elseif($job->status == 2):?>
+                            Offer
+                        <?php elseif($job->status == 3):?>
+                            Job
+                        <?php elseif($job->status == 4):?>
+                            Picked_Up
+                        <?php elseif($job->status == 5):?>
+                            In-Transit
+                        <?php elseif($job->status == 6):?>
+                            Delivery
+                        <?php elseif($job->status == 7):?>
+                            Completed
+                        <?php endif;?>
+                    </td>
                 </tr>
                 <tr>
                     <th><?= __('Moving From') ?></th>
@@ -56,7 +72,13 @@
                 </tr>
                 <tr>
                     <th><?= __('Deposit Status') ?></th>
-                    <td><?= h($job->deposit_status) ?></td>
+                    <td>
+                        <?php if($job->deposit_status == 1):?>
+                            Waiting
+                        <?php elseif($job->deposit_status == 2):?>
+                            Confirmed
+                        <?php endif;?>
+                    </td>
                 </tr>
                 <tr>
                     <th><?= __('Id') ?></th>
