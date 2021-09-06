@@ -103,7 +103,6 @@
                 </tr>
             </table>
             <br><br>
-            <center>
                 <h4 class="sent-notification"></h4>
                 <form id="myForm">
                     <h2>Send an Email</h2>
@@ -122,7 +121,6 @@
                     <br><br>
                     <button type="button" onclick="sendEmail()" value="Send to customer">Submit</button>
                 </form>
-                <center>
                     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
                     <script type="text/javascript">
