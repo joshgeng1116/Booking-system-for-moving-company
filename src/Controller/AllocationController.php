@@ -63,6 +63,19 @@ class AllocationController extends AppController
         $vehicles = $this->Allocation->Vehicles->find('list', ['limit' => 200]);
         $this->set(compact('allocation', 'staffs', 'vehicles'));
     }
+    /**
+     * Calender view
+     *
+     * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
+     */
+    public function calendar()
+    {   
+        $this->paginate = [
+            'contain' => ['Staffs', 'Vehicles'],
+        ];
+        $allocation = $this->paginate($this->Allocation);
+        $this->set(compact('allocation'));
+    }
 
     /**
      * Edit method
