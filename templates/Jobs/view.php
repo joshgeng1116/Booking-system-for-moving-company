@@ -101,7 +101,64 @@
                     <td><?= h($job->date) ?></td>
                 </tr>
             </table>
+            <br><br>
+            <center>
+                <h4 class="sent-notification"></h4>
+                <form id="myForm">
+                    <h2>Send an Email</h2>
 
+                    <label>Name</label>
+                    <input id="name" type="text" placeholder="Enter Name">
+                    <br><br>
+                    <label>Email</label>
+                    <input id="email" type="text" placeholder="Enter Email">
+                    <br><br>
+                    <label>Subject</label>
+                    <input id="subject" type="text" placeholder="Enter Subject">
+                    <br><br>
+                    <label>Message</label>
+                    <input id="body" rows="5" placeholder="Type Message"></Textarea>
+                    <br><br>
+                    <button type="button" onclick="sendEmail()" value="Send to customer">Submit</button>
+                </form>
+                <center>
+                    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+                    <script type="text/javascript">
+                        function sendEmail(){
+                            var name = $('#name');
+                            var email = $('#email');
+                            var subject = $('#subject');
+                            var body = $('#body');
+
+                            if(isNotEmpty(name) && isNotEmpty(email) && isNotEmpty(subject) && isNotEmpty(body)){
+                                $.ajax({
+                                    url:'SendEmail.php',
+                                    method: 'POST',
+                                    dataTypr: 'json',
+                                    data:{
+                                        name: name.val(),
+                                        email: email.val(),
+                                        subject: subject.val(),
+                                        body: body.val()
+                                    },success: function(response){
+                                        $('#myForm')[0].reset();
+                                        $('sent-notification').text("Message sent successfully.");
+                                    }
+                                });
+                            }
+                        }
+                        function isNotEmpty(caller){
+                            if(call.val()==""){
+                                caller.css('border','1px solid red')
+                                return false;
+                            }
+                            else{
+                                caller.css('border','');
+                                return true;
+                            }
+                        }
+                    </script>
         </div>
     </div>
 </div>
