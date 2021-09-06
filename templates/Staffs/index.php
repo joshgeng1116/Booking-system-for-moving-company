@@ -32,7 +32,7 @@ echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js',['blo
                     <td><?= $this->Number->format($staff->id) ?></td>
                     <td><?= h($staff->first_name) ?></td>
                     <td><?= h($staff->last_name) ?></td>
-                    <td><?= $this->Number->format($staff->phone_number) ?></td>
+                    <td><?= h($staff->phone_number) ?></td>
                     <td><?= h($staff->email_address) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $staff->id]) ?>

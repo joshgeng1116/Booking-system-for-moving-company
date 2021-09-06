@@ -57,7 +57,6 @@ class JobsController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-
             $this->Flash->error(__('The job could not be saved. Please, try again.'));
         }
         $allocation = $this->Jobs->Allocation->find('list', ['limit' => 200]);

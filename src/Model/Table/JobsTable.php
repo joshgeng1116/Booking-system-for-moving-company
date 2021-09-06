@@ -84,9 +84,6 @@ class JobsTable extends Table
             ->notEmptyString('customer_email');
 
         $validator
-            ->scalar('status')
-            ->maxLength('status', 255)
-            ->requirePresence('status', 'create')
             ->notEmptyString('status');
 
         $validator
@@ -119,9 +116,6 @@ class JobsTable extends Table
             ->notEmptyDate('date');
 
         $validator
-            ->scalar('deposit_status')
-            ->maxLength('deposit_status', 255)
-            ->requirePresence('deposit_status', 'create')
             ->notEmptyString('deposit_status');
 
         $validator

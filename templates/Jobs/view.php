@@ -86,7 +86,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Customer Phone') ?></th>
-                    <td><?= $this->Number->format($job->customer_phone) ?></td>
+                    <td><?= h($job->customer_phone) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Total Paid') ?></th>
@@ -101,6 +101,7 @@
                     <td><?= h($job->date) ?></td>
                 </tr>
             </table>
+
         </div>
     </div>
 </div>

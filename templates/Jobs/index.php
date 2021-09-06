@@ -41,7 +41,7 @@ echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js',['blo
                     <td><?= $this->Number->format($job->id) ?></td>
                     <td><?= h($job->customer_first_name) ?></td>
                     <td><?= h($job->customer_last_name) ?></td>
-                    <td><?= $this->Number->format($job->customer_phone) ?></td>
+                    <td><?= h($job->customer_phone) ?></td>
                     <td><?= h($job->customer_email) ?></td>
                     <td><?= $job->has('allocation') ? $this->Html->link($job->allocation->id, ['controller' => 'Allocation', 'action' => 'view', $job->allocation->id]) : '' ?></td>
                     <td>
@@ -61,7 +61,6 @@ echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js',['blo
                             Completed
                         <?php endif;?>
                     </td>
-                    <td>
                     <td><?= h($job->moving_from) ?></td>
                     <td><?= h($job->moving_to) ?></td>
                     <td><?= h($job->list_of_item) ?></td>
@@ -76,7 +75,7 @@ echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js',['blo
                     </td>
                     <td><?= $this->Number->format($job->total_paid) ?></td>
                     <td><?= $this->Number->format($job->total_remaining) ?></td>
-                    <td class="actions">
+                    <td class="Actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $job->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $job->id]) ?>
                         <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $job->id], ['confirm' => __('Are you sure you want to delete # {0}?', $job->id)]) ?>

@@ -23,20 +23,20 @@
             <fieldset>
                 <legend><?= __('Edit Job') ?></legend>
                 <?php
-                echo $this->Form->control('customer_first_name');
-                echo $this->Form->control('customer_last_name');
-                echo $this->Form->control('customer_phone');
-                echo $this->Form->control('customer_email');
-                echo $this->Form->control('allocation_id', ['options' => $allocation, 'empty' => true]);
-                echo $this->Form->control('status');
-                echo $this->Form->control('moving_from');
-                echo $this->Form->control('moving_to');
-                echo $this->Form->control('list_of_item');
-                echo $this->Form->control('size');
-                echo $this->Form->control('date');
-                echo $this->Form->control('deposit_status');
-                echo $this->Form->control('total_paid');
-                echo $this->Form->control('total_remaining');
+                    echo $this->Form->control('customer_first_name');
+                    echo $this->Form->control('customer_last_name');
+                    echo $this->Form->control('customer_phone');
+                    echo $this->Form->control('customer_email');
+                    echo $this->Form->control('allocation_id', ['options' => $allocation, 'empty' => true]);
+                    echo $this->Form->control('status');
+                    echo $this->Form->control('moving_from');
+                    echo $this->Form->control('moving_to');
+                    echo $this->Form->control('list_of_item');
+                    echo $this->Form->control('size');
+                    echo $this->Form->control('date');
+                    echo $this->Form->control('deposit_status');
+                    echo $this->Form->control('total_paid');
+                    echo $this->Form->control('total_remaining');
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

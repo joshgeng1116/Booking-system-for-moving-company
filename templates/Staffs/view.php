@@ -36,7 +36,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Phone Number') ?></th>
-                    <td><?= $this->Number->format($staff->phone_number) ?></td>
+                    <td><?= h($staff->phone_number) ?></td>
                 </tr>
             </table>
         </div>

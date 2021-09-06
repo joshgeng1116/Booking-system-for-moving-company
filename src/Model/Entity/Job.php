@@ -14,13 +14,13 @@ use Cake\ORM\Entity;
  * @property int $customer_phone
  * @property string $customer_email
  * @property int|null $allocation_id
- * @property string $status
+ * @property int $status
  * @property string $moving_from
  * @property string $moving_to
  * @property string $list_of_item
  * @property string $size
  * @property \Cake\I18n\FrozenDate $date
- * @property string $deposit_status
+ * @property int $deposit_status
  * @property float|null $total_paid
  * @property float|null $total_remaining
  *
