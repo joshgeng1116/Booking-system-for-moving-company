@@ -56,7 +56,7 @@ $routes->scope('/', function (RouteBuilder $builder) {
      * ...and connect the rest of 'Pages' controller's URLs.
      */
     $builder->connect('/pages/*', 'Pages::display');
-
+    $builder->setExtensions(['json']);
     /*
      * Connect catchall routes for all controllers.
      *
