@@ -145,7 +145,13 @@ use Cake\Validation\Validator;
                 <div class="row">
                 <div class="center mx-auto">
                     <!-- todo SEE HERE DISHA wrap this in a CakePHP anchor <a> element and link to your asset -->
-                    <button class="btn btn-info"><i class="fas fa-info-circle"></i><span> </span>See Truck Times</button>
+                    <?php
+                        echo $this->Html->link('See Truck Times', array(
+                            'controller' => 'allocation', 
+                            'action' => 'calendar', 
+                        ), array('target' => '_blank')
+                        );
+                    ?>
                 </div>
                 </div>
                 <br>
