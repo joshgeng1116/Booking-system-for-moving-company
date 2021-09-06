@@ -2,7 +2,7 @@
 $data = [];
 foreach ($allocation as $allocat){
     $item =[
-        'title' => 'Truck Busy',
+        'title' => $allocat->vehicle->vehicle_type ,
         'start' => $allocat->date,
     ];
     $data[] = $item;
