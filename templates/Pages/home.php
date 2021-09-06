@@ -138,7 +138,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
 
         <div class="col-md-6 landing_info">
 
-            <h1 class="text-center landing_heading">So You're Moving...</h1>
+            <h1 class="text-center landing_heading mx-auto">So You're Moving...</h1>
             <p class="text-center w-75 mx-auto">
                 Well we're movers. Melbourne-based, honest working moving company to relocate you easy peasy. Get in touch with our team to get the show on the road!
             </p>
