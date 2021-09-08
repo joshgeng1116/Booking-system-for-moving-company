@@ -148,8 +148,8 @@ use Cake\Validation\Validator;
                    
                     <?php
                         echo $this->Html->link('See Truck Times', array(
-                            'controller' => 'allocation', 
-                            'action' => 'calendar', 
+                            'controller' => 'allocation',
+                            'action' => 'calendar',
                         ), array('target' => '_blank')
                         );
                     ?>
@@ -207,6 +207,10 @@ use Cake\Validation\Validator;
     </div>
 </div>
 
+<!-- API Js -->
+<?php
+    echo $this->Html->script('API/addressFinder');
+?>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
