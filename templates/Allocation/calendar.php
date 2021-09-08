@@ -84,9 +84,21 @@ echo $this->Html->script('main.min');
 <!-- page title -->
 <h1 class="text-center text-title">Calendar</h1>
 
+            </br>
+            </br>
+
 <div class="container w-50">
     <div class="text-center text-secondary">
     <div id='calendar'></div>
+            </br>
+    <?php
+        echo $this->Html->link(
+            '<button class="text-center btn btn-info mx-auto" onclick="close_window();" > Return to the Enquiry!</button>',
+            ['controller'=>'Jobs', 'action'=>'add','_full'=>true],
+            ['escape' => false]  // important
+        );
+    ?>
+    </br>
     </div>
 </div>
 
@@ -118,4 +130,8 @@ echo $this->Html->script('add_enquiry_logic');
         });
         calendar.render();
     });
+    function close_window() {
+        close();
+    }
 </script>
+
