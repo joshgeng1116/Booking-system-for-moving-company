@@ -54,7 +54,6 @@ class JobsController extends AppController
             $job = $this->Jobs->patchEntity($job, $this->request->getData());
             if ($this->Jobs->save($job)) {
                 $this->Flash->success(__('The job has been saved.'));
-
                 return $this->redirect(['controller'=>'pages','action' => 'display']);
             }
             $this->Flash->error(__('The job could not be saved. Please, try again.'));
