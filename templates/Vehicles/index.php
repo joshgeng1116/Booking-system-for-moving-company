@@ -29,7 +29,19 @@ echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js',['blo
                 <tr>
                     <td><?= $this->Number->format($vehicle->id) ?></td>
                     <td><?= h($vehicle->rego_number) ?></td>
-                    <td><?= h($vehicle->vehicle_type) ?></td>
+                    <td>
+                        <?php if($vehicle->vehicle_type == 1):?>
+                            2T
+                        <?php elseif($vehicle->vehicle_type == 2):?>
+                            4T
+                        <?php elseif($vehicle->vehicle_type == 3):?>
+                            8T
+                        <?php elseif($vehicle->vehicle_type == 4):?>
+                            10T
+                        <?php elseif($vehicle->vehicle_type == 5):?>
+                            12T
+                        <?php endif;?>
+                    </td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $vehicle->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $vehicle->id]) ?>

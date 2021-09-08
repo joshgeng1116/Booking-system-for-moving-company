@@ -3,7 +3,7 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Job $job
  */
-
+use Cake\Mailer\Mailer;
 ?>
 <div class="row">
     <aside class="column">
@@ -16,7 +16,7 @@
         </div>
     </aside>
     <div class="column-responsive column-80">
-        <div class="jobs view content">
+        <body class="jobs view content">
             <h3><?= h($job->id) ?></h3>
             <table>
                 <tr>
@@ -38,19 +38,19 @@
                 <tr>
                     <th><?= __('Status') ?></th>
                     <td>
-                        <?php if($job->status == 1):?>
+                        <?php if ($job->status == 1) :?>
                             Enquiry
-                        <?php elseif($job->status == 2):?>
+                        <?php elseif ($job->status == 2) :?>
                             Offer
-                        <?php elseif($job->status == 3):?>
+                        <?php elseif ($job->status == 3) :?>
                             Job
-                        <?php elseif($job->status == 4):?>
+                        <?php elseif ($job->status == 4) :?>
                             Picked_Up
-                        <?php elseif($job->status == 5):?>
+                        <?php elseif ($job->status == 5) :?>
                             In-Transit
-                        <?php elseif($job->status == 6):?>
+                        <?php elseif ($job->status == 6) :?>
                             Delivery
-                        <?php elseif($job->status == 7):?>
+                        <?php elseif ($job->status == 7) :?>
                             Completed
                         <?php endif;?>
                     </td>
@@ -74,9 +74,9 @@
                 <tr>
                     <th><?= __('Deposit Status') ?></th>
                     <td>
-                        <?php if($job->deposit_status == 1):?>
+                        <?php if ($job->deposit_status == 1) :?>
                             Waiting
-                        <?php elseif($job->deposit_status == 2):?>
+                        <?php elseif ($job->deposit_status == 2) :?>
                             Confirmed
                         <?php endif;?>
                     </td>
@@ -102,11 +102,10 @@
                     <td><?= h($job->date) ?></td>
                 </tr>
             </table>
-            <br><br>
+            <center>
                 <h4 class="sent-notification"></h4>
                 <form id="myForm">
                     <h2>Send an Email</h2>
-
                     <label>Name</label>
                     <input id="name" type="text" placeholder="Enter Name">
                     <br><br>
@@ -121,26 +120,32 @@
                     <br><br>
                     <button type="button" onclick="sendEmail()" value="Send to customer">Submit</button>
                 </form>
+                <?php
+                $mailer = new Mailer('default');
+                $mailer->setFrom(['me@example.com' => 'My Site'])
+                    ->setTo('you@example.com')
+                    ->setSubject('About')
+                    ->deliver('My message');
+                ?>
+                <center>
                     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
                     <script type="text/javascript">
                         function sendEmail(){
                             var name = $('#name');
                             var email = $('#email');
                             var subject = $('#subject');
                             var body = $('#body');
-
                             if(isNotEmpty(name) && isNotEmpty(email) && isNotEmpty(subject) && isNotEmpty(body)){
                                 $.ajax({
                                     url:'SendEmail.php',
                                     method: 'POST',
-                                    dataTypr: 'json',
+                                    dataType: 'json',
                                     data:{
                                         name: name.val(),
                                         email: email.val(),
                                         subject: subject.val(),
                                         body: body.val()
-                                    },success: function(response){
+                                    },success: function(){
                                         $('#myForm')[0].reset();
                                         $('sent-notification').text("Message sent successfully.");
                                     }
@@ -148,7 +153,7 @@
                             }
                         }
                         function isNotEmpty(caller){
-                            if(call.val()==""){
+                            if(call.val()===""){
                                 caller.css('border','1px solid red')
                                 return false;
                             }

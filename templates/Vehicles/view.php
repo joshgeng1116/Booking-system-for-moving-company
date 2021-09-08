@@ -24,7 +24,19 @@
                 </tr>
                 <tr>
                     <th><?= __('Vehicle Type') ?></th>
-                    <td><?= h($vehicle->vehicle_type) ?></td>
+                    <td>
+                        <?php if($vehicle->vehicle_type == 1):?>
+                            2T
+                        <?php elseif($vehicle->vehicle_type == 2):?>
+                            4T
+                        <?php elseif($vehicle->vehicle_type == 3):?>
+                            8T
+                        <?php elseif($vehicle->vehicle_type == 4):?>
+                            10T
+                        <?php elseif($vehicle->vehicle_type == 5):?>
+                            12T
+                        <?php endif;?>
+                    </td>
                 </tr>
                 <tr>
                     <th><?= __('Id') ?></th>

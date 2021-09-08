@@ -23,12 +23,13 @@
             <fieldset>
                 <legend><?= __('Edit Job') ?></legend>
                 <?php
+                    $status_options=[1=>"Enquiry", 2=>"Offer", 3=>"Job", 4=>"Picked-Up", 5=>"In-Transit", 6=>"Delivery", 7=>"Completed"];
                     echo $this->Form->control('customer_first_name');
                     echo $this->Form->control('customer_last_name');
                     echo $this->Form->control('customer_phone');
                     echo $this->Form->control('customer_email');
                     echo $this->Form->control('allocation_id', ['options' => $allocation, 'empty' => true]);
-                    echo $this->Form->control('status');
+                    echo $this->Form->control('status',['options' => $status_options]);
                     echo $this->Form->control('moving_from');
                     echo $this->Form->control('moving_to');
                     echo $this->Form->control('list_of_item');

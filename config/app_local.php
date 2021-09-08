@@ -45,7 +45,7 @@ return [
         //'port' => 'non_standard_port_number',
 
             'username' => 'fit3047',
-            'password' => 'fit3047',
+            'password' => 'gjy25988',
 
             'database' => 'fit3047',
             /*

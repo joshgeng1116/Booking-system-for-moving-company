@@ -60,7 +60,7 @@ class AllocationController extends AppController
             $this->Flash->error(__('The allocation could not be saved. Please, try again.'));
         }
         $staffs = $this->Allocation->Staffs->find('list', ['limit' => 200]);
-        $vehicles = $this->Allocation->Vehicles->find('list', ['limit' => 200]);
+        $vehicles = $this->Allocation->Vehicles->find('list',['limit'=>200]);
         $this->set(compact('allocation', 'staffs', 'vehicles'));
     }
     /**
@@ -69,7 +69,7 @@ class AllocationController extends AppController
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
     public function calendar()
-    {   
+    {
         $this->paginate = [
             'contain' => ['Staffs', 'Vehicles'],
         ];

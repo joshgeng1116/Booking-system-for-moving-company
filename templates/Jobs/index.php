@@ -45,21 +45,7 @@ echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js',['blo
                     <td><?= h($job->customer_email) ?></td>
                     <td><?= $job->has('allocation') ? $this->Html->link($job->allocation->id, ['controller' => 'Allocation', 'action' => 'view', $job->allocation->id]) : '' ?></td>
                     <td>
-                        <?php if($job->status == 1):?>
-                            Enquiry
-                        <?php elseif($job->status == 2):?>
-                            Offer
-                        <?php elseif($job->status == 3):?>
-                            Job
-                        <?php elseif($job->status == 4):?>
-                            Picked_Up
-                        <?php elseif($job->status == 5):?>
-                            In-Transit
-                        <?php elseif($job->status == 6):?>
-                            Delivery
-                        <?php elseif($job->status == 7):?>
-                            Completed
-                        <?php endif;?>
+                        <?= h($job->status) ?>
                     </td>
                     <td><?= h($job->moving_from) ?></td>
                     <td><?= h($job->moving_to) ?></td>
