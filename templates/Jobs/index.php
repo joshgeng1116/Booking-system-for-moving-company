@@ -45,7 +45,21 @@ echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js',['blo
                     <td><?= h($job->customer_email) ?></td>
                     <td><?= $job->has('allocation') ? $this->Html->link($job->allocation->id, ['controller' => 'Allocation', 'action' => 'view', $job->allocation->id]) : '' ?></td>
                     <td>
-                        <?= h($job->status) ?>
+                        <?php if($job->status == 0):?>
+                            Enquiry
+                        <?php elseif($job->status == 1):?>
+                            Offer
+                        <?php elseif($job->status == 2):?>
+                            Job
+                        <?php elseif($job->status == 3):?>
+                            Picked-Up
+                        <?php elseif($job->status == 4):?>
+                            In-Transit
+                        <?php elseif($job->status == 5):?>
+                            Delivery
+                        <?php elseif($job->status == 6):?>
+                            Completed
+                        <?php endif;?>
                     </td>
                     <td><?= h($job->moving_from) ?></td>
                     <td><?= h($job->moving_to) ?></td>
@@ -53,9 +67,9 @@ echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js',['blo
                     <td><?= h($job->size) ?></td>
                     <td><?= h($job->date) ?></td>
                     <td>
-                        <?php if($job->deposit_status == 1):?>
+                        <?php if($job->deposit_status == 0):?>
                             Waiting
-                        <?php elseif($job->deposit_status == 2):?>
+                        <?php elseif($job->deposit_status == 1):?>
                             Confirmed
                         <?php endif;?>
                     </td>

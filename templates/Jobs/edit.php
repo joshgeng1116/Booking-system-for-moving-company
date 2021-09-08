@@ -23,7 +23,8 @@
             <fieldset>
                 <legend><?= __('Edit Job') ?></legend>
                 <?php
-                    $status_options=[1=>"Enquiry", 2=>"Offer", 3=>"Job", 4=>"Picked-Up", 5=>"In-Transit", 6=>"Delivery", 7=>"Completed"];
+                    $status_options=array("Enquiry", "Offer", "Job", "Picked-Up", "In-Transit", "Delivery", "Completed");
+                    $deposit_status_options=array("Waiting","Confirmed");
                     echo $this->Form->control('customer_first_name');
                     echo $this->Form->control('customer_last_name');
                     echo $this->Form->control('customer_phone');
@@ -35,7 +36,7 @@
                     echo $this->Form->control('list_of_item');
                     echo $this->Form->control('size');
                     echo $this->Form->control('date');
-                    echo $this->Form->control('deposit_status');
+                    echo $this->Form->control('deposit_status',['options'=>$deposit_status_options]);
                     echo $this->Form->control('total_paid');
                     echo $this->Form->control('total_remaining');
                 ?>
