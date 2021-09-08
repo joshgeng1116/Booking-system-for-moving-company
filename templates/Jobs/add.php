@@ -133,7 +133,7 @@ use Cake\Validation\Validator;
                     //echo $this->Form->control('size', ["class" => "form-control"]);
 
 
-                    $truck_size_opts = array("2T" => "Just a few items", "4T" => "1-2 Bedrooms / Small Office", "8T" => "3-4 Bedrooms / Medium Office", "10T" => "4-5 Bedrooms / Medium Office", "12T" => '4-5 Bedrooms / Large Office');
+                    $truck_size_opts = array("2T" => "Just a few items - (2T)", "4T" => "1-2 Bedrooms / Small Office - (4T)", "8T" => "3-4 Bedrooms / Medium Office - (8T)", "10T" => "4-5 Bedrooms / Medium Office - (10T)", "12T" => '4-5 Bedrooms / Large Office - (12T)');
                     echo $this->Form->control('size', array("required", 'options' => $truck_size_opts, 'label' => "How many items are we moving?",
                         'empty' => 'Choose...', 'selected' => 'Choose...', "class" => "form-control"));
 
