@@ -147,8 +147,8 @@ use Cake\Validation\Validator;
                     <!-- todo SEE HERE DISHA wrap this in a CakePHP anchor <a> element and link to your asset -->
                     <?php
                         echo $this->Html->link('See Truck Times', array(
-                            'controller' => 'allocation', 
-                            'action' => 'calendar', 
+                            'controller' => 'allocation',
+                            'action' => 'calendar',
                         ), array('target' => '_blank')
                         );
                     ?>
@@ -206,6 +206,10 @@ use Cake\Validation\Validator;
     </div>
 </div>
 
+<!-- API Js -->
+<?php
+    echo $this->Html->script('API/addressFinder');
+?>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
