@@ -22,8 +22,9 @@
             <fieldset>
                 <legend><?= __('Edit Vehicle') ?></legend>
                 <?php
+                $option_type=[1=>"2T",2=>"4T",3=>"8T",4=>"10T",5=>"12T"];
                     echo $this->Form->control('rego_number');
-                    echo $this->Form->control('vehicle_type');
+                    echo $this->Form->control('vehicle_type',['options'=>$option_type]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>
