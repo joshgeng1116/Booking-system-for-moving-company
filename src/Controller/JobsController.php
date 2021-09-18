@@ -7,6 +7,7 @@ namespace App\Controller;
  * Jobs Controller
  *
  * @property \App\Model\Table\JobsTable $Jobs
+ * @property \App\Model\Table\AllocationTable $Allocation
  * @method \App\Model\Entity\Job[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class JobsController extends AppController
@@ -58,8 +59,17 @@ class JobsController extends AppController
             }
             $this->Flash->error(__('The job could not be saved. Please, try again.'));
         }
+
+
+        $allocation = $this->Jobs->Allocation->paginate = [
+            'contain' => ['Vehicles'],
+        ];
+        $this->set(compact('allocation')); 
+
         $allocation = $this->Jobs->Allocation->find('list', ['limit' => 200]);
         $this->set(compact('job', 'allocation'));
+        
+
     }
 
     /**

@@ -11,6 +11,12 @@ use Cake\Validation\Validator;
 
 ?>
 
+<?php
+$this->disableAutoLayout();
+echo $this->Html->css('main.min');
+echo $this->Html->script('main.min');
+?>
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -145,14 +151,7 @@ use Cake\Validation\Validator;
                 <div class="row">
                 <div class="center mx-auto">
                     <!-- todo SEE HERE DISHA wrap this in a CakePHP anchor <a> element and link to your asset -->
-                   
-                    <?php
-                        echo $this->Html->link('See Truck Times', array(
-                            'controller' => 'allocation',
-                            'action' => 'calendar',
-                        ), array('target' => '_blank')
-                        );
-                    ?>
+                    <div id='calendar'></div>
                 </div>
                 </div>
                 <br>
@@ -223,6 +222,16 @@ use Cake\Validation\Validator;
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                events: '<?= $this->URL->build(['controller' => 'allocation', 'action' => 'calendar', '_ext' => 'json']) ?>'
+            });
+                calendar.render();
+            });
+        </script>
 
 </body>
 
