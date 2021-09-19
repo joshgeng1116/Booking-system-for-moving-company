@@ -93,13 +93,14 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
 
     <?php
     echo $this->Html->link(
-        '<img src="/team102-app_fit3047/img/easy_peasy_default_logo.png" height="50px" class="navbar-brand"/>',
-        ['controller'=>'Pages', 'action'=>'home','_full'=>true, 'class' => "navbar-brand"],
+        $this->Html->image('easy_peasy_default_logo.png', ['alt' => 'Easy Peasy logo', 'class' => 'navbar-brand', 'height' => '50px']),
+        ['controller' => 'Pages', 'action' => 'home', '_full' => true, 'class' => "navbar-brand"],
         ['escape' => false]  // important
     );
     ?>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -110,7 +111,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                 echo $this->Html->link(
                     'Enquire Now',
                     '/Jobs/add',
-                    ['class' => 'nav-link', 'target' => '_blank']
+                    ['class' => 'nav-link', 'target' => '_self']
                 );
                 ?>
             </li>
@@ -147,8 +148,8 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
 
                 <?php
                 echo $this->Html->link(
-                    '<button class="text-center btn btn-success mx-auto">Enquire Now!</button>',
-                    ['controller'=>'Jobs', 'action'=>'add','_full'=>true],
+                    '<button class="text-center btn btn-success mx-auto">Enquire Now</button>',
+                    ['controller'=>'Jobs', 'action'=>'add','_full'=>true, "target" => "_self"],
                     ['escape' => false]  // important
                 );
                 ?>

@@ -59,7 +59,7 @@ echo $this->Html->script('main.min');
 
     <?php
     echo $this->Html->link(
-        '<img src="/team102-app_fit3047/img/easy_peasy_default_logo.png" height="50px" class="navbar-brand"/>',
+        $this->Html->image('easy_peasy_default_logo.png', ['alt' => 'Easy Peasy logo', 'class' => 'navbar-brand', 'height' => '50px']),
         ['controller' => 'Pages', 'action' => 'home', '_full' => true, 'class' => "navbar-brand"],
         ['escape' => false]  // important
     );
@@ -77,7 +77,7 @@ echo $this->Html->script('main.min');
                 echo $this->Html->link(
                     'Enquire Now',
                     '/Jobs/add',
-                    ['class' => 'nav-link', 'target' => '_blank']
+                    ['class' => 'nav-link', 'target' => '_self']
                 );
                 ?>
             </li>
@@ -88,6 +88,8 @@ echo $this->Html->script('main.min');
 
     </div>
 </nav>
+
+<!-- form content -->
 <div class="container w-75">
     <div class="column-responsive column-80">
         <div class="jobs form content">
