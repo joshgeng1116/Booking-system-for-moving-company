@@ -1,0 +1,4 @@
+input[type="radio"] {
+    border: 3px solid pink !important;
+    margin: 3vw;
+}

@@ -73,7 +73,34 @@ class JobsController extends AppController
         $allocation = $this->Jobs->Allocation->paginate = [
             'contain' => ['Vehicles'],
         ];
-        $this->set(compact('allocation')); 
+        $this->set(compact('allocation'));
+
+        $allocation = $this->Jobs->Allocation->find('list', ['limit' => 200]);
+        $this->set(compact('job', 'allocation'));
+    }
+
+    /**
+     * Review method
+     *
+     * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
+     */
+    public function review()
+    {
+        $job = $this->Jobs->newEmptyEntity();
+        if ($this->request->is('post')) {
+            $job = $this->Jobs->patchEntity($job, $this->request->getData());
+            if ($this->Jobs->save($job)) {
+                $this->Flash->success(__('The job has been saved.'));
+                return $this->redirect(['controller'=>'pages','action' => 'display']);
+            }
+            $this->Flash->error(__('The job could not be saved. Please, try again.'));
+        }
+
+
+        $allocation = $this->Jobs->Allocation->paginate = [
+            'contain' => ['Vehicles'],
+        ];
+        $this->set(compact('allocation'));
 
         $allocation = $this->Jobs->Allocation->find('list', ['limit' => 200]);
         $this->set(compact('job', 'allocation'));
