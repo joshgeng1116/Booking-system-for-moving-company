@@ -27,6 +27,15 @@ class JobsController extends AppController
         $this->set(compact('jobs'));
     }
 
+    public function indexdriver()
+    {
+        $this->paginate = [
+            'contain' => ['Allocation'],
+        ];
+        $jobs = $this->paginate($this->Jobs);
+
+        $this->set(compact('jobs'));
+    }
     /**
      * View method
      *
