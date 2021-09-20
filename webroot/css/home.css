@@ -254,4 +254,6 @@ h2 {
     color: RGB(235, 143, 52);
 }
 
-
+.customer-first-name_markup, .customer-last-name_markup {
+    text-transform: capitalize;
+}

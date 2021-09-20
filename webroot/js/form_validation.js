@@ -39,7 +39,7 @@ class InputField {
         if (type === "regex") {
             //console.log("Regex given.");
 
-            console.log(input_value);
+            // console.log(input_value);
 
             if (this.Validation.validation.test(input_value)) {
                 this.valid = true;
@@ -98,7 +98,7 @@ class InputField {
         // Dropdown given
         if (type == "dropdown") {
             //console.log("DROPDOWN GIVEN");
-            console.log(input_value);
+            // console.log(input_value);
             if (input_value !== "") {
                 this.valid = true;
             } else {
@@ -106,7 +106,7 @@ class InputField {
             }
         }
 
-        console.log(this.valid);
+        // console.log(this.valid);
 
     }
 
@@ -191,7 +191,7 @@ function validateInputtedField(event) {
     }
 
     const input_field = findSameInputFieldObj(event);
-    console.log("id of input_field is: " + input_field.id);
+    // console.log("id of input_field is: " + input_field.id);
 
     /* TODO is this necessary or redundant?
     // Make the seen_before attribute true as the user has for sure interacted with this form input now
@@ -203,5 +203,57 @@ function validateInputtedField(event) {
 
     // Change styling accordingly
     input_field.realTimeFeedback();
+
+    // Generating review message
+    ReviewMessageInserts = {
+        "customer-first-name": null,
+        "customer-last-name": null,
+        "customer-phone": null,
+        "customer-email": null,
+        "moving-from": null,
+        "moving-to": null,
+        "size": null,
+        "list-of-item": null,
+        "date": null
+
+    }
+
+    function generateReviewMessage() {
+        $.each(all_form_sections, function (key, value) {
+            let form_inputs_array = value.inputs;
+            // console.log(form_inputs_array);
+            if (form_inputs_array !== null) {
+                $.each(form_inputs_array, function (i) {
+                    let current_form_input = form_inputs_array[i];
+                    let current_input_id = current_form_input.id;
+                    //console.log("id: " + current_input_id);
+                    //console.log(current_input_id.val());
+                    //console.log($("#" + current_input_id).val());
+                    ReviewMessageInserts[current_input_id] = "<a href=\"#" + current_input_id + "\">" + "<mark class='" + current_input_id + "_markup" + "'>" + $("#" + current_input_id).val() + "</mark></a>"; // TODO error here
+                })
+
+                //console.log(ReviewMessageInserts);
+
+            }
+        })
+
+        // Now create the string of text for review message
+        return `Hi there ${ReviewMessageInserts["customer-first-name"]} ${ReviewMessageInserts["customer-last-name"]}, we'll stay in touch via ${ReviewMessageInserts["customer-phone"]} and ${ReviewMessageInserts["customer-email"]} regarding your move from ${ReviewMessageInserts["moving-from"]} to ${ReviewMessageInserts["moving-to"]}. We think it would be best to use our ${ReviewMessageInserts["size"]} sized truck in order to move ${ReviewMessageInserts["list-of-item"]} on ${ReviewMessageInserts["date"]}.`;
+    }
+
+    function updateReviewMessage(message) {
+
+        $review_message_html = $(".review_message");
+
+        $review_message_html.html(review_message);
+
+    }
+
+    let review_message = generateReviewMessage();
+    console.log(review_message);
+
+    updateReviewMessage(review_message);
+
+
 
 }

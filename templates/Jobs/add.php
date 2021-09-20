@@ -183,15 +183,15 @@ echo $this->Html->script('main.min');
 
                     <h2>When Suits?</h2>
                     <div class="row">
-                    <div class="center mx-auto">
-                        <div id='calendar'></div>
-                    </div>
+                        <div class="center mx-auto">
+                            <div id='calendar'></div>
+                        </div>
                     </div>
                     <br>
                     <div class="row mx-auto">
-                    <div class="alert alert-warning text-center mx-auto" role="alert">
-                        Make sure that the truck is available on the date you choose!
-                    </div>
+                        <div class="alert alert-warning text-center mx-auto" role="alert">
+                            Make sure that the truck is available on the date you choose!
+                        </div>
                     </div>
                     <div class="row mx-auto">
 
@@ -208,15 +208,15 @@ echo $this->Html->script('main.min');
                 </div>
             </fieldset>
 
-                <div class="hide_default">
-                    <?php
-                    echo $this->Form->control('deposit_status', ["class" => "hide_default"]);
-                    echo $this->Form->control('total_paid', ["class" => "hide_default"]);
-                    echo $this->Form->control('total_remaining', ["class" => "hide_default"]);
-                    echo $this->Form->control('feedback_stars', ["class" => "hide_default"]);
-                    echo $this->Form->control('feedback_comment', ["class" => "hide_default"]);
-                    ?>
-                </div>
+            <div class="hide_default">
+                <?php
+                echo $this->Form->control('deposit_status', ["class" => "hide_default"]);
+                echo $this->Form->control('total_paid', ["class" => "hide_default"]);
+                echo $this->Form->control('total_remaining', ["class" => "hide_default"]);
+                echo $this->Form->control('feedback_stars', ["class" => "hide_default"]);
+                echo $this->Form->control('feedback_comment', ["class" => "hide_default"]);
+                ?>
+            </div>
             </fieldset>
 
             <div id="invalid_form">
@@ -227,7 +227,13 @@ echo $this->Html->script('main.min');
             <div id="valid_form" class="mx-auto">
 
                 <h2>Does this all look correct?</h2>
-                <p>Review message goes here with links!</p>
+                <div class="row">
+                    <p class="review_message wx-50"></p>
+                </div>
+                <br/>
+                <div class="row">
+                    <p class="hint">Something look wrong? Click on the yellow field to edit it.</p>
+                </div>
 
                 <h2>Let's Do It!</h2>
                 <div class="center">
@@ -241,13 +247,13 @@ echo $this->Html->script('main.min');
 
 <!-- API Js -->
 <?php
-    echo $this->Html->script('API/addressFinder');
+echo $this->Html->script('API/addressFinder');
 ?>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -255,20 +261,20 @@ echo $this->Html->script('main.min');
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-        <script>
-            $(document).ready(function() {
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                events: '<?= $this->URL->build(['controller' => 'allocation', 'action' => 'calendar', '_ext' => 'json']) ?>'
-            });
-                calendar.render();
-            });
-        </script>
+<script>
+    $(document).ready(function () {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            events: '<?= $this->URL->build(['controller' => 'allocation', 'action' => 'calendar', '_ext' => 'json']) ?>'
+        });
+        calendar.render();
+    });
+</script>
 
 <!-- custom form validation front-end JS script by Darren -->
 <?php
-    echo $this->Html->script('form_validation');
+echo $this->Html->script('form_validation');
 ?>
 
 </body>
