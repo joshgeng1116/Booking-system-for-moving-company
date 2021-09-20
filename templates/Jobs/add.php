@@ -132,7 +132,7 @@ echo $this->Html->script('main.min');
                     </div>
                 </div>
 
-                <div class="section_JOB">
+                <div class="section_JOB locked_section">
 
                     <h2>The Job...</h2>
 
@@ -157,7 +157,7 @@ echo $this->Html->script('main.min');
 
                 </div>
 
-                <div class="section_TRUCK">
+                <div class="section_TRUCK locked_section">
 
                     <h2>The Truck...</h2>
 
@@ -179,7 +179,7 @@ echo $this->Html->script('main.min');
 
                 </div>
 
-                <div class="section_WHEN">
+                <div class="section_WHEN locked_section">
 
                     <h2>When Suits?</h2>
                     <div class="row">
@@ -219,21 +219,21 @@ echo $this->Html->script('main.min');
             </div>
             </fieldset>
 
-            <div id="invalid_form">
-                <h2>Invalid Form Heading</h2>
-                <p>Invalid form informative text</p>
+            <div id="invalid_form" class="no-review_section">
+                <h2>Are you sure you're done?</h2>
+                <p>Looks like some fields were left empty or entered incorrectly. Please scroll up.</p>
             </div>
 
-            <div id="valid_form" class="mx-auto">
+            <div id="valid_form" class="mx-auto locked_section">
 
-                <h2>Does this all look correct?</h2>
-                <div class="row">
-                    <p class="review_message wx-50"></p>
+                <div class="review_section hide_this">
+                    <h2>Does this all look correct?</h2>
+                    <div class="row">
+                        <p class="review_message wx-50"></p>
+                    </div>
+                    <br/>
                 </div>
-                <br/>
-                <div class="row">
-                    <p class="hint">Something look wrong? Click on the yellow field to edit it.</p>
-                </div>
+
 
                 <h2>Let's Do It!</h2>
                 <div class="center">

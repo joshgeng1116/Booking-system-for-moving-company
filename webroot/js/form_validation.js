@@ -250,9 +250,95 @@ function validateInputtedField(event) {
     }
 
     let review_message = generateReviewMessage();
-    console.log(review_message);
+    // console.log(review_message);
 
     updateReviewMessage(review_message);
+
+    // LOCKING / UNLOCKING form sections
+    function unlockNextField(section_to_unlock) {
+        $div_to_unlock = $("." + section_to_unlock.div);
+        $div_to_unlock.removeClass("locked_section");
+    }
+
+    function lockFutureFields(array_of_sections_to_lock) {
+        console.log(array_of_sections_to_lock);
+
+        for (let i = 0; i < array_of_sections_to_lock.length; i++) {
+            $div_to_lock = $("." + array_of_sections_to_lock[i].div);
+            $div_to_lock.addClass("locked_section");
+        }
+    }
+
+    function allFieldsValid(section) {
+        let sectionIsValid = true;
+        $.each(section.inputs, function(index) {
+            let valid = section.inputs[index].valid;
+            if (!valid) {
+                sectionIsValid = false;
+                return sectionIsValid;
+            }
+
+
+        });
+
+        return sectionIsValid;
+    }
+
+    function Hide(className) {
+        $div = $("." + className);
+        $div.addClass("hide_this");
+    }
+
+    function Reveal(className) {
+        $div = $("." + className);
+        $div.removeClass("hide_this");
+    }
+
+
+    function AllowSubmission() {
+        $("#valid_form").removeClass("locked_section");
+        Reveal("review_section");
+        Hide("no-review_section");
+    }
+
+    function DisallowSubmission() {
+        $("#valid_form").addClass("locked_section");
+        Hide("review_section");
+        Reveal("no-review_section");
+    }
+
+
+    // are all fields valid in a tested section
+    if (allFieldsValid(all_form_sections.section_WHEN)) {
+        AllowSubmission();
+    } else {
+        DisallowSubmission();
+    }
+
+    if (allFieldsValid(all_form_sections.section_TRUCK)) {
+        unlockNextField(all_form_sections.section_WHEN);
+    } else {
+        lockFutureFields([all_form_sections.section_WHEN]);
+        DisallowSubmission();
+
+    }
+
+    if (allFieldsValid(all_form_sections.section_JOB)) {
+        unlockNextField(all_form_sections.section_TRUCK);
+    } else {
+        lockFutureFields([all_form_sections.section_TRUCK, all_form_sections.section_WHEN]);
+        DisallowSubmission();
+
+    }
+
+    if (allFieldsValid(all_form_sections.section_YOU)) {
+        unlockNextField(all_form_sections.section_JOB);
+    } else {
+        lockFutureFields([all_form_sections.section_JOB, all_form_sections.section_TRUCK, all_form_sections.section_WHEN]);
+        DisallowSubmission();
+
+    }
+
 
 
 
