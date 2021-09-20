@@ -1,0 +1,11 @@
+/* REAL TIME form feedback for input fields */
+.success_realtime {
+    border: 3px solid #5cb85c !important;
+    transition: 0.3s ease-in !important;
+}
+
+.fail_realtime {
+    border: 3px solid #d9534f !important;
+    transition: 0.3s ease-out !important;
+}
+

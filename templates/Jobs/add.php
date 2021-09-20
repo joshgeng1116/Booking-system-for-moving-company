@@ -14,6 +14,7 @@ use Cake\Validation\Validator;
 <?php
 $this->disableAutoLayout();
 echo $this->Html->css('main.min');
+echo $this->Html->css('validation.css');
 echo $this->Html->script('main.min');
 ?>
 
@@ -98,109 +99,139 @@ echo $this->Html->script('main.min');
 
                 <h1>tell us about the move</h1>
 
-                <h2>You...</h2>
+                <div class="section_YOU">
 
-                <div class="row mx-auto">
-                    <?php
-                    echo $this->Form->control('customer_first_name', ["required", "class" => "form-control", "label" => "First Name"]);
-                    echo $this->Form->control('customer_last_name', ["class" => "form-control", "label" => "Last Name"]);
-                    ?>
-                </div>
-                <div class="row mx-auto">
-                    <?php
-                    echo $this->Form->control('customer_phone', ["required", "class" => "form-control", "label" => "Phone", "minlength" => 8, "maxlength" => 10, "type" => "tel"]);
-                    echo $this->Form->control('customer_email', ["required", "class" => "form-control", "label" => "Email", "type" => "email"]);
-                    ?>
-                </div>
-                <div class="hide_default">
-                    <?php
-                    echo $this->Form->control('allocation_id', ['options' => $allocation, 'empty' => true, "class" => "hide_default"]);
-                    echo $this->Form->control('status', ["required", "class" => "hide_default"]);
+                    <h2>You...</h2>
 
-                    ?>
-                </div>
+                    <div class="row mx-auto">
+                        <?php
+                        echo $this->Form->control('customer_first_name', ["required", "class" => "form-control", "label" => "First Name"]);
+                        echo $this->Form->control('customer_last_name', ["class" => "form-control", "label" => "Last Name"]);
+                        ?>
+                    </div>
+                    <div class="row mx-auto">
+                        <p class="col-xs-6">Error for customer first name would go here exactly.</p>
+                        <p class="col-xs-6">Error for customer last name would go here exactly.</p>
+                    </div>
+                    <div class="row mx-auto">
+                        <?php
+                        echo $this->Form->control('customer_phone', ["required", "class" => "form-control", "label" => "Phone", "maxlength" => "14", "type" => "tel"]);
+                        echo $this->Form->control('customer_email', ["required", "class" => "form-control", "label" => "Email"]);
+                        ?>
+                    </div>
+                    <div class="row mx-auto">
+                        <p class="col-xs-6">Error for customer phone would go here exactly.</p>
+                        <p class="col-xs-6">Error for customer email would go here exactly.</p>
+                    </div>
+                    <div class="hide_default">
+                        <?php
+                        echo $this->Form->control('allocation_id', ['options' => $allocation, 'empty' => true, "class" => "hide_default"]);
+                        echo $this->Form->control('status', ["required", "class" => "hide_default"]);
 
-                <h2>The Job...</h2>
-
-                <div class="row mx-auto">
-                    <?php
-                    echo $this->Form->control('moving_from', ["required", "class" => "form-control"]);
-                    echo $this->Form->control('moving_to', ["required", "class" => "form-control"]);
-                    ?>
-                </div>
-                <div class="row mx-auto input_wide">
-                    <?php
-                    echo $this->Form->control('list_of_item', ["required", "class" => "form-control input_wide col-md-12", "label" => "Items Being Moved", "type" => "textarea"]);
-                    ?>
+                        ?>
+                    </div>
                 </div>
 
-                <h2>The Truck...</h2>
+                <div class="section_JOB">
 
-                <div class="row mx-auto">
-                    <?php
-                    //echo $this->Form->control('size', ["class" => "form-control"]);
+                    <h2>The Job...</h2>
 
-
-                    $truck_size_opts = array("2T" => "Just a few items - (2T)", "4T" => "1-2 Bedrooms / Small Office - (4T)", "8T" => "3-4 Bedrooms / Medium Office - (8T)", "10T" => "4-5 Bedrooms / Medium Office - (10T)", "12T" => '4-5 Bedrooms / Large Office - (12T)');
-                    echo $this->Form->control('size', array("required", 'options' => $truck_size_opts, 'label' => "How many items are we moving?",
-                        'empty' => 'Choose...', 'selected' => 'Choose...', "class" => "form-control"));
-
-
-                    ?>
-                </div>
-
-                <h2>When Suits?</h2>
-                <div class="row">
-                <div class="center mx-auto">
-                    <!-- todo SEE HERE DISHA wrap this in a CakePHP anchor <a> element and link to your asset -->
-                    <div id='calendar'></div>
-                </div>
-                </div>
-                <br>
-                <div class="row mx-auto">
-                <div class="alert alert-warning text-center mx-auto" role="alert">
-                    Make sure that the truck is available on the date you choose!
-                </div>
-                </div>
-                <div class="row mx-auto">
+                    <div class="row mx-auto">
+                        <?php
+                        echo $this->Form->control('moving_from', ["required", "class" => "form-control"]);
+                        echo $this->Form->control('moving_to', ["required", "class" => "form-control"]);
+                        ?>
+                    </div>
+                    <div class="row mx-auto">
+                        <p class="col-xs-6">Error for moving from would go here exactly.</p>
+                        <p class="col-xs-6">Error for moving to would go here exactly.</p>
+                    </div>
+                    <div class="row mx-auto input_wide">
+                        <?php
+                        echo $this->Form->control('list_of_item', ["required", "class" => "form-control input_wide col-md-12", "label" => "Items Being Moved", "type" => "textarea"]);
+                        ?>
+                    </div>
+                    <div class="row mx-auto">
+                        <p class="col-xs-12">Error for list of items from would go here exactly.</p>
+                    </div>
 
                 </div>
 
-                <div class="row mx-auto">
-                    <?php
-                    echo $this->Form->control('date', ["required", "class" => "form-control text-center"]);
-                    ?>
+                <div class="section_TRUCK">
+
+                    <h2>The Truck...</h2>
+
+                    <div class="row mx-auto">
+                        <?php
+                        //echo $this->Form->control('size', ["class" => "form-control"]);
+
+
+                        $truck_size_opts = array("2T" => "Just a few items - (2T)", "4T" => "1-2 Bedrooms / Small Office - (4T)", "8T" => "3-4 Bedrooms / Medium Office - (8T)", "10T" => "4-5 Bedrooms / Medium Office - (10T)", "12T" => '4-5 Bedrooms / Large Office - (12T)');
+                        echo $this->Form->control('size', array("required", 'options' => $truck_size_opts, 'label' => "How many items are we moving?",
+                            'empty' => 'Choose...', 'selected' => 'Choose...', "class" => "form-control"));
+
+
+                        ?>
+                    </div>
+                    <div class="row mx-auto">
+                        <p class="col-xs-12">Error for truck size dropdown would go here exactly.</p>
+                    </div>
+
                 </div>
+
+                <div class="section_WHEN">
+
+                    <h2>When Suits?</h2>
+                    <div class="row">
+                    <div class="center mx-auto">
+                        <div id='calendar'></div>
+                    </div>
+                    </div>
+                    <br>
+                    <div class="row mx-auto">
+                    <div class="alert alert-warning text-center mx-auto" role="alert">
+                        Make sure that the truck is available on the date you choose!
+                    </div>
+                    </div>
+                    <div class="row mx-auto">
+
+                    </div>
+
+                    <div class="row mx-auto">
+                        <?php
+                        echo $this->Form->control('date', ["required", "class" => "form-control text-center"]);
+                        ?>
+                    </div>
+                    <div class="row mx-auto">
+                        <p class="col-xs-12">Error for date chosen would go here exactly.</p>
+                    </div>
+                </div>
+            </fieldset>
+
                 <div class="hide_default">
                     <?php
                     echo $this->Form->control('deposit_status', ["class" => "hide_default"]);
                     echo $this->Form->control('total_paid', ["class" => "hide_default"]);
                     echo $this->Form->control('total_remaining', ["class" => "hide_default"]);
+                    echo $this->Form->control('feedback_stars', ["class" => "hide_default"]);
+                    echo $this->Form->control('feedback_comment', ["class" => "hide_default"]);
                     ?>
                 </div>
             </fieldset>
 
-            <!-- todo finish implementing with JS next iteration maybe
-
-            <div class="invalid_form mx-auto">
-                <div class="alert alert-warning" role="alert">
-                    Scroll up to finish completing the form.
-                </div>
+            <div id="invalid_form">
+                <h2>Invalid Form Heading</h2>
+                <p>Invalid form informative text</p>
             </div>
 
+            <div id="valid_form" class="mx-auto">
 
-
-            <div class="valid_form mx-auto">
-                <h2>Did We Hear You Right?</h2>
-                <p>Review will go here.</p>
-                <p class="muted">Something wrong? Click on the incorrect field.</p>
-
-                -->
-            <div class="valid_form mx-auto">
+                <h2>Does this all look correct?</h2>
+                <p>Review message goes here with links!</p>
 
                 <h2>Let's Do It!</h2>
                 <div class="center">
-                    <?= $this->Form->button(__('Submit Enquiry'), ["class" => "btn btn-success"]) ?>
+                    <?= $this->Form->button(__('Submit Enquiry'), ["class" => "btn btn-success", "id" => "submit_btn"]) ?>
                 </div>
                 <?= $this->Form->end() ?>
             </div>
@@ -234,6 +265,11 @@ echo $this->Html->script('main.min');
                 calendar.render();
             });
         </script>
+
+<!-- custom form validation front-end JS script by Darren -->
+<?php
+    echo $this->Html->script('form_validation');
+?>
 
 </body>
 
