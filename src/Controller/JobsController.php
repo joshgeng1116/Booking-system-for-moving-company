@@ -68,8 +68,6 @@ class JobsController extends AppController
 
         $allocation = $this->Jobs->Allocation->find('list', ['limit' => 200]);
         $this->set(compact('job', 'allocation'));
-        
-
     }
 
     /**
