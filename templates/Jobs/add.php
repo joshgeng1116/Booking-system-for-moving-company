@@ -266,7 +266,7 @@ echo $this->Html->script('API/addressFinder');
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
-            events: '<?= $this->URL->build(['controller' => 'allocation', 'action' => 'calendar', '_ext' => 'json']) ?>'
+            events: '<?= $this->URL->build(['controller' => 'Jobs', 'action' => 'calendar', '_ext' => 'json']) ?>'
         });
         calendar.render();
     });

@@ -19,6 +19,10 @@
             <h3><?= h($staff->id) ?></h3>
             <table>
                 <tr>
+                    <th><?= __('Id') ?></th>
+                    <td><?= $this->Number->format($staff->id) ?></td>
+                </tr>
+                <tr>
                     <th><?= __('First Name') ?></th>
                     <td><?= h($staff->first_name) ?></td>
                 </tr>
@@ -27,16 +31,21 @@
                     <td><?= h($staff->last_name) ?></td>
                 </tr>
                 <tr>
+                    <th><?= __('Phone Number') ?></th>
+                    <td><?= h($staff->phone_number) ?></td>
+                </tr>
+                <tr>
                     <th><?= __('Email Address') ?></th>
                     <td><?= h($staff->email_address) ?></td>
                 </tr>
+
                 <tr>
-                    <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($staff->id) ?></td>
+                    <th><?= __('Staff Type') ?></th>
+                    <td><?= h($staff->staff_type) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Phone Number') ?></th>
-                    <td><?= h($staff->phone_number) ?></td>
+                    <th><?= __('Password') ?></th>
+                    <td><?= h($staff->password) ?></td>
                 </tr>
             </table>
         </div>

@@ -68,15 +68,19 @@ class JobsController extends AppController
             }
             $this->Flash->error(__('The job could not be saved. Please, try again.'));
         }
-
-
-        $allocation = $this->Jobs->Allocation->paginate = [
-            'contain' => ['Vehicles'],
-        ];
-        $this->set(compact('allocation'));
-
         $allocation = $this->Jobs->Allocation->find('list', ['limit' => 200]);
         $this->set(compact('job', 'allocation'));
+    }
+
+    public function calendar()
+    {
+        $this->loadModel('Allocation');
+        /*$allAllocations = $this->Allocation->find('all');*/
+        $this->paginate = [
+            'contain' => ['Staffs', 'Vehicles'],
+        ];
+        $allocation = $this->paginate($this->Allocation);
+        $this->set(compact('allocation'));
     }
 
     /**

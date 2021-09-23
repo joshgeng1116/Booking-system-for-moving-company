@@ -19,10 +19,12 @@ echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js',['blo
             <thead>
                 <tr>
                     <th><?= h('id') ?></th>
-                    <th><?= h('first_name') ?></th>
-                    <th><?= h('last_name') ?></th>
-                    <th><?= h('phone_number') ?></th>
-                    <th><?= h('email_address') ?></th>
+                    <th><?= h('First Name') ?></th>
+                    <th><?= h('Last Name') ?></th>
+                    <th><?= h('Phone Number') ?></th>
+                    <th><?= h('Email Address') ?></th>
+                    <th><?= h('Staff Type') ?></th>
+                    <th><?= h('Password') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -34,6 +36,14 @@ echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js',['blo
                     <td><?= h($staff->last_name) ?></td>
                     <td><?= h($staff->phone_number) ?></td>
                     <td><?= h($staff->email_address) ?></td>
+                    <td>
+                        <?php if($staff->type == 0):?>
+                            Admin
+                        <?php elseif($staff->type == 1):?>
+                            Driver
+                        <?php endif;?>
+                    </td>
+                    <td><?= h($staff->password) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $staff->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $staff->id]) ?>
