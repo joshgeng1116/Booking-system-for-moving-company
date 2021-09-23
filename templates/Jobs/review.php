@@ -100,8 +100,18 @@ echo $this->Html->css('review.css')
 
                 <h1>how'd the move go?</h1>
 
-                <div>
-                    <label>How Satisfied Were You With Your Move?</label>
+                <h2>Give Us A Rating</h2>
+                <div class="row stars_row">
+                    <div class="stars">
+                        <i class="far fa-lg fa-star" id="1"></i>
+                        <i class="far fa-lg fa-star" id="2"></i>
+                        <i class="far fa-lg fa-star" id="3"></i>
+                        <i class="far fa-lg fa-star" id="4"></i>
+                        <i class="far fa-lg fa-star" id="5"></i>
+                    </div>
+                </div>
+
+                <div class="hide_default">
                     <br/>
                     <?php
                     echo $this->Form->radio('feedback_stars',
@@ -112,14 +122,23 @@ echo $this->Html->css('review.css')
                             ['value' => '4', 'text' => ''],
                             ['value' => '5', 'text' => '']
                         ]);
-                    echo $this->Form->control('feedback_comment', ["class" => "form-control"]);
                     ?>
                 </div>
 
-            </fieldset>
+                <div class="feedback_text_section hide">
 
-            <h2>Let Us Know!</h2>
-            <div class="center">
+                    <h2 id="feedback_question">What can we do better?</h2>
+                    <?php
+                    echo $this->Form->control('feedback_comment', ['class' => 'form-control', 'maxlength' => '255']);
+                    ?>
+
+                </div>
+
+
+            </fieldset>
+            </br/>
+
+            <div class="center lock submit_section">
                 <?= $this->Form->button(__('Submit Review'), ["class" => "btn btn-success", "id" => "submit_btn"]) ?>
             </div>
             <?= $this->Form->end() ?>
@@ -154,6 +173,141 @@ echo $this->Html->css('review.css')
 <?php
 echo $this->Html->script('review_validation');
 ?>
+
+<!-- TODO embed this in its own JS file, wasn't working that's why in HTML -->
+<script>
+    let only_need_rating = true;
+    $stars = $(".stars");
+    console.log($stars);
+
+    $stars.click(function (event) {
+        /*
+        console.log(event.target);
+        $clicked_star = $(event.target)[0];
+        console.log($clicked_star);
+        $clicked_star.classList.remove("far");
+        $clicked_star.classList.add("fas");
+
+         */
+
+        console.log(event.target.id);
+        star_no = event.target.id;
+        const stars = document.getElementsByClassName("stars");
+        const feedback_text_section = document.getElementsByClassName("feedback_text_section");
+        console.log(feedback_text_section);
+
+
+        // to fill in stars
+        for (let i = 0; i < star_no; i++) {
+            console.log("star " + i + " will be filled.");
+            let current_star = document.getElementsByClassName("fa-star")[i];
+            current_star.classList.remove("far");
+            current_star.classList.add("fas");
+        }
+
+        // to remove fill from remaining stars
+        for (let i = star_no; i < document.getElementsByClassName("fa-star").length; i++) {
+            let current_star = document.getElementsByClassName("fa-star")[i];
+            current_star.classList.remove("fas");
+            current_star.classList.add("far");
+        }
+
+        // Check the corresponding radio button for the review score
+        radiobtn = document.getElementById("feedback-stars-" + star_no);
+        console.log("Radio button:");
+        console.log(radiobtn);
+        radiobtn.checked = true;
+
+        // Allow a comment if the feedback score was less than 2 (stars)
+        if (star_no <= 2) {
+
+            stars[0].classList.remove("stars_happy");
+            stars[0].classList.add("stars_sad");
+
+            only_need_rating = false;
+
+            document.getElementById("feedback-comment").innerHTML = "";
+
+
+            feedback_text_section[0].classList.remove("hide");
+
+
+            let plural = true;
+
+            if (star_no == 1) {
+                plural = false;
+            }
+
+            // Show feedback field
+            if (plural) {
+                document.getElementById("feedback_question").innerHTML = "Only two stars out of five! How can we improve?";
+            } else {
+                document.getElementById("feedback_question").innerHTML = "Only one star out of five! How can we improve?";
+            }
+
+            document.getElementsByClassName("submit_section")[0].classList.add("lock");
+
+
+        } else {
+
+            stars[0].classList.remove("stars_sad");
+            stars[0].classList.add("stars_happy");
+
+            only_need_rating = true;
+
+
+            // Hide feedback field
+            feedback_text_section[0].classList.add("hide");
+
+            // Set input of feedback field to (customer rated 3+ stars, not necessary)
+            document.getElementById("feedback-comment").innerHTML = "N/A";
+
+            document.getElementsByClassName("submit_section")[0].classList.remove("lock");
+
+        }
+
+    })
+
+</script>
+
+<style>
+    .hide {
+        transition: 0.3s ease-in !important;
+        display: none;
+    }
+
+    .stars_row {
+        display: flex !important;
+        justify-content: center !important;
+    }
+
+    .fa-star:hover {
+
+        cursor: pointer;
+
+    }
+
+    .stars_happy {
+        color: #5cb85c !important;
+    }
+
+    .stars_sad {
+        color: red !important;
+    }
+
+
+    .lock {
+        opacity: 0.3 !important;
+        pointer-events: none;
+        user-select: none;
+    }
+
+    .submit_section {
+        transition: 0.4s ease-out !important;
+    }
+
+</style>
+
 
 </body>
 

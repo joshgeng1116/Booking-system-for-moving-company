@@ -84,24 +84,27 @@ class JobsController extends AppController
      *
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
-    public function review()
+    public function review($id = 8)
     {
-        $job = $this->Jobs->newEmptyEntity();
-        if ($this->request->is('post')) {
+        $job = $this->Jobs->get($id, [
+            'contain' => [],
+        ]);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+
+
+            $userData = $this->request->getData();
             $job = $this->Jobs->patchEntity($job, $this->request->getData());
+            $job->feedback_stars = $userData['feedback_stars'];
+            $job->feedback_comment = $userData['feedback_comment'];
+//            debug($job);
+//            exit;
             if ($this->Jobs->save($job)) {
                 $this->Flash->success(__('The job has been saved.'));
-                return $this->redirect(['controller'=>'pages','action' => 'display']);
+
+                return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The job could not be saved. Please, try again.'));
         }
-
-
-        $allocation = $this->Jobs->Allocation->paginate = [
-            'contain' => ['Vehicles'],
-        ];
-        $this->set(compact('allocation'));
-
         $allocation = $this->Jobs->Allocation->find('list', ['limit' => 200]);
         $this->set(compact('job', 'allocation'));
     }
