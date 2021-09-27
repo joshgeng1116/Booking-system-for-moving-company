@@ -64,12 +64,21 @@ class JobsController extends AppController
             $job = $this->Jobs->patchEntity($job, $this->request->getData());
             if ($this->Jobs->save($job)) {
                 $this->Flash->success(__('The job has been saved.'));
-                return $this->redirect(['controller'=>'pages','action' => 'display']);
+                return $this->redirect(['controller'=>'Jobs','action' => 'success']);
             }
             $this->Flash->error(__('The job could not be saved. Please, try again.'));
         }
         $allocation = $this->Jobs->Allocation->find('list', ['limit' => 200]);
         $this->set(compact('job', 'allocation'));
+    }
+
+    /*
+     * Success method
+     *
+     * for successful form submission
+     */
+    public function success() {
+
     }
 
     public function calendar()
