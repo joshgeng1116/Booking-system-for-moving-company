@@ -81,6 +81,14 @@ class JobsController extends AppController
 
     }
 
+    /*
+     * Review success method
+     *
+     * for successful review form submission
+     */
+    public function reviewSuccess() {
+
+    }
     public function calendar()
     {
         $this->loadModel('Allocation');
@@ -113,8 +121,7 @@ class JobsController extends AppController
 //            exit;
             if ($this->Jobs->save($job)) {
                 $this->Flash->success(__('The job has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller'=>'Jobs','action' => 'review_success']);
             }
             $this->Flash->error(__('The job could not be saved. Please, try again.'));
         }

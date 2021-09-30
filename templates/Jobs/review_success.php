@@ -16,7 +16,7 @@ $this->disableAutoLayout();
 echo $this->Html->css('main.min');
 echo $this->Html->css('validation.css');
 echo $this->Html->script('main.min');
-echo $this->Html->css('review.css')
+echo $this->Html->css('jobs_success.css')
 ?>
 
 <head>
@@ -74,7 +74,7 @@ echo $this->Html->css('review.css')
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item">
                 <?php
                 echo $this->Html->link(
                     'Enquire Now',
@@ -93,59 +93,25 @@ echo $this->Html->css('review.css')
 
 <!-- form content -->
 <div class="container w-75">
-    <div class="column-responsive column-80">
-        <div class="jobs form content">
-            <?= $this->Form->create($job) ?>
-            <fieldset>
+    <div class="column-responsive column-80 text_center">
 
-                <h1>how'd the move go?</h1>
+        <h1>Your Feedback Helps</h1>
+        <h2>All the best</h2>
+        <h4>- the Easy Peasy team</h4>
+        <br/>
 
-                <h2>Give Us A Rating</h2>
-                <div class="row stars_row">
-                    <div class="stars">
-                        <i class="far fa-lg fa-star" id="1"></i>
-                        <i class="far fa-lg fa-star" id="2"></i>
-                        <i class="far fa-lg fa-star" id="3"></i>
-                        <i class="far fa-lg fa-star" id="4"></i>
-                        <i class="far fa-lg fa-star" id="5"></i>
-                    </div>
-                </div>
+            <?=
 
-                <div class="hide_default">
-                    <br/>
-                    <?php
-                    echo $this->Form->radio('feedback_stars',
-                        [
-                            ['value' => '1', 'text' => ''],
-                            ['value' => '2', 'text' => ''],
-                            ['value' => '3', 'text' => ''],
-                            ['value' => '4', 'text' => ''],
-                            ['value' => '5', 'text' => '']
-                        ]);
-                    ?>
-                </div>
+            $this->Html->Link('Return Home',
 
-                <div class="feedback_text_section hide">
+                ['controller' => 'Pages', 'action' => 'home', '_full' => true, 'class' => "btn btn-success center"]
+            );
 
-                    <h2 id="feedback_question">What can we do better?</h2>
-                    <?php
-                    echo $this->Form->control('feedback_comment', ['class' => 'form-control', 'maxlength' => '255']);
-                    ?>
-
-                </div>
-
-
-            </fieldset>
-            </br/>
-
-            <div class="center lock submit_section">
-                <?= $this->Form->button(__('Submit Review'), ["class" => "btn btn-success", "id" => "submit_btn"]) ?>
-            </div>
-            <?= $this->Form->end() ?>
+            ?>
         </div>
-    </div>
+        <br/>
 </div>
-</div>
+
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -159,15 +125,10 @@ echo $this->Html->css('review.css')
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 
-<!-- custom form validation front-end JS script by Darren -->
-<?php
-echo $this->Html->script('review_validation');
-?>
-
-
-
 </body>
 
 </html>
+
+
 
 

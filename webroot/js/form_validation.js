@@ -1,5 +1,4 @@
 // Represent each form input as an object with needed attributes for form validation
-
 class Validation {
     constructor(validation_type, validation, min_length, max_length) {
         if (["regex", "dropdown", "date", "none"].includes(validation_type)) {

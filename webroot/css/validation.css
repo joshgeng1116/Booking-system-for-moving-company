@@ -31,3 +31,6 @@
     transition: 0.5s ease-out;
 }
 
+.text_center {
+    text-align: center;
+}
