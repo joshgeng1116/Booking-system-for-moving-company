@@ -110,18 +110,13 @@ echo $this->Html->script('main.min');
                         ?>
                     </div>
                     <div class="row mx-auto">
-                        <p class="col-xs-6">Error for customer first name would go here exactly.</p>
-                        <p class="col-xs-6">Error for customer last name would go here exactly.</p>
-                    </div>
-                    <div class="row mx-auto">
                         <?php
                         echo $this->Form->control('customer_phone', ["required", "class" => "form-control", "label" => "Phone", "maxlength" => "14", "type" => "tel"]);
                         echo $this->Form->control('customer_email', ["required", "class" => "form-control", "label" => "Email"]);
                         ?>
                     </div>
                     <div class="row mx-auto">
-                        <p class="col-xs-6">Error for customer phone would go here exactly.</p>
-                        <p class="col-xs-6">Error for customer email would go here exactly.</p>
+                        <p class="col-xs-6 phone_specific_error hide_default">Phone numbers must begin with 0, 61 or +61. Then remaining nine digits.</p>
                     </div>
                     <div class="hide_default">
                         <?php
@@ -142,17 +137,10 @@ echo $this->Html->script('main.min');
                         echo $this->Form->control('moving_to', ["required", "class" => "form-control"]);
                         ?>
                     </div>
-                    <div class="row mx-auto">
-                        <p class="col-xs-6">Error for moving from would go here exactly.</p>
-                        <p class="col-xs-6">Error for moving to would go here exactly.</p>
-                    </div>
                     <div class="row mx-auto input_wide">
                         <?php
                         echo $this->Form->control('list_of_item', ["required", "class" => "form-control input_wide col-md-12", "label" => "Items Being Moved", "type" => "textarea"]);
                         ?>
-                    </div>
-                    <div class="row mx-auto">
-                        <p class="col-xs-12">Error for list of items from would go here exactly.</p>
                     </div>
 
                 </div>
@@ -173,9 +161,7 @@ echo $this->Html->script('main.min');
 
                         ?>
                     </div>
-                    <div class="row mx-auto">
-                        <p class="col-xs-12">Error for truck size dropdown would go here exactly.</p>
-                    </div>
+
 
                 </div>
 
@@ -201,7 +187,7 @@ echo $this->Html->script('main.min');
                         ?>
                     </div>
                     <div class="row mx-auto">
-                        <p class="col-xs-12">Error for date chosen would go here exactly.</p>
+                        <p class="col-xs-12 date_specific_error hide_default">You must choose a future date for the delivery to occur.</p>
                     </div>
                 </div>
             </fieldset>

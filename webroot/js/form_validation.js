@@ -13,6 +13,10 @@ class Validation {
 
 }
 
+const phone_specific_error = document.getElementsByClassName("phone_specific_error")[0];
+const date_specific_error = document.getElementsByClassName("date_specific_error")[0];
+
+
 const validation_pureText = new Validation("regex", /^[a-zA-Z ']+$/, 1, 255);
 const validation_specialText = new Validation("regex", /^[\w \-,\./']+$/, 1, 255);
 const validation_specialTextAndLineBreaks = new Validation("regex", /^[\w \-,\.\n']+$/, 1, 255);
@@ -114,9 +118,22 @@ class InputField {
         if (this.valid) {
             $("#" + this.id).removeClass("fail_realtime");
             $("#" + this.id).addClass("success_realtime");
+            if (this.id == 'customer-phone') {
+                phone_specific_error.classList.add("hide_default");
+            }
+            if (this.id == 'date') {
+                date_specific_error.classList.add("hide_default");
+            }
         } else {
             $("#" + this.id).removeClass("success_realtime");
             $("#" + this.id).addClass("fail_realtime");
+
+            if (this.id == 'customer-phone') {
+                phone_specific_error.classList.remove("hide_default");
+            }
+            if (this.id == 'date') {
+                date_specific_error.classList.remove("hide_default");
+            }
         }
     }
 

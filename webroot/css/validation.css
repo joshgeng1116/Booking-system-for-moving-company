@@ -34,3 +34,7 @@
 .text_center {
     text-align: center;
 }
+
+.date_specific_error, .phone_specific_error {
+    color: red !important;
+}
