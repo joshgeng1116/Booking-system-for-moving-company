@@ -7,6 +7,7 @@ namespace App\Controller;
  * Jobs Controller
  *
  * @property \App\Model\Table\JobsTable $Jobs
+ * @property \App\Model\Table\AllocationTable $Allocation
  * @method \App\Model\Entity\Job[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class JobsController extends AppController
@@ -54,7 +55,8 @@ class JobsController extends AppController
             $job = $this->Jobs->patchEntity($job, $this->request->getData());
             if ($this->Jobs->save($job)) {
                 $this->Flash->success(__('The job has been saved.'));
-                return $this->redirect(['controller'=>'pages','action' => 'display']);
+
+                return $this->redirect(['controller' => 'pages','action' => 'display']);
             }
             $this->Flash->error(__('The job could not be saved. Please, try again.'));
         }
@@ -105,5 +107,36 @@ class JobsController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    /**
+     * AddAllocation method
+     *
+     * @param string|null $id Job id.
+     * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function addAllocation($id = null)
+    {
+        $job = $this->Jobs->get($id, [
+            'contain' => ['Allocation'],
+        ]);
+        $allocation = $this->Jobs->Allocation->newEmptyEntity();
+        if ($this->request->is('post')) {
+            $allocation = $this->Jobs->Allocation->patchEntity($allocation, $this->request->getData());
+            if ($this->Jobs->Allocation->save($allocation)) {
+                $this->Flash->success(__('The allocation has been saved.'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('The allocation could not be saved. Please, try again.'));
+        }
+        $staffs = $this->Jobs->Allocation->Staffs->find('list', ['keyField' => 'id', 'valueField' => function ($e) {
+            return $e->first_name . ' ' . $e->last_name . ' ' . $e->more;
+        }]);
+        $vehicles = $this->Jobs->Allocation->Vehicles->find('list', ['keyField' => 'id', 'valueField' => function ($e) {
+            return $e->rego_number . ' / ' . $e->vehicle_type . ' ' . $e->more;
+        }]);
+        $this->set(compact('job', 'allocation', 'staffs', 'vehicles'));
     }
 }

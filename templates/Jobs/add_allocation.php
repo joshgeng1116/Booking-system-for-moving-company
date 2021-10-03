@@ -4,15 +4,11 @@
  * @var \App\Model\Entity\Allocation $allocation
  * @var \Cake\Collection\CollectionInterface|string[] $staffs
  * @var \Cake\Collection\CollectionInterface|string[] $vehicles
- * @var \App\Model\Entity\Allocation $jobs
+ * @var \App\Model\Entity\Job $job
  */
 ?>
 <div class="row">
     <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('List Allocation'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
     </aside>
     <div class="column-responsive column-80">
         <div class="allocation form content">

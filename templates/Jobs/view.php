@@ -120,13 +120,6 @@ use Cake\Mailer\Mailer;
                     <br><br>
                     <button type="button" onclick="sendEmail()" value="Send to customer">Submit</button>
                 </form>
-                <?php
-                $mailer = new Mailer('default');
-                $mailer->setFrom(['me@example.com' => 'My Site'])
-                    ->setTo('you@example.com')
-                    ->setSubject('About')
-                    ->deliver('My message');
-                ?>
                 <center>
                     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
                     <script type="text/javascript">
