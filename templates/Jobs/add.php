@@ -11,6 +11,13 @@ use Cake\Validation\Validator;
 
 ?>
 
+<?php
+$this->disableAutoLayout();
+echo $this->Html->css('main.min');
+echo $this->Html->css('validation.css');
+echo $this->Html->script('main.min');
+?>
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -53,7 +60,7 @@ use Cake\Validation\Validator;
 
     <?php
     echo $this->Html->link(
-        '<img src="/team102-app_fit3047/img/easy_peasy_default_logo.png" height="50px" class="navbar-brand"/>',
+        $this->Html->image('easy_peasy_default_logo.png', ['alt' => 'Easy Peasy logo', 'class' => 'navbar-brand', 'height' => '50px']),
         ['controller' => 'Pages', 'action' => 'home', '_full' => true, 'class' => "navbar-brand"],
         ['escape' => false]  // important
     );
@@ -71,7 +78,7 @@ use Cake\Validation\Validator;
                 echo $this->Html->link(
                     'Enquire Now',
                     '/Jobs/add',
-                    ['class' => 'nav-link', 'target' => '_blank']
+                    ['class' => 'nav-link', 'target' => '_self']
                 );
                 ?>
             </li>
@@ -82,6 +89,8 @@ use Cake\Validation\Validator;
 
     </div>
 </nav>
+
+<!-- form content -->
 <div class="container w-75">
     <div class="column-responsive column-80">
         <div class="jobs form content">
@@ -90,116 +99,119 @@ use Cake\Validation\Validator;
 
                 <h1>tell us about the move</h1>
 
-                <h2>You...</h2>
+                <div class="section_YOU">
 
-                <div class="row mx-auto">
-                    <?php
-                    echo $this->Form->control('customer_first_name', ["required", "class" => "form-control", "label" => "First Name"]);
-                    echo $this->Form->control('customer_last_name', ["class" => "form-control", "label" => "Last Name"]);
-                    ?>
-                </div>
-                <div class="row mx-auto">
-                    <?php
-                    echo $this->Form->control('customer_phone', ["required", "class" => "form-control", "label" => "Phone", "minlength" => 8, "maxlength" => 10, "type" => "tel"]);
-                    echo $this->Form->control('customer_email', ["required", "class" => "form-control", "label" => "Email", "type" => "email"]);
-                    ?>
-                </div>
-                <div class="hide_default">
-                    <?php
-                    echo $this->Form->control('allocation_id', ['options' => $allocation, 'empty' => true, "class" => "hide_default"]);
-                    echo $this->Form->control('status', ["required", "class" => "hide_default"]);
+                    <h2>You...</h2>
 
-                    ?>
-                </div>
+                    <div class="row mx-auto">
+                        <?php
+                        echo $this->Form->control('customer_first_name', ["required", "class" => "form-control", "label" => "First Name"]);
+                        echo $this->Form->control('customer_last_name', ["class" => "form-control", "label" => "Last Name"]);
+                        ?>
+                    </div>
+                    <div class="row mx-auto">
+                        <?php
+                        echo $this->Form->control('customer_phone', ["required", "class" => "form-control", "label" => "Phone", "maxlength" => "14", "type" => "tel"]);
+                        echo $this->Form->control('customer_email', ["required", "class" => "form-control", "label" => "Email"]);
+                        ?>
+                    </div>
+                    <div class="row mx-auto">
+                        <p class="col-xs-6 phone_specific_error hide_default">Phone numbers must begin with 0, 61 or +61. Then remaining nine digits.</p>
+                    </div>
+                    <div class="hide_default">
+                        <?php
+                        echo $this->Form->control('allocation_id', ['options' => $allocation, 'empty' => true, "class" => "hide_default"]);
+                        echo $this->Form->control('status', ["required", "class" => "hide_default"]);
 
-                <h2>The Job...</h2>
-
-                <div class="row mx-auto">
-                    <?php
-                    echo $this->Form->control('moving_from', ["required", "class" => "form-control"]);
-                    echo $this->Form->control('moving_to', ["required", "class" => "form-control"]);
-                    ?>
-                </div>
-                <div class="row mx-auto input_wide">
-                    <?php
-                    echo $this->Form->control('list_of_item', ["required", "class" => "form-control input_wide col-md-12", "label" => "Items Being Moved", "type" => "textarea"]);
-                    ?>
+                        ?>
+                    </div>
                 </div>
 
-                <h2>The Truck...</h2>
+                <div class="section_JOB locked_section">
 
-                <div class="row mx-auto">
-                    <?php
-                    //echo $this->Form->control('size', ["class" => "form-control"]);
+                    <h2>The Job...</h2>
 
-
-                    $truck_size_opts = array("2T" => "Just a few items - (2T)", "4T" => "1-2 Bedrooms / Small Office - (4T)", "8T" => "3-4 Bedrooms / Medium Office - (8T)", "10T" => "4-5 Bedrooms / Medium Office - (10T)", "12T" => '4-5 Bedrooms / Large Office - (12T)');
-                    echo $this->Form->control('size', array("required", 'options' => $truck_size_opts, 'label' => "How many items are we moving?",
-                        'empty' => 'Choose...', 'selected' => 'Choose...', "class" => "form-control"));
-
-
-                    ?>
-                </div>
-
-                <h2>When Suits?</h2>
-                <div class="row">
-                <div class="center mx-auto">
-                    <!-- todo SEE HERE DISHA wrap this in a CakePHP anchor <a> element and link to your asset -->
-                   
-                    <?php
-                        echo $this->Html->link('See Truck Times', array(
-                            'controller' => 'allocation',
-                            'action' => 'calendar',
-                        ), array('target' => '_blank')
-                        );
-                    ?>
-                </div>
-                </div>
-                <br>
-                <div class="row mx-auto">
-                <div class="alert alert-warning text-center mx-auto" role="alert">
-                    Make sure that the truck is available on the date you choose!
-                </div>
-                </div>
-                <div class="row mx-auto">
+                    <div class="row mx-auto">
+                        <?php
+                        echo $this->Form->control('moving_from', ["required", "class" => "form-control"]);
+                        echo $this->Form->control('moving_to', ["required", "class" => "form-control"]);
+                        ?>
+                    </div>
+                    <div class="row mx-auto input_wide">
+                        <?php
+                        echo $this->Form->control('list_of_item', ["required", "class" => "form-control input_wide col-md-12", "label" => "Items Being Moved", "type" => "textarea"]);
+                        ?>
+                    </div>
 
                 </div>
 
-                <div class="row mx-auto">
-                    <?php
-                    echo $this->Form->control('date', ["required", "class" => "form-control text-center"]);
-                    ?>
+                <div class="section_TRUCK locked_section">
+
+                    <h2>The Truck...</h2>
+
+                    <div class="row mx-auto">
+                        <?php
+                        //echo $this->Form->control('size', ["class" => "form-control"]);
+
+
+                        $truck_size_opts = array("2T" => "Just a few items - (2T)", "4T" => "1-2 Bedrooms / Small Office - (4T)", "8T" => "3-4 Bedrooms / Medium Office - (8T)", "10T" => "4-5 Bedrooms / Medium Office - (10T)", "12T" => '4-5 Bedrooms / Large Office - (12T)');
+                        echo $this->Form->control('size', array("required", 'options' => $truck_size_opts, 'label' => "How many items are we moving?",
+                            'empty' => 'Choose...', 'selected' => 'Choose...', "class" => "form-control"));
+
+
+                        ?>
+                    </div>
+
+
                 </div>
-                <div class="hide_default">
-                    <?php
-                    echo $this->Form->control('deposit_status', ["class" => "hide_default"]);
-                    echo $this->Form->control('total_paid', ["class" => "hide_default"]);
-                    echo $this->Form->control('total_remaining', ["class" => "hide_default"]);
-                    ?>
+
+                <div class="section_WHEN locked_section">
+
+                    <h2>When Suits?</h2>
+                    <div class="row">
+                        <div class="center mx-auto">
+                            <div id='calendar'></div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row mx-auto">
+                        <div class="alert alert-warning text-center mx-auto" role="alert">
+                            Make sure that the truck is NOT unavailable (red) on the date you choose!
+                        </div>
+                    </div>
+
+
+                    <div class="row mx-auto">
+                        <?php
+                        echo $this->Form->control('date', ["required", "class" => "form-control text-center"]);
+                        ?>
+                    </div>
+                    <div class="row mx-auto">
+                        <p class="col-xs-12 date_specific_error hide_default">You must choose a future date for the delivery to occur.</p>
+                    </div>
                 </div>
             </fieldset>
 
-            <!-- todo finish implementing with JS next iteration maybe
 
-            <div class="invalid_form mx-auto">
-                <div class="alert alert-warning" role="alert">
-                    Scroll up to finish completing the form.
-                </div>
+            <div id="invalid_form" class="no-review_section">
+                <h2>Are you sure you're done?</h2>
+                <p>Looks like some fields were left empty or entered incorrectly. Please scroll up.</p>
             </div>
 
+            <div id="valid_form" class="mx-auto locked_section">
 
+                <div class="review_section hide_this">
+                    <h2>Does this all look correct?</h2>
+                    <div class="row">
+                        <p class="review_message wx-50"></p>
+                    </div>
+                    <br/>
+                </div>
 
-            <div class="valid_form mx-auto">
-                <h2>Did We Hear You Right?</h2>
-                <p>Review will go here.</p>
-                <p class="muted">Something wrong? Click on the incorrect field.</p>
-
-                -->
-            <div class="valid_form mx-auto">
 
                 <h2>Let's Do It!</h2>
                 <div class="center">
-                    <?= $this->Form->button(__('Submit Enquiry'), ["class" => "btn btn-success"]) ?>
+                    <?= $this->Form->button(__('Submit Enquiry'), ["class" => "btn btn-success", "id" => "submit_btn"]) ?>
                 </div>
                 <?= $this->Form->end() ?>
             </div>
@@ -209,13 +221,13 @@ use Cake\Validation\Validator;
 
 <!-- API Js -->
 <?php
-    echo $this->Html->script('API/addressFinder');
+echo $this->Html->script('API/addressFinder');
 ?>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -223,9 +235,26 @@ use Cake\Validation\Validator;
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function () {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            events: '<?= $this->URL->build(['controller' => 'Jobs', 'action' => 'calendar', '_ext' => 'json']) ?>'
+        });
+        calendar.render();
+    });
+</script>
+
+<!-- custom form validation front-end JS script by Darren -->
+<?php
+echo $this->Html->script('form_validation');
+?>
 
 </body>
 
 </html>
+
+
 
 

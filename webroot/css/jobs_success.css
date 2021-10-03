@@ -1,0 +1,16 @@
+.steps_wrapper {
+    text-align: center;
+}
+
+.success_step {
+    margin: 3%;
+}
+
+.success_icon {
+    font-size: 3rem;
+    margin-bottom: 2%;
+}
+
+.success_explanation {
+    font-size: 1.5rem;
+}

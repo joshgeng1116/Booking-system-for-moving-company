@@ -1,0 +1,40 @@
+/* REAL TIME form feedback for input fields */
+.success_realtime {
+    border: 3px solid #5cb85c !important;
+    transition: 0.3s ease-in !important;
+}
+
+.fail_realtime {
+    border: 3px solid #d9534f !important;
+    transition: 0.3s ease-out !important;
+}
+
+#customer-first-name, #customer-last-name {
+    text-transform: capitalize;
+}
+
+.section_JOB, .section_TRUCK, .section_YOU, .section_WHEN {
+    transition: 0.4s ease-in;
+}
+
+.locked_section {
+    opacity: 0.2 !important;
+    transition: 0.4s ease-out;
+    pointer-events: none;
+    cursor: none;
+    tab-index: -1;
+}
+
+.hide_this {
+    display: none;
+    opacity: 0;
+    transition: 0.5s ease-out;
+}
+
+.text_center {
+    text-align: center;
+}
+
+.date_specific_error, .phone_specific_error {
+    color: red !important;
+}

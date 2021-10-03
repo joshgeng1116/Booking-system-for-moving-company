@@ -64,20 +64,6 @@ class AllocationController extends AppController
         $this->set(compact('allocation', 'staffs', 'vehicles'));
     }
     /**
-     * Calender view
-     *
-     * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
-     */
-    public function calendar()
-    {
-        $this->paginate = [
-            'contain' => ['Staffs', 'Vehicles'],
-        ];
-        $allocation = $this->paginate($this->Allocation);
-        $this->set(compact('allocation'));
-    }
-
-    /**
      * Edit method
      *
      * @param string|null $id Allocation id.

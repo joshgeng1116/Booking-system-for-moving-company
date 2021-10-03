@@ -27,6 +27,15 @@ class JobsController extends AppController
         $this->set(compact('jobs'));
     }
 
+    public function indexdriver()
+    {
+        $this->paginate = [
+            'contain' => ['Allocation'],
+        ];
+        $jobs = $this->paginate($this->Jobs);
+
+        $this->set(compact('jobs'));
+    }
     /**
      * View method
      *
@@ -55,8 +64,69 @@ class JobsController extends AppController
             $job = $this->Jobs->patchEntity($job, $this->request->getData());
             if ($this->Jobs->save($job)) {
                 $this->Flash->success(__('The job has been saved.'));
+<<<<<<< HEAD
 
                 return $this->redirect(['controller' => 'pages','action' => 'display']);
+=======
+                return $this->redirect(['controller'=>'Jobs','action' => 'success']);
+            }
+            $this->Flash->error(__('The job could not be saved. Please, try again.'));
+        }
+        $allocation = $this->Jobs->Allocation->find('list', ['limit' => 200]);
+        $this->set(compact('job', 'allocation'));
+    }
+
+    /*
+     * Success method
+     *
+     * for successful form submission
+     */
+    public function success() {
+
+    }
+
+    /*
+     * Review success method
+     *
+     * for successful review form submission
+     */
+    public function reviewSuccess() {
+
+    }
+    public function calendar()
+    {
+        $this->loadModel('Allocation');
+        /*$allAllocations = $this->Allocation->find('all');*/
+        $this->paginate = [
+            'contain' => ['Staffs', 'Vehicles'],
+        ];
+        $allocation = $this->paginate($this->Allocation);
+        $this->set(compact('allocation'));
+    }
+
+    /**
+     * Review method
+     *
+     * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
+     */
+    public function review($id = 8)
+    {
+        $job = $this->Jobs->get($id, [
+            'contain' => [],
+        ]);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+
+
+            $userData = $this->request->getData();
+            $job = $this->Jobs->patchEntity($job, $this->request->getData());
+            $job->feedback_stars = $userData['feedback_stars'];
+            $job->feedback_comment = $userData['feedback_comment'];
+//            debug($job);
+//            exit;
+            if ($this->Jobs->save($job)) {
+                $this->Flash->success(__('The job has been saved.'));
+                return $this->redirect(['controller'=>'Jobs','action' => 'review_success']);
+>>>>>>> 3f0d8cd6b90712c44ca3a1db07d3645ef8af16b8
             }
             $this->Flash->error(__('The job could not be saved. Please, try again.'));
         }
