@@ -36,6 +36,7 @@ class JobsController extends AppController
 
         $this->set(compact('jobs'));
     }
+
     /**
      * View method
      *
@@ -64,11 +65,8 @@ class JobsController extends AppController
             $job = $this->Jobs->patchEntity($job, $this->request->getData());
             if ($this->Jobs->save($job)) {
                 $this->Flash->success(__('The job has been saved.'));
-<<<<<<< HEAD
 
-                return $this->redirect(['controller' => 'pages','action' => 'display']);
-=======
-                return $this->redirect(['controller'=>'Jobs','action' => 'success']);
+                return $this->redirect(['controller' => 'Jobs','action' => 'success']);
             }
             $this->Flash->error(__('The job could not be saved. Please, try again.'));
         }
@@ -81,8 +79,9 @@ class JobsController extends AppController
      *
      * for successful form submission
      */
-    public function success() {
 
+    public function success()
+    {
     }
 
     /*
@@ -90,9 +89,11 @@ class JobsController extends AppController
      *
      * for successful review form submission
      */
-    public function reviewSuccess() {
 
+    public function reviewSuccess()
+    {
     }
+
     public function calendar()
     {
         $this->loadModel('Allocation');
@@ -115,8 +116,6 @@ class JobsController extends AppController
             'contain' => [],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-
-
             $userData = $this->request->getData();
             $job = $this->Jobs->patchEntity($job, $this->request->getData());
             $job->feedback_stars = $userData['feedback_stars'];
@@ -125,8 +124,8 @@ class JobsController extends AppController
 //            exit;
             if ($this->Jobs->save($job)) {
                 $this->Flash->success(__('The job has been saved.'));
-                return $this->redirect(['controller'=>'Jobs','action' => 'review_success']);
->>>>>>> 3f0d8cd6b90712c44ca3a1db07d3645ef8af16b8
+
+                return $this->redirect(['controller' => 'Jobs','action' => 'review_success']);
             }
             $this->Flash->error(__('The job could not be saved. Please, try again.'));
         }
@@ -141,7 +140,7 @@ class JobsController extends AppController
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function edit($id = null)
+    public function edit($id = 8)
     {
         $job = $this->Jobs->get($id, [
             'contain' => [],
@@ -195,18 +194,44 @@ class JobsController extends AppController
         if ($this->request->is('post')) {
             $allocation = $this->Jobs->Allocation->patchEntity($allocation, $this->request->getData());
             if ($this->Jobs->Allocation->save($allocation)) {
-                $this->Flash->success(__('The allocation has been saved.'));
+                $job->allocation = $allocation;
+                if ($this->Jobs->save($job)) {
+                    $this->Flash->success(__('The allocation has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                    return $this->redirect(['action' => 'index']);
+                }
+                $this->Flash->error(__('The allocation could not be saved. Please, try again.'));
             }
             $this->Flash->error(__('The allocation could not be saved. Please, try again.'));
         }
         $staffs = $this->Jobs->Allocation->Staffs->find('list', ['keyField' => 'id', 'valueField' => function ($e) {
             return $e->first_name . ' ' . $e->last_name . ' ' . $e->more;
         }]);
+        $date = $job->get('date');
         $vehicles = $this->Jobs->Allocation->Vehicles->find('list', ['keyField' => 'id', 'valueField' => function ($e) {
-            return $e->rego_number . ' / ' . $e->vehicle_type . ' ' . $e->more;
+            return $e->rego_number . ' / ' . $this->type($e->vehicle_type) . ' ' . $e->more;
         }]);
-        $this->set(compact('job', 'allocation', 'staffs', 'vehicles'));
+        $this->set(compact('job', 'allocation', 'staffs', 'vehicles', 'date'));
+    }
+
+    public function type($type)
+    {
+        if ($type == 1) {
+                           return '2T';
+        }
+        if ($type == 2) {
+                          return '4T';
+        }
+        if ($type == 3) {
+                         return '8T';
+        }
+        if ($type == 4) {
+                        return '10T';
+        }
+        if ($type == 5) {
+                       return '12T';
+        }
+
+                       return 'null';
     }
 }

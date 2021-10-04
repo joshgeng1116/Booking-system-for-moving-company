@@ -35,14 +35,11 @@
 <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul class="navbar-nav bg-gradient-warning sidebar sidebar-black accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= $this->Url->build('/') ?>">
-            <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
-            </div>
-            <div class="sidebar-brand-text mx-3">Easy Peasy Removal Admin</div>
+            <div style="color: black" class="sidebar-brand-text mx-3">Easy Peasy Removal Admin</div>
         </a>
 
 
@@ -54,27 +51,27 @@
         <!-- Nav Item - Charts -->
         <li class="nav-item">
             <a class="nav-link" href="<?=$this->Url->build(['controller'=>'Jobs','action'=>'index'])?>">
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>Jobs</span></a>
+                <i class="fas fa-fw fa-people-carry"></i>
+                <span style="color: black" size="1">Jobs</span></a>
         </li>
 
 
         <li class="nav-item">
             <a class="nav-link" href="<?=$this->Url->build(['controller'=>'Staffs','action'=>'index'])?>">
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>Staffs</span></a>
+                <i class="fas fa-"></i>
+                <span style="color: black">Staffs</span></a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="<?=$this->Url->build(['controller'=>'Vehicles','action'=>'index'])?>">
                 <i class="fas fa-fw fa-chart-area"></i>
-                <span>Vehicles</span></a>
+                <span style="color: black">Vehicles</span></a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="<?=$this->Url->build(['controller'=>'Allocation','action'=>'index'])?>">
                 <i class="fas fa-fw fa-chart-area"></i>
-                <span>Allocation</span></a>
+                <span style="color: black">Allocation</span></a>
         </li>
 
         <!-- Divider -->

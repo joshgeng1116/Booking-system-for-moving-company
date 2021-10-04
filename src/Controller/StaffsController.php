@@ -39,6 +39,11 @@ class StaffsController extends AppController
         $this->set(compact('staff'));
     }
 
+    public function get_name($id = null){
+        $staffs = $this->Staffs->find('list', ['condition' => ['id'=>$id], ]);
+        return $staffs;
+    }
+
     /**
      * Add method
      *

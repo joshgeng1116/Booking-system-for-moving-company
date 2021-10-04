@@ -42,6 +42,7 @@ class StaffsTable extends Table
         $this->setPrimaryKey('id');
     }
 
+
     /**
      * Default validation rules.
      *

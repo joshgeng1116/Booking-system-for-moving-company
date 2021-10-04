@@ -3,14 +3,14 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Allocation[]|\Cake\Collection\CollectionInterface $allocation
  */
-echo $this->Html->css('vendor/datatables/dataTables.bootstrap4.min.css',['block'=>true]);
-echo $this->Html->script('/vendor/datatables/jquery.dataTables.min.js',['block'=>true]);
-echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js',['block'=>true]);
+echo $this->Html->css('vendor/datatables/dataTables.bootstrap4.min.css', ['block' => true]);
+echo $this->Html->script('/vendor/datatables/jquery.dataTables.min.js', ['block' => true]);
+echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js', ['block' => true]);
 ?>
 <div class="allocation index content">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800"><?= __('Allocation') ?></h1>
-        <a href="<?=$this->Url->build(['action'=>'add'])?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+        <a href="<?=$this->Url->build(['action' => 'add'])?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                 class="fas fa-plus fa-sm text-white-50"></i> New Allocation</a>
     </div>
     <div class="table-responsive">
@@ -26,7 +26,7 @@ echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js',['blo
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($allocation as $allocation): ?>
+                <?php foreach ($allocation as $allocation) : ?>
                 <tr>
                     <td><?= $this->Number->format($allocation->id) ?></td>
                     <td><?= $this->Number->format($allocation->staff_member1_id) ?></td>

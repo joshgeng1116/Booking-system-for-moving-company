@@ -6,6 +6,7 @@
  * @var \Cake\Collection\CollectionInterface|string[] $vehicles
  * @var \App\Model\Entity\Allocation $jobs
  */
+
 ?>
 <div class="row">
     <aside class="column">
