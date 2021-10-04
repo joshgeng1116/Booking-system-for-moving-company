@@ -9,15 +9,21 @@ echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js',['blo
 ?>
 <div class="jobs index content">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800"><?= __('Jobs') ?></h1>
+        <h1 class="h3 mb-0 text-gray-800"><?= __('Jobs For Drivers') ?></h1>
         <a href="<?=$this->Url->build(['action'=>'add'])?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                 class="fas fa-plus fa-sm text-white-50"></i> New Job</a>
+    </div>
+    <div>
+        <?= $this->Form->create($jobs,['type'=>'get']); ?>
+        <?= $this->Form->control('start_date',['class'=>'datepicker','value'=>$this->request->getQuery('start_date')]); ?>
+        <?= $this->Form->control('end_date',['class'=>'datepicker','value'=>$this->request->getQuery('end_date')]); ?>
+        <button>Search</button>
+        <?= $this->Form->end(); ?>
     </div>
     <div class="table-responsive">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
             <tr>
-                <th><?= $this->Paginator->sort('id') ?></th>
                 <th><?= $this->Paginator->sort('customer_first_name') ?></th>
                 <th><?= $this->Paginator->sort('customer_last_name') ?></th>
                 <th><?= $this->Paginator->sort('customer_phone') ?></th>
@@ -32,13 +38,13 @@ echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js',['blo
                 <th><?= $this->Paginator->sort('deposit_status') ?></th>
                 <th><?= $this->Paginator->sort('total_paid') ?></th>
                 <th><?= $this->Paginator->sort('total_remaining') ?></th>
+
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
             </thead>
             <tbody>
             <?php foreach ($jobs as $job): ?>
                 <tr>
-                    <td><?= $this->Number->format($job->id) ?></td>
                     <td><?= h($job->customer_first_name) ?></td>
                     <td><?= h($job->customer_last_name) ?></td>
                     <td><?= h($job->customer_phone) ?></td>
@@ -99,5 +105,10 @@ echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js',['blo
         $(document).ready(function() {
             $('#dataTable').DataTable();
         });
+    </script>
+        <script>
+            $( function() {
+            $( ".datepicker" ).datepicker({dateFormat:'yy-mm-dd'});
+        } );
     </script>
 </div>
