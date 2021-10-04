@@ -105,14 +105,14 @@ echo $this->Html->script('main.min');
 
                     <div class="row mx-auto">
                         <?php
-                        echo $this->Form->control('customer_first_name', ["required", "class" => "form-control", "label" => "First Name"]);
-                        echo $this->Form->control('customer_last_name', ["class" => "form-control", "label" => "Last Name"]);
+                        echo $this->Form->control('customer_first_name', ["required", "class" => "form-control", "label" => "First Name", "placeholder" => "John"]);
+                        echo $this->Form->control('customer_last_name', ["class" => "form-control", "label" => "Last Name", "placeholder" => "Doe"]);
                         ?>
                     </div>
                     <div class="row mx-auto">
                         <?php
-                        echo $this->Form->control('customer_phone', ["required", "class" => "form-control", "label" => "Phone", "maxlength" => "14", "type" => "tel"]);
-                        echo $this->Form->control('customer_email', ["required", "class" => "form-control", "label" => "Email"]);
+                        echo $this->Form->control('customer_phone', ["required", "class" => "form-control", "label" => "Phone", "maxlength" => "14", "type" => "tel", "placeholder" => "0xxxxxxxxx"]);
+                        echo $this->Form->control('customer_email', ["required", "class" => "form-control", "label" => "Email", "placeholder" => "johndoe@mail.com"]);
                         ?>
                     </div>
                     <div class="row mx-auto">
@@ -133,13 +133,13 @@ echo $this->Html->script('main.min');
 
                     <div class="row mx-auto">
                         <?php
-                        echo $this->Form->control('moving_from', ["required", "class" => "form-control"]);
-                        echo $this->Form->control('moving_to', ["required", "class" => "form-control"]);
+                        echo $this->Form->control('moving_from', ["required", "class" => "form-control", "placeholder" => "Location A"]);
+                        echo $this->Form->control('moving_to', ["required", "class" => "form-control", "placeholder" => "Location B"]);
                         ?>
                     </div>
                     <div class="row mx-auto input_wide">
                         <?php
-                        echo $this->Form->control('list_of_item', ["required", "class" => "form-control input_wide col-md-12", "label" => "Items Being Moved", "type" => "textarea"]);
+                        echo $this->Form->control('list_of_item', ["required", "class" => "form-control input_wide col-md-12", "label" => "Items Being Moved", "type" => "textarea", "placeholder" => "Item one\nItem two\nItem three..."]);
                         ?>
                     </div>
 
