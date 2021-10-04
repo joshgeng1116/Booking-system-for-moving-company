@@ -11,15 +11,6 @@ use Cake\Mailer\Mailer;
 <html lang="en" style="background-color: lightyellow">
 <body style="background-color: lightyellow">
 <div class="row">
-<!--    <aside class="column">-->
-<!--        <div class="side-nav">-->
-<!--            <h4 class="heading">--><?php //= __('Actions') ?><!--</h4>-->
-<!--            --><?php //= $this->Html->link(__('Edit Job'), ['action' => 'edit', $job->id], ['class' => 'side-nav-item']) ?>
-<!--            --><?php //= $this->Form->postLink(__('Delete Job'), ['action' => 'delete', $job->id], ['confirm' => __('Are you sure you want to delete # {0}?', $job->id), 'class' => 'side-nav-item']) ?>
-<!--            --><?php //= $this->Html->link(__('List Jobs'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-<!--            --><?php //= $this->Html->link(__('New Job'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
-<!--        </div>-->
-<!--    </aside>-->
     <div class="column-responsive column-100">
         <body class="jobs view content">
         <hr class="sidebar-divider d-none d-md-block">
@@ -49,7 +40,7 @@ use Cake\Mailer\Mailer;
                             <p style="color: black;font-size: 20px" ><?= h($job->customer_email) ?></p>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <p style="color: gray(5);font-size: 20px" >Customer's Email:</p>
+                            <p style="color: gray(5);font-size: 20px" >Customer's Phone:</p>
                             <p style="color: black;font-size: 20px" ><?= h($job->customer_phone) ?></p>
                         </div>
                     </div>
@@ -224,7 +215,7 @@ use Cake\Mailer\Mailer;
                 <a href="<?=$this->Url->build(['action' => 'index'])?>" class="form-control button" style="background-color: black;color: white"><i
                         class="fas fa-backward fa-sm text-white"></i> Back</a>
                 <hr class="sidebar-divider d-none d-md-block">
-                <a href="<?=$this->Url->build(['action' => 'edit'])?>" class="form-control button" style="background-color: black;color: white"><i
+                <a href="<?=$this->Url->build(['action' => 'edit', $job->id])?>" class="form-control button" style="background-color: black;color: white"><i
                         class="fas fa-edit fa-sm text-white"></i> Edit</a>
                 <hr class="sidebar-divider d-none d-md-block">
                 <a href="<?=$this->Url->build(['action' => 'delete', $job->id])?>" onclick="return confirm('Do you want to delete this job?')" class="form-control button" style="background-color: red;color: white"><i

@@ -5,49 +5,50 @@
  */
 ?>
 <div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Edit Staff'), ['action' => 'edit', $staff->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Staff'), ['action' => 'delete', $staff->id], ['confirm' => __('Are you sure you want to delete # {0}?', $staff->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List Staffs'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New Staff'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
-    <div class="column-responsive column-80">
-        <div class="staffs view content">
-            <h3><?= h($staff->id) ?></h3>
-            <table>
-                <tr>
-                    <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($staff->id) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('First Name') ?></th>
-                    <td><?= h($staff->first_name) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Last Name') ?></th>
-                    <td><?= h($staff->last_name) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Phone Number') ?></th>
-                    <td><?= h($staff->phone_number) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Email Address') ?></th>
-                    <td><?= h($staff->email_address) ?></td>
-                </tr>
+    <div class="column-responsive column-100">
+        <body class="jobs view content">
+        <hr class="sidebar-divider d-none d-md-block">
+        <div class="row">
+            <div class="col-md-auto">
+                <h3 class="mb-3" style="color: black">Details for Staff id : <?= h($staff->id)?></h3>
+                <form class="needs-validation" novalidate="">
 
-                <tr>
-                    <th><?= __('Staff Type') ?></th>
-                    <td><?= h($staff->staff_type) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Password') ?></th>
-                    <td><?= h($staff->password) ?></td>
-                </tr>
-            </table>
+                    <hr class="sidebar-divider d-none d-md-block">
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <p style="color: gray(5);font-size: 20px" >First name:</p>
+                            <p style="color: black;font-size: 20px" ><?= h($staff->first_name) ?></p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <p style="color: gray(5);font-size: 20px" >Last name:</p>
+                            <p style="color: black;font-size: 20px" ><?= h($staff->last_name) ?></p>
+                        </div>
+                    </div>
+
+                    <hr class="sidebar-divider d-none d-md-block">
+
+                    <div class="col-md-6 mb-3">
+                        <p style="color: gray(5);font-size: 20px" >Staff's Email:</p>
+                        <p style="color: black;font-size: 20px" ><?= h($staff->email_address) ?></p>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <p style="color: gray(5);font-size: 20px" >Staff's Email:</p>
+                        <p style="color: black;font-size: 20px" ><?= h($staff->phone_number) ?></p>
+                    </div>
+                </form>
+                <hr class="sidebar-divider d-none d-md-block">
+            <div class="col-md-auto">
+                <h3 class="mb-3" style="color: black">Actions :</h3>
+                <hr class="sidebar-divider d-none d-md-block">
+                <a href="<?=$this->Url->build(['action' => 'index'])?>" class="form-control button" style="background-color: black;color: white"><i
+                        class="fas fa-backward fa-sm text-white"></i> Back</a>
+                <hr class="sidebar-divider d-none d-md-block">
+                <a href="<?=$this->Url->build(['action' => 'edit', $staff->id])?>" class="form-control button" style="background-color: black;color: white"><i
+                        class="fas fa-edit fa-sm text-white"></i> Edit</a>
+                <hr class="sidebar-divider d-none d-md-block">
+                <a href="<?=$this->Url->build(['action' => 'delete', $staff->id])?>" onclick="return confirm('Do you want to delete this staff?')" class="form-control button" style="background-color: red;color: white"><i
+                        class="fas fa-edit fa-sm text-white"></i> Delete</a>
+            </div>
         </div>
     </div>
-</div>

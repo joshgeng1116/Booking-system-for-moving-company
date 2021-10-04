@@ -25,7 +25,7 @@ return [
      *   You should treat it as extremely sensitive data.
      */
     'Security' => [
-        'salt' => env('SECURITY_SALT', '__SALT__'),
+        'salt' => env('SECURITY_SALT', '043e4923bb485fef5e24892b8876ff023b558d27b7b10f776a29db23001073d1'),
     ],
 
     /*
@@ -44,14 +44,8 @@ return [
              */
             //'port' => 'non_standard_port_number',
 
-<<<<<<< HEAD
-
             'username' => 'fit3047',
             'password' => 'gjy25988',
-=======
-            'username' => 'fit3047',
-            'password' => 'fit3047',
->>>>>>> d318ba5ebccd4c68cc99ad7d2d3971e0170d991f
 
             'database' => 'fit3047',
             /*
