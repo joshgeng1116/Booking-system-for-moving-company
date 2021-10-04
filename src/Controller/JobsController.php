@@ -29,9 +29,21 @@ class JobsController extends AppController
 
     public function indexdriver()
     {
+
         $this->paginate = [
             'contain' => ['Allocation'],
         ];
+
+        $start_date = $this->request->getQuery('start_date');
+        $end_date = $this->request->getQuery('end_date');
+
+        $this->paginate = [
+            'conditions' => [
+                'DATE(jobs.date) >=' => $start_date,
+                'DATE(jobs.date) <=' => $end_date,
+            ]
+        ];
+
         $jobs = $this->paginate($this->Jobs);
 
         $this->set(compact('jobs'));

@@ -39,6 +39,8 @@
                     echo $this->Form->control('deposit_status',['options'=>$deposit_status_options]);
                     echo $this->Form->control('total_paid');
                     echo $this->Form->control('total_remaining');
+                    echo $this->Form->control('feedback_stars');
+                    echo $this->Form->control('feedback_comment');
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>
