@@ -92,7 +92,7 @@ class VehiclesController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        //$this->request->allowMethod(['post', 'delete']);
         $vehicle = $this->Vehicles->get($id);
         if ($this->Vehicles->delete($vehicle)) {
             $this->Flash->success(__('The vehicle has been deleted.'));

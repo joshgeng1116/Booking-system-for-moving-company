@@ -185,15 +185,7 @@ use Cake\Mailer\Mailer;
                         $recipient = $job->customer_email;
                         $subject = 'Notification of your job has been done! (id : ' . $job->id . ')';
                     }
-                }
-
-//                if (isset($_POST['send'])) {
-//                    $mailer = new Mailer('default');
-//                    $mailer->setFrom(['joshgeng1116@gmail.com' => 'My Site'])
-//                        ->setTo($job->customer_email)
-//                        ->setSubject($subject)
-//                        ->deliver('My message');
-//                }?>
+                }?>
                 <form method="post">
                     <div class="form-group">
                         <input class="form-control" name="email" type="email" placeholder="Recipients" value="<?php echo $recipient ?>">

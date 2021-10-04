@@ -44,7 +44,7 @@
                 <a href="<?=$this->Url->build(['action' => 'index'])?>" class="form-control button" style="background-color: black;color: white"><i
                         class="fas fa-backward fa-sm text-white"></i> Back</a>
                 <hr class="sidebar-divider d-none d-md-block">
-                <a href="<?=$this->Url->build(['action' => 'edit', $staff->id])?>" class="form-control button" style="background-color: black;color: white"><i
+                <a href="<?=$this->Url->build(['action' => 'edit',$staff->id])?>" class="form-control button" style="background-color: black;color: white"><i
                         class="fas fa-edit fa-sm text-white"></i> Edit</a>
                 <hr class="sidebar-divider d-none d-md-block">
                 <a href="<?=$this->Url->build(['action' => 'delete', $staff->id])?>" onclick="return confirm('Do you want to delete this staff?')" class="form-control button" style="background-color: red;color: white"><i
