@@ -41,7 +41,7 @@ class JobsController extends AppController
             'conditions' => [
                 'DATE(jobs.date) >=' => $start_date,
                 'DATE(jobs.date) <=' => $end_date,
-            ]
+            ],
         ];
 
         $jobs = $this->paginate($this->Jobs);
@@ -61,8 +61,26 @@ class JobsController extends AppController
         $job = $this->Jobs->get($id, [
             'contain' => ['Allocation'],
         ]);
-
-        $this->set(compact('job'));
+           $staffs =  $this->getTableLocator()->get('Staffs');
+           $vehicles = $this->getTableLocator()->get('Vehicles');
+        if ($job->allocation != null) {
+            $staff_name_obj1 = $staffs->find()->where(['id' => $job->allocation->staff_member1_id])->select(['first_name','last_name'])->first();
+            $staff_name1 = $staff_name_obj1->first_name . ' ' . $staff_name_obj1->last_name;
+            $staff_name_obj2 = $staffs->find()->where(['id' => $job->allocation->staff_member2_id])->select(['first_name','last_name'])->first();
+            $staff_name2 = $staff_name_obj2->first_name . ' ' . $staff_name_obj2->last_name;
+            $vehicleObj = $vehicles->find()->where(['id' => $job->allocation->vehicle_id])->select(['rego_number'])->first();
+            $vehicle_rego = $vehicleObj->rego_number;
+            $this->set(compact('job', 'staff_name1', 'staff_name2', 'vehicle_rego'));
+        } else {
+            $this->set(compact('job'));
+        }
+//        $staff_name_obj1 = $staffs->find()->where(['id'=>$job->allocation->staff_member1_id])->select(['first_name','last_name'])->first();
+//        $staff_name1 = $staff_name_obj1->first_name .' '.$staff_name_obj1->last_name;
+//        $staff_name_obj2 = $staffs->find()->where(['id'=>$job->allocation->staff_member2_id])->select(['first_name','last_name'])->first();
+//        $staff_name2 = $staff_name_obj2->first_name .' '.$staff_name_obj2->last_name;
+//        $vehicleObj = $vehicles->find()->where(['id'=>$job->allocation->vehicle_id])->select(['rego_number'])->first();
+//        $vehicle_rego = $vehicleObj->rego_number;
+//        $this->set(compact('job','staff_name1','staff_name2','vehicle_rego'));
     }
 
     /**
@@ -179,7 +197,7 @@ class JobsController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        //$this->request->allowMethod(['post', 'delete']);
         $job = $this->Jobs->get($id);
         if ($this->Jobs->delete($job)) {
             $this->Flash->success(__('The job has been deleted.'));
@@ -205,7 +223,30 @@ class JobsController extends AppController
         $allocation = $this->Jobs->Allocation->newEmptyEntity();
         if ($this->request->is('post')) {
             $allocation = $this->Jobs->Allocation->patchEntity($allocation, $this->request->getData());
-            if ($this->Jobs->Allocation->save($allocation)) {
+            $req = $this->request->getData();
+            $allocationObj =  $this->getTableLocator()->get('Allocation');
+            $count = $allocationObj->find()
+                ->where(['or' => [
+                    [
+                        'staff_member1_id' => $req['staff_member1_id'],
+                        'date' => $req['date'],
+                    ],[
+                        'staff_member2_id' => $req['staff_member2_id'],
+                        'date' => $req['date'],
+                    ],
+                    ['vehicle_id' => $req['vehicle_id'],
+                        'date' => $req['date'],
+                    ],
+                    [
+                    'staff_member1_id' => $req['staff_member1_id'],
+                    'staff_member2_id' => $req['staff_member1_id'],
+                    'vehicle_id' => $req['vehicle_id'],
+                    'date' => $req['date'],
+                    ],
+                ],
+                    ])
+                ->count();
+            if ($count == 0 && $this->Jobs->Allocation->save($allocation)) {
                 $job->allocation = $allocation;
                 if ($this->Jobs->save($job)) {
                     $this->Flash->success(__('The allocation has been saved.'));
@@ -219,11 +260,10 @@ class JobsController extends AppController
         $staffs = $this->Jobs->Allocation->Staffs->find('list', ['keyField' => 'id', 'valueField' => function ($e) {
             return $e->first_name . ' ' . $e->last_name . ' ' . $e->more;
         }]);
-        $date = $job->get('date');
         $vehicles = $this->Jobs->Allocation->Vehicles->find('list', ['keyField' => 'id', 'valueField' => function ($e) {
             return $e->rego_number . ' / ' . $this->type($e->vehicle_type) . ' ' . $e->more;
         }]);
-        $this->set(compact('job', 'allocation', 'staffs', 'vehicles', 'date'));
+        $this->set(compact('job', 'allocation', 'staffs', 'vehicles'));
     }
 
     public function type($type)
@@ -244,6 +284,6 @@ class JobsController extends AppController
                        return '12T';
         }
 
-                       return 'null';
+        return 'null';
     }
 }

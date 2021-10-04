@@ -7,8 +7,6 @@
 
 $this->disableAutoLayout();
 
-use Cake\Validation\Validator;
-
 ?>
 
 <?php
@@ -47,7 +45,7 @@ echo $this->Html->script('main.min');
         '/img/favicon.png',
         ['type' => 'icon']
     );
-    ?>
+?>
 
 
     <title>Easy Peasy Removalists</title>
@@ -61,7 +59,7 @@ echo $this->Html->script('main.min');
     <?php
     echo $this->Html->link(
         $this->Html->image('easy_peasy_default_logo.png', ['alt' => 'Easy Peasy logo', 'class' => 'navbar-brand', 'height' => '50px']),
-        ['controller' => 'Pages', 'action' => 'home', '_full' => true, 'class' => "navbar-brand"],
+        ['controller' => 'Pages', 'action' => 'home', '_full' => true, 'class' => 'navbar-brand'],
         ['escape' => false]  // important
     );
     ?>
@@ -105,14 +103,14 @@ echo $this->Html->script('main.min');
 
                     <div class="row mx-auto">
                         <?php
-                        echo $this->Form->control('customer_first_name', ["required", "class" => "form-control", "label" => "First Name"]);
-                        echo $this->Form->control('customer_last_name', ["class" => "form-control", "label" => "Last Name"]);
+                        echo $this->Form->control('customer_first_name', ['required', 'class' => 'form-control', 'label' => 'First Name']);
+                        echo $this->Form->control('customer_last_name', ['class' => 'form-control', 'label' => 'Last Name']);
                         ?>
                     </div>
                     <div class="row mx-auto">
                         <?php
-                        echo $this->Form->control('customer_phone', ["required", "class" => "form-control", "label" => "Phone", "maxlength" => "14", "type" => "tel"]);
-                        echo $this->Form->control('customer_email', ["required", "class" => "form-control", "label" => "Email"]);
+                        echo $this->Form->control('customer_phone', ['required', 'class' => 'form-control', 'label' => 'Phone', 'maxlength' => '14', 'type' => 'tel']);
+                        echo $this->Form->control('customer_email', ['required', 'class' => 'form-control', 'label' => 'Email']);
                         ?>
                     </div>
                     <div class="row mx-auto">
@@ -120,8 +118,8 @@ echo $this->Html->script('main.min');
                     </div>
                     <div class="hide_default">
                         <?php
-                        echo $this->Form->control('allocation_id', ['options' => $allocation, 'empty' => true, "class" => "hide_default"]);
-                        echo $this->Form->control('status', ["required", "class" => "hide_default"]);
+                        echo $this->Form->control('allocation_id', ['options' => $allocation, 'empty' => true, 'class' => 'hide_default']);
+                        echo $this->Form->control('status', ['required', 'class' => 'hide_default']);
 
                         ?>
                     </div>
@@ -133,13 +131,13 @@ echo $this->Html->script('main.min');
 
                     <div class="row mx-auto">
                         <?php
-                        echo $this->Form->control('moving_from', ["required", "class" => "form-control"]);
-                        echo $this->Form->control('moving_to', ["required", "class" => "form-control"]);
+                        echo $this->Form->control('moving_from', ['required', 'class' => 'form-control']);
+                        echo $this->Form->control('moving_to', ['required', 'class' => 'form-control']);
                         ?>
                     </div>
                     <div class="row mx-auto input_wide">
                         <?php
-                        echo $this->Form->control('list_of_item', ["required", "class" => "form-control input_wide col-md-12", "label" => "Items Being Moved", "type" => "textarea"]);
+                        echo $this->Form->control('list_of_item', ['required', 'class' => 'form-control input_wide col-md-12', 'label' => 'Items Being Moved', 'type' => 'textarea']);
                         ?>
                     </div>
 
@@ -154,10 +152,9 @@ echo $this->Html->script('main.min');
                         //echo $this->Form->control('size', ["class" => "form-control"]);
 
 
-                        $truck_size_opts = array("2T" => "Just a few items - (2T)", "4T" => "1-2 Bedrooms / Small Office - (4T)", "8T" => "3-4 Bedrooms / Medium Office - (8T)", "10T" => "4-5 Bedrooms / Medium Office - (10T)", "12T" => '4-5 Bedrooms / Large Office - (12T)');
-                        echo $this->Form->control('size', array("required", 'options' => $truck_size_opts, 'label' => "How many items are we moving?",
-                            'empty' => 'Choose...', 'selected' => 'Choose...', "class" => "form-control"));
-
+                        $truck_size_opts = ['2T' => 'Just a few items - (2T)', '4T' => '1-2 Bedrooms / Small Office - (4T)', '8T' => '3-4 Bedrooms / Medium Office - (8T)', '10T' => '4-5 Bedrooms / Medium Office - (10T)', '12T' => '4-5 Bedrooms / Large Office - (12T)'];
+                        echo $this->Form->control('size', ['required', 'options' => $truck_size_opts, 'label' => 'How many items are we moving?',
+                            'empty' => 'Choose...', 'selected' => 'Choose...', 'class' => 'form-control']);
 
                         ?>
                     </div>
@@ -183,7 +180,7 @@ echo $this->Html->script('main.min');
 
                     <div class="row mx-auto">
                         <?php
-                        echo $this->Form->control('date', ["required", "class" => "form-control text-center"]);
+                        echo $this->Form->control('date', ['required', 'class' => 'form-control text-center']);
                         ?>
                     </div>
                     <div class="row mx-auto">
@@ -211,7 +208,7 @@ echo $this->Html->script('main.min');
 
                 <h2>Let's Do It!</h2>
                 <div class="center">
-                    <?= $this->Form->button(__('Submit Enquiry'), ["class" => "btn btn-success", "id" => "submit_btn"]) ?>
+                    <?= $this->Form->button(__('Submit Enquiry'), ['class' => 'btn btn-success', 'id' => 'submit_btn']) ?>
                 </div>
                 <?= $this->Form->end() ?>
             </div>

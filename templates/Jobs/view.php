@@ -6,8 +6,10 @@
  * @var \Cake\Collection\CollectionInterface|string[] $staffs
  * @var \Cake\Collection\CollectionInterface|string[] $vehicles
  */
+use Cake\Mailer\Mailer;
 ?>
-<html lang="en">
+<html lang="en" style="background-color: lightyellow">
+<body style="background-color: lightyellow">
 <div class="row">
 <!--    <aside class="column">-->
 <!--        <div class="side-nav">-->
@@ -18,10 +20,11 @@
 <!--            --><?php //= $this->Html->link(__('New Job'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
 <!--        </div>-->
 <!--    </aside>-->
-    <div class="column-responsive column-80">
+    <div class="column-responsive column-100">
         <body class="jobs view content">
+        <hr class="sidebar-divider d-none d-md-block">
         <div class="row">
-            <div class="col-md-7 order-md-1">
+            <div class="col-md-auto">
                 <h3 class="mb-3" style="color: black">Details for Job id : <?= h($job->id)?>  Size : <?= h($job->size)?>   Date : <?= h($job->date)?></h3>
                 <form class="needs-validation" novalidate="">
 
@@ -106,140 +109,129 @@
 
                 </form>
             </div>
-            <div class="col-md-4 order-md-2 mb-4">
+            <div class="col-md-auto">
                 <h3 class="mb-3" style="color: black">Allocation : </h3>
                 <form class="needs-validation" novalidate="">
 
                     <hr class="sidebar-divider d-none d-md-block">
 
-                    <?php foreach ($staffs as $staff) :?>
-                        <?php if ($staff->id == $job->allocation->staff_member1_id) :?>
-                            <?php $staff_name = '';
-                            $staff_name = $staff->first_name?>
-                        <?php endif;?>
-                    <?php endforeach;?>
-                    <div class="row">
-                        <?php if ($job->allocation != null) :?>
-                            <div class="col-md-6 mb-3">
-                                <p style="color: gray(5);font-size: 20px" >Staff 1:</p>
-                                <p style="color: black;font-size: 20px" ><?= h($staff_name)?></p>
+<!--                    --><?php //$staffs = $job->allocation->staff->find('list', ['keyField' => 'id', 'valueField' => function ($e) {
+//                    return $e->first_name . ' ' . $e->last_name . ' ' . $e->more;
+//                    }]);?>
+                    <?php if ($job->allocation != null) :?>
+                        <div class="row">
+                            <div class="col-md-auto mb-3">
+                                <p style="color: gray(5);font-size: 20px" >Staff 1 Name:</p>
+                                <p style="color: black;font-size: 20px" ><?= h($staff_name1)?></p>
                             </div>
-                        <?php else :?>
-                        <div class="col-md-6 mb-3">
-                            <p style="color: gray(5);font-size: 20px" >Staff 1:</p>
-                            <p style="color: black;font-size: 20px" >Waiting for Allocation</p>
+                            <div class="col-md-auto mb-3">
+                                <p style="color: gray(5);font-size: 20px" >Staff 2 Name:</p>
+                                <p style="color: black;font-size: 20px" ><?= h($staff_name2)?></p>
+                            </div>
                         </div>
-                        <?php endif;?>
+                        <hr class="sidebar-divider d-none d-md-block">
+                        <div>
+                            <p style="color: gray(5);font-size: 20px" >Vehicle Rego:</p>
+                            <p style="color: black;font-size: 20px" ><?= h($vehicle_rego)?></p>
+                        </div>
+                    <?php else :?>
+                    <div class="col-md-6 mb-3">
+                        <p style="color: gray(5);font-size: 20px" >Staff 1:</p>
+                        <p style="color: black;font-size: 20px" >Waiting for Allocation</p>
                     </div>
+                    <?php endif;?>
 
                     <hr class="sidebar-divider d-none d-md-block">
-
+                </form>
+                <h3 class="mb-3" style="color: black">Payment Detail : </h3>
+                <hr class="sidebar-divider d-none d-md-block">
+                <form>
                     <div class="mb-3">
-                        <p style="color: gray(5);font-size: 20px" >Customer's Email:</p>
-                        <p style="color: black;font-size: 20px" ><?= h($job->customer_email) ?></p>
+                        <p style="color: gray(5);font-size: 20px" >Total Paid:</p>
+                        <p style="color: black;font-size: 20px" ><?= $this->Number->format($job->total_paid) ?></p>
                     </div>
-
                     <hr class="sidebar-divider d-none d-md-block">
-
                     <div class="mb-3">
-                        <p style="color: gray(5);font-size: 20px" >Moving from:</p>
-                        <p style="color: black;font-size: 20px" ><?= h($job->moving_from) ?></p>
+                        <p style="color: gray(5);font-size: 20px" >Total Remaining:</p>
+                        <p style="color: black;font-size: 20px" ><?= $this->Number->format($job->total_remaining) ?></p>
                     </div>
-
-                    <hr class="sidebar-divider d-none d-md-block">
-
-                    <div class="mb-3">
-                        <p style="color: gray(5);font-size: 20px" >Moving to:</p>
-                        <p style="color: black;font-size: 20px" ><?= h($job->moving_to) ?></p>
-                    </div>
-
-                    <hr class="sidebar-divider d-none d-md-block">
-
-                    <div>
-                        <?php
-                        if ($job->status == 0) {
-                            $status = 'Enquiry';
-                        } elseif ($job->status == 1) {
-                            $status = 'Offer';
-                        } elseif ($job->status == 2) {
-                            $status = 'Job';
-                        } elseif ($job->status == 3) {
-                            $status = 'Picked_Up';
-                        } elseif ($job->status == 4) {
-                            $status = 'In-Transit';
-                        } elseif ($job->status == 5) {
-                            $status = 'Delivery';
-                        } elseif ($job->status == 6) {
-                            $status = 'Completed';
-                        }
-                        ?>
-                        <p style="color: gray(5);font-size: 20px" >Status:</p>
-                        <p style="color: black;font-size: 20px" ><?=h($status)?></p>
-                    </div>
-
-                    <hr class="sidebar-divider d-none d-md-block">
-
-                    <div>
-                        <?php
-                        if ($job->deposit_status == 0) {
-                            $deposit_status = 'Waiting';
-                        } elseif ($job->deposit_status == 1) {
-                            $deposit_status = 'Confirmed';
-                        }?>
-                        <p style="color: gray(5);font-size: 20px" >Deposit Status:</p>
-                        <p style="color: black;font-size: 20px" ><?=h($deposit_status)?></p>
-                    </div>
-
-                    <hr class="sidebar-divider d-none d-md-block">
-
-
                 </form>
             </div>
+            <div class="col-lg-auto">
+                <h3 class="mb-3" style="color: black">Send Email To Customer </h3>
+                <hr class="sidebar-divider d-none d-md-block">
+                <?php
+                    $recipient = $job->customer_email;
+                    $subject = 'Notification of your job has been done! (id : ' . $job->id . ')';
+                ?>
+                <?php
+                if (isset($_POST['send'])) {
+                    //access user entered data
+                    $recipient = $_POST['email'];
+                    $subject = $_POST['subject'];
+                    $message = $_POST['message'];
+                    $sender = 'From: gche0005@gmail.com';
+                    //if user leave empty field among one of them
+                    if (empty($recipient) || empty($subject) || empty($message)) {
+                        ?>
+                        <!-- display an alert message if one of them field is empty -->
+                        <div class="alert alert-danger text-center">
+                            <?php echo 'All inputs are required!' ?>
+                        </div>
+                        <?php
+                    } else {
+                        $mailer = new Mailer('default');
+                        $mailer->setFrom(['joshgeng1116@gmail.com' => 'My Site'])
+                            ->setTo($recipient)
+                            ->setSubject($subject)
+                            ->deliver($message);
+                        ?>
+
+                        <div class="alert alert-success text-center">
+                            <?php echo "Your mail successfully sent to $recipient"?>
+                        </div>
+                        <?php
+                        $recipient = $job->customer_email;
+                        $subject = 'Notification of your job has been done! (id : ' . $job->id . ')';
+                    }
+                }
+
+//                if (isset($_POST['send'])) {
+//                    $mailer = new Mailer('default');
+//                    $mailer->setFrom(['joshgeng1116@gmail.com' => 'My Site'])
+//                        ->setTo($job->customer_email)
+//                        ->setSubject($subject)
+//                        ->deliver('My message');
+//                }?>
+                <form method="post">
+                    <div class="form-group">
+                        <input class="form-control" name="email" type="email" placeholder="Recipients" value="<?php echo $recipient ?>">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" name="subject" type="text" placeholder="Subject" value="<?php echo $subject?>">
+                    </div>
+                    <div class="form-group">
+                        <textarea cols="30" rows="5" class="form-control textarea" name="message" placeholder="Compose your message.." ></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control button" style="background-color: black; color: white" type="submit" name="send" value="Send"/>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-auto">
+                <h3 class="mb-3" style="color: black">Actions :</h3>
+                <hr class="sidebar-divider d-none d-md-block">
+                <a href="<?=$this->Url->build(['action' => 'index'])?>" class="form-control button" style="background-color: black;color: white"><i
+                        class="fas fa-backward fa-sm text-white"></i> Back</a>
+                <hr class="sidebar-divider d-none d-md-block">
+                <a href="<?=$this->Url->build(['action' => 'edit'])?>" class="form-control button" style="background-color: black;color: white"><i
+                        class="fas fa-edit fa-sm text-white"></i> Edit</a>
+                <hr class="sidebar-divider d-none d-md-block">
+                <a href="<?=$this->Url->build(['action' => 'delete', $job->id])?>" onclick="return confirm('Do you want to delete this job?')" class="form-control button" style="background-color: red;color: white"><i
+                        class="fas fa-edit fa-sm text-white"></i> Delete</a>
         </div>
-            <table>
-                <tr>
-                    <th><?= __('Allocation') ?></th>
-                    <td><?= $job->has('allocation') ? $this->Html->link($job->allocation->id, ['controller' => 'Allocation', 'action' => 'view', $job->allocation->id]) : '' ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Moving From') ?></th>
-                    <td><?= h($job->moving_from) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Moving To') ?></th>
-                    <td><?= h($job->moving_to) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('List Of Item') ?></th>
-                    <td><?= h($job->list_of_item) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Size') ?></th>
-                    <td><?= h($job->size) ?></td>
-                </tr>
-
-                <tr>
-                    <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($job->id) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Customer Phone') ?></th>
-                    <td><?= h($job->customer_phone) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Total Paid') ?></th>
-                    <td><?= $this->Number->format($job->total_paid) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Total Remaining') ?></th>
-                    <td><?= $this->Number->format($job->total_remaining) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Date') ?></th>
-                    <td><?= h($job->date) ?></td>
-                </tr>
-            </table>
-
         </div>
     </div>
+</body>
 </html>
+
