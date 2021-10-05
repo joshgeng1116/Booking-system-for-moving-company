@@ -10,7 +10,7 @@
         <hr class="sidebar-divider d-none d-md-block">
         <div class="row">
             <div class="col-md-auto">
-                <h3 class="mb-3" style="color: black">Details for Staff id : <?= h($staff->id)?></h3>
+                <h3 class="mb-8" style="color: black">Details for Staff id : <?= h($staff->id)?></h3>
                 <form class="needs-validation" novalidate="">
 
                     <hr class="sidebar-divider d-none d-md-block">
@@ -28,12 +28,12 @@
 
                     <hr class="sidebar-divider d-none d-md-block">
 
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-auto">
                         <p style="color: gray(5);font-size: 20px" >Staff's Email:</p>
                         <p style="color: black;font-size: 20px" ><?= h($staff->email_address) ?></p>
                     </div>
-                    <div class="col-md-6 mb-3">
-                        <p style="color: gray(5);font-size: 20px" >Staff's Email:</p>
+                    <div class="col-md-auto">
+                        <p style="color: gray(5);font-size: 20px" >Staff's Phone:</p>
                         <p style="color: black;font-size: 20px" ><?= h($staff->phone_number) ?></p>
                     </div>
                 </form>

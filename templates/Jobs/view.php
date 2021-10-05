@@ -105,10 +105,6 @@ use Cake\Mailer\Mailer;
                 <form class="needs-validation" novalidate="">
 
                     <hr class="sidebar-divider d-none d-md-block">
-
-<!--                    --><?php //$staffs = $job->allocation->staff->find('list', ['keyField' => 'id', 'valueField' => function ($e) {
-//                    return $e->first_name . ' ' . $e->last_name . ' ' . $e->more;
-//                    }]);?>
                     <?php if ($job->allocation != null) :?>
                         <div class="row">
                             <div class="col-md-auto mb-3">
@@ -154,7 +150,14 @@ use Cake\Mailer\Mailer;
                 <?php
                     $recipient = $job->customer_email;
                     $subject = 'Job Completion Notification: ' . $job->date . ' for ' . $job->customer_first_name;
-                    $message = '';
+                    $message = 'Thank you! The Link below is for feedback.'.PHP_EOL.
+                    $this->Url->build(['controller' => 'Jobs', 'action' => 'Review', "?" => ["id" => $job->id], 'fullBase' => true]).PHP_EOL.
+                    PHP_EOL.'Please transfer to the bank account below to make a payment.'.PHP_EOL.
+                    'Account Name: Easy Peasy Removel'.PHP_EOL.
+                    'BSB: 000-000'.PHP_EOL.
+                    'Account Number: 00000000'.PHP_EOL.
+                    PHP_EOL.'Remain Amount: '.$this->Number->format($job->total_remaining)
+                    ;
                 ?>
                 <?php
                 if (isset($_POST['send'])) {
@@ -195,13 +198,11 @@ use Cake\Mailer\Mailer;
                         <input class="form-control" name="subject" type="text" placeholder="Subject" value="<?php echo $subject?>">
                     </div>
                     <div class="form-group">
-                        <textarea cols="30" rows="5" class="form-control textarea" name="message" placeholder="Click send to automatically ask for feedback!" value="Feedback will occur"></textarea>
+                        <textarea cols="30" rows="5" class="form-control textarea" name="message"><?php echo $message?></textarea>
                     </div>
                     <div class="form-group">
-                        <input class="form-control button" style="background-color: black; color: white" type="submit" name="send" value="Send"/>
+                        <input class="form-control button" style="background-color:#3CB371; color: white" type="submit" name="send" value="Send"/>
                     </div>
-                    <!-- TODO see here for generated URL -->
-                    <h1>Just to see this works <?php echo $this->Url->build(['controller' => 'Jobs', 'action' => 'Review', "?" => ["id" => $job->id], 'fullBase' => true]); ?></h1>
                 </form>
             </div>
             <div class="col-md-auto">

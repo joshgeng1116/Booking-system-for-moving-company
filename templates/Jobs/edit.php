@@ -2,49 +2,139 @@
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Job $job
- * @var string[]|\Cake\Collection\CollectionInterface $allocation
+ * @var \App\Model\Entity\Staff[]|\Cake\Collection\CollectionInterface $staffs
+ * @var \Cake\Collection\CollectionInterface|string[] $staffs
+ * @var \Cake\Collection\CollectionInterface|string[] $vehicles
  */
+use Cake\Mailer\Mailer;
 ?>
+<html lang="en" style="background-color: lightyellow">
+<body style="background-color: lightyellow">
 <div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $job->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $job->id), 'class' => 'side-nav-item']
-            ) ?>
-            <?= $this->Html->link(__('List Jobs'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
-    <div class="column-responsive column-80">
-        <div class="jobs form content">
-            <?= $this->Form->create($job) ?>
+    <div class="column-responsive column-100">
+        <body class="jobs view content">
+        <hr class="sidebar-divider d-none d-md-block">
+        <?= $this->Form->create($job) ?>
             <fieldset>
-                <legend><?= __('Edit Job') ?></legend>
-                <?php
-                    $status_options=array("Enquiry", "Offer", "Job", "Picked-Up", "In-Transit", "Delivery", "Completed");
-                    $deposit_status_options=array("Waiting","Confirmed");
-                    echo $this->Form->control('customer_first_name');
-                    echo $this->Form->control('customer_last_name');
-                    echo $this->Form->control('customer_phone');
-                    echo $this->Form->control('customer_email');
-                    echo $this->Form->control('allocation_id', ['options' => $allocation, 'empty' => true]);
-                    echo $this->Form->control('status',['options' => $status_options]);
-                    echo $this->Form->control('moving_from');
-                    echo $this->Form->control('moving_to');
-                    echo $this->Form->control('list_of_item');
-                    echo $this->Form->control('size');
-                    echo $this->Form->control('date');
-                    echo $this->Form->control('deposit_status',['options'=>$deposit_status_options]);
-                    echo $this->Form->control('total_paid');
-                    echo $this->Form->control('total_remaining');
-                    echo $this->Form->control('feedback_stars');
-                    echo $this->Form->control('feedback_comment');
-                ?>
-            </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
+                <div class="row">
+                    <div class="col-md-auto">
+                        <h3 class="mb-3" style="color: black">Details for Job id : <?= h($job->id)?>  Size : <?= h($job->size)?>   Date : <?= h($job->date)?></h3>
+                        <form class="needs-validation" novalidate="">
+
+                            <hr class="sidebar-divider d-none d-md-block">
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <?php
+                                        echo $this->Form->control('customer_first_name', ["required", "class" => "form-control", "label" => "First Name: "]);
+                                    ?>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <?php
+                                        echo $this->Form->control('customer_last_name', ["required", "class" => "form-control", "label" => "Last Name: "]);
+                                    ?>
+                                </div>
+                            </div>
+
+                            <hr class="sidebar-divider d-none d-md-block">
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <?php
+                                        echo $this->Form->control('customer_email', ["required", "class" => "form-control", "label" => "Customer's Email: "]);
+                                    ?>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <?php
+                                        echo $this->Form->control('customer_phone', ["required", "class" => "form-control", "label" => "Customer's Phone: "]);
+                                    ?>
+                                </div>
+                            </div>
+
+                            <hr class="sidebar-divider d-none d-md-block">
+
+                            <div class="mb-3">
+                                <?php
+                                    echo $this->Form->control('moving_from', ["required", "class" => "form-control", "label" => "Moving From: "]);
+                                ?>
+                            </div>
+
+                            <hr class="sidebar-divider d-none d-md-block">
+
+                            <div class="mb-3">
+                                <?php
+                                    echo $this->Form->control('moving_to', ["required", "class" => "form-control", "label" => "Moving To: "]);
+                                ?>
+                            </div>
+
+                            <hr class="sidebar-divider d-none d-md-block">
+
+                            <div class="mb-3">
+                                <?php
+                                    $status_type=[0=>"Enquiry",1=>"Offer",2=>"Job",3=>"Picked_Up",4=>"In-Transit",5=>'Delivery',6=>'Completed'];
+                                    echo $this->Form->control('status', ['options'=>$status_type, "required", "class" => "form-control", "label" => "Job Status: "]);
+                                ?>
+                            </div>
+
+                            <hr class="sidebar-divider d-none d-md-block">
+
+                            <div class="mb-3">
+                                <?php
+                                    $deposit_status_type=[0=>"Waiting",1=>"Confirmed"];
+                                    echo $this->Form->control('deposit_status', ['options'=>$deposit_status_type, "required", "class" => "form-control", "label" => "Deposit Status: "]);
+                                ?>
+                            </div>
+
+                            <hr class="sidebar-divider d-none d-md-block">
+
+                        </form>
+                    </div>
+                    <div class="col-md-auto">
+                        <h3 class="mb-3" style="color: black">Allocation : </h3>
+                        <form class="needs-validation" novalidate="">
+
+                            <hr class="sidebar-divider d-none d-md-block">
+                                <?php
+                                    echo $this->Form->control('allocation_id', ['options'=>$allocation, "empty"=>true, "required", "class" => "form-control", "label" => "Allocation Id: "]);
+                                ?>
+                                <hr class="sidebar-divider d-none d-md-block">
+                                <div style="text-align: center">
+                                    <a href="<?=$this->Url->build(['action' => 'add_allocation', $job->id])?>" class="form-control button" style="background-color:#4169E1;color: white">Add New Allocation For This Job</a>
+                                </div>
+                            <hr class="sidebar-divider d-none d-md-block">
+                        </form>
+                        <h3 class="mb-3" style="color: black">Payment Detail : </h3>
+                        <hr class="sidebar-divider d-none d-md-block">
+                        <form>
+                            <div class="mb-3">
+                                <?php
+                                    echo $this->Form->control('total_paid', ["required", "class" => "form-control", "label" => "Total Paid: ", 'placeholder'=>'0.00']);
+                                ?>
+                            </div>
+                            <hr class="sidebar-divider d-none d-md-block">
+                            <div class="mb-3">
+                                <?php
+                                    echo $this->Form->control('total_remaining', ["required", "class" => "form-control", "label" => "Total Remaining: ", 'placeholder'=>'0.00']);
+                                ?>
+                            </div>
+                        </form>
+                        <hr class="sidebar-divider d-none d-md-block">
+                        <div class="center">
+                        <?= $this->Form->button(__('Save'), ['class' => 'form-control button', 'style'=>'background:#3CB371;color:white', 'id' => 'submit_btn', 'onclick'=>'Changes have been saved']) ?>
+                        <?= $this->Form->end() ?>
+                        </div>
+                    </div>
+                    <div class="col-md-auto">
+                        <h3 class="mb-3" style="color: black">Actions :</h3>
+                        <hr class="sidebar-divider d-none d-md-block">
+                        <a href="<?=$this->Url->build(['action' => 'index'])?>" class="form-control button" style="background-color: black;color: white"><i
+                                class="fas fa-backward fa-sm text-white"></i> Back</a>
+                        <hr class="sidebar-divider d-none d-md-block">
+                        <a href="<?=$this->Url->build(['action' => 'delete', $job->id])?>" onclick="return confirm('Do you want to delete this job?')" class="form-control button" style="background-color: red;color: white"><i
+                                class="fas fa-edit fa-sm text-white"></i> Delete</a>
+                    </div>
         </div>
     </div>
-</div>
+</body>
+</html>
+

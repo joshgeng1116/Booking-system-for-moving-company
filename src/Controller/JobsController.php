@@ -185,8 +185,26 @@ class JobsController extends AppController
             }
             $this->Flash->error(__('The job could not be saved. Please, try again.'));
         }
-        $allocation = $this->Jobs->Allocation->find('list', ['limit' => 200]);
+        $allocation = $this->Jobs->Allocation->find('list', ['keyField' => 'id', 'valueField' => function ($e) {
+            $staffs =  $this->getTableLocator()->get('Staffs');
+            $vehicles = $this->getTableLocator()->get('Vehicles');
+            return $this->get_name($e->staff_member1_id) . ' / ' . $this->get_name($e->staff_member2_id) . ' / ' . $this->get_rego($e->vehicle_id);
+        }]);
         $this->set(compact('job', 'allocation'));
+    }
+
+    public function get_name($id){
+        $staffs =  $this->getTableLocator()->get('Staffs');
+        $staff_name_obj1 = $staffs->find()->where(['id' => $id])->select(['first_name','last_name'])->first();
+        $staff_name1 = $staff_name_obj1->first_name . ' ' . $staff_name_obj1->last_name;
+        return $staff_name1;
+    }
+
+    public function get_rego($id){
+        $vehicles = $this->getTableLocator()->get('Vehicles');
+        $vehicleObj = $vehicles->find()->where(['id' => $id])->select(['rego_number'])->first();
+        $vehicle_rego = $vehicleObj->rego_number;
+        return $vehicle_rego;
     }
 
     /**
