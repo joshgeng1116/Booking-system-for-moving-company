@@ -140,8 +140,9 @@ class JobsController extends AppController
      *
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
-    public function review($id = 8)
+    public function review()
     {
+        $id = $this->request->getQuery('id');
         $job = $this->Jobs->get($id, [
             'contain' => [],
         ]);

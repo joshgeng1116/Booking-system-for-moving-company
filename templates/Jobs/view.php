@@ -153,7 +153,8 @@ use Cake\Mailer\Mailer;
                 <hr class="sidebar-divider d-none d-md-block">
                 <?php
                     $recipient = $job->customer_email;
-                    $subject = 'Notification of your job has been done! (id : ' . $job->id . ')';
+                    $subject = 'Job Completion Notification: ' . $job->date . ' for ' . $job->customer_first_name;
+                    $message = '';
                 ?>
                 <?php
                 if (isset($_POST['send'])) {
@@ -163,7 +164,7 @@ use Cake\Mailer\Mailer;
                     $message = $_POST['message'];
                     $sender = 'From: gche0005@gmail.com';
                     //if user leave empty field among one of them
-                    if (empty($recipient) || empty($subject) || empty($message)) {
+                    if (empty($recipient) || empty($subject)) {
                         ?>
                         <!-- display an alert message if one of them field is empty -->
                         <div class="alert alert-danger text-center">
@@ -183,7 +184,7 @@ use Cake\Mailer\Mailer;
                         </div>
                         <?php
                         $recipient = $job->customer_email;
-                        $subject = 'Notification of your job has been done! (id : ' . $job->id . ')';
+                        $subject = 'Job Completion Notification: ID ' . $job->id . '!';
                     }
                 }?>
                 <form method="post">
@@ -194,11 +195,13 @@ use Cake\Mailer\Mailer;
                         <input class="form-control" name="subject" type="text" placeholder="Subject" value="<?php echo $subject?>">
                     </div>
                     <div class="form-group">
-                        <textarea cols="30" rows="5" class="form-control textarea" name="message" placeholder="Compose your message.." ></textarea>
+                        <textarea cols="30" rows="5" class="form-control textarea" name="message" placeholder="Click send to automatically ask for feedback!" value="Feedback will occur"></textarea>
                     </div>
                     <div class="form-group">
                         <input class="form-control button" style="background-color: black; color: white" type="submit" name="send" value="Send"/>
                     </div>
+                    <!-- TODO see here for generated URL -->
+                    <h1>Just to see this works <?php echo $this->Url->build(['controller' => 'Jobs', 'action' => 'Review', "?" => ["id" => $job->id], 'fullBase' => true]); ?></h1>
                 </form>
             </div>
             <div class="col-md-auto">
