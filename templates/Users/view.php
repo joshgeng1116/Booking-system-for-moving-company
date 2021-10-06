@@ -31,6 +31,10 @@
                     <td><?= h($user->password) ?></td>
                 </tr>
                 <tr>
+                    <th><?= __('User Type') ?></th>
+                    <td><?= h($user->user_Type) ?></td>
+                </tr>
+                <tr>
                     <th><?= __('Id') ?></th>
                     <td><?= $this->Number->format($user->id) ?></td>
                 </tr>

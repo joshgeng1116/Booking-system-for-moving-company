@@ -18,7 +18,6 @@ class UsersController extends AppController
     $result = $this->Authentication->getResult();
     // regardless of POST or GET, redirect if user is logged in
     if ($result->isValid()) {
-
         return $this->redirect(['controller' => 'Jobs','action' => 'index']);
     }
     // display error if user submitted and authentication failed
@@ -36,6 +35,7 @@ public function logout()
         return $this->redirect(['controller' => 'Users', 'action' => 'login']);
     }
 }
+
     /**
      * Index method
      *
