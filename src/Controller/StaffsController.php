@@ -76,8 +76,11 @@ class StaffsController extends AppController
         $staff = $this->Staffs->get($id, [
             'contain' => [],
         ]);
+       
         if ($this->request->is(['patch', 'post', 'put'])) {
             $staff = $this->Staffs->patchEntity($staff, $this->request->getData());
+            $staff->staff_type = $this->request->getData('staff_type');
+            $staff->password = $this->request->getData('password');
             if ($this->Staffs->save($staff)) {
                 $this->Flash->success(__('The staff has been saved.'));
 

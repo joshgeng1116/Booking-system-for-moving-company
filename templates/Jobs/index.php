@@ -18,15 +18,12 @@ echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js', ['bl
             <thead>
             <tr>
                 <th><?= h('Customer Name') ?></th>
-                <th class="allocation"><?= __('Allocation') ?></th>
                 <th><?= h('Status') ?></th>
                 <th><?= h('Moving From') ?></th>
                 <th><?= h('Moving To') ?></th>
                 <th><?= h('Size') ?></th>
                 <th><?= h('date') ?></th>
                 <th><?= h('deposit_status') ?></th>
-                <th><?= h('total_paid') ?></th>
-                <th><?= h('total_remaining') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
             </thead>
@@ -36,15 +33,6 @@ echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js', ['bl
 
                     <tr>
                         <td><?= h($job->customer_first_name . ' ' . $job->customer_last_name) ?></td>
-                        <td>
-                            <?php if ($job->allocation == null) :?>
-                                <?php
-                                    echo $this->Html->link('Add Allocation', ['controller' => 'Jobs', 'action' => 'addAllocation', $job->id,]);
-                                ?>
-                            <?php elseif ($job->allocation !== null) :?>
-                                <?= $this->Html->link($job->allocation_id, ['controller' => 'Allocation', 'action' => 'view', $job->allocation->id]) ?>
-                            <?php endif;?>
-                        </td>
                         <td>
                             <?php if ($job->status == 0) :?>
                                 Enquiry
@@ -73,12 +61,16 @@ echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js', ['bl
                                 Confirmed
                             <?php endif;?>
                         </td>
-                        <td><?= $this->Number->format($job->total_paid) ?></td>
-                        <td><?= $this->Number->format($job->total_remaining) ?></td>
                         <td class="Actions">
-                            <?= $this->Html->link(__('View'), ['action' => 'view', $job->id]) ?>
-                            <?= $this->Html->link(__('Edit'), ['action' => 'edit', $job->id]) ?>
-                            <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $job->id], ['confirm' => __('Are you sure you want to delete # {0}?', $job->id)]) ?>
+                            <div>
+                                <?= $this->Html->link(__('More Info'), ['action' => 'view', $job->id]) ?>
+                            </div>
+                            <div>
+                                <?= $this->Html->link(__('Edit'), ['action' => 'edit', $job->id]) ?>
+                            </div>
+                            <div>
+                                <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $job->id], ['style'=>'color:red'], ['confirm' => __('Are you sure you want to delete # {0}?', $job->id)]) ?>
+                            </div>
                         </td>
                     </tr>
                 <?php endif;?>

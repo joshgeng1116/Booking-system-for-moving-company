@@ -61,6 +61,13 @@ use Cake\Mailer\Mailer;
 
                     <hr class="sidebar-divider d-none d-md-block">
 
+                    <div class="mb-3">
+                        <p style="color: gray(5);font-size: 20px" >List of Items:</p>
+                        <p style="color: black;font-size: 20px" ><?= h($job->list_of_item) ?></p>
+                    </div>
+
+                    <hr class="sidebar-divider d-none d-md-block">
+
                     <div>
                         <?php
                         if ($job->status == 0) {
@@ -143,21 +150,74 @@ use Cake\Mailer\Mailer;
                         <p style="color: black;font-size: 20px" ><?= $this->Number->format($job->total_remaining) ?></p>
                     </div>
                 </form>
+                <hr class="sidebar-divider d-none d-md-block">
+                <h3 class="mb-3" style="color: black">Feedback : </h3>
+                <hr class="sidebar-divider d-none d-md-block">
+                <?php if($job->feedback_stars != null):?>
+                    <?php if($job->feedback_comment != null):?>
+                        <form>
+                            <div class="mb-3">
+                                <p style="color: gray(5);font-size: 20px" >Feedback Star (5 Max):</p>
+                                <p style="color: black;font-size: 20px" ><?= $this->Number->format($job->feedback_stars) ?></p>
+                            </div>
+                            <hr class="sidebar-divider d-none d-md-block">
+                            <div class="mb-3">
+                                <p style="color: gray(5);font-size: 20px" >Feedback Comments:</p>
+                                <p style="color: black;font-size: 20px" ><?= $this->Number->format($job->feedback_comment) ?></p>
+                            </div>
+                        </form>
+                    <?php else:?>
+                        <form>
+                            <div class="mb-3">
+                                <p style="color: gray(5);font-size: 20px" >Feedback Star (5 Max):</p>
+                                <p style="color: black;font-size: 20px" ><?= $this->Number->format($job->feedback_stars) ?></p>
+                            </div>
+                        </form>
+                    <?php endif;?>
+                <?php else:?>
+                    <div class="mb-3">
+                        <p style="color: black;font-size: 20px" >Waiting for Feedback</p>
+                    </div>
+                <?php endif;?>
             </div>
             <div class="col-lg-auto">
                 <h3 class="mb-3" style="color: black">Send Email To Customer </h3>
                 <hr class="sidebar-divider d-none d-md-block">
                 <?php
                     $recipient = $job->customer_email;
-                    $subject = 'Job Completion Notification: ' . $job->date . ' for ' . $job->customer_first_name;
-                    $message = 'Thank you! The Link below is for feedback.'.PHP_EOL.
-                    $this->Url->build(['controller' => 'Jobs', 'action' => 'Review', "?" => ["id" => $job->id], 'fullBase' => true]).PHP_EOL.
-                    PHP_EOL.'Please transfer to the bank account below to make a payment.'.PHP_EOL.
-                    'Account Name: Easy Peasy Removel'.PHP_EOL.
-                    'BSB: 000-000'.PHP_EOL.
-                    'Account Number: 00000000'.PHP_EOL.
-                    PHP_EOL.'Remain Amount: '.$this->Number->format($job->total_remaining)
+                    if ($job->status == 0) {
+                        $subject = 'Enquiry has been accepted: ' . $job->date . ' for ' . $job->customer_first_name;
+                        $message = 'Thank you for making an enquiry! It has been accepted'.PHP_EOL.
+                        PHP_EOL.'Please transfer to the bank account below to make a deposit.'.PHP_EOL.
+                        'Account Name: Easy Peasy Removel'.PHP_EOL.
+                        'BSB: 000-000'.PHP_EOL.
+                        'Account Number: 00000000'.PHP_EOL.
+                        PHP_EOL.'Remain Amount: '.$this->Number->format($job->total_remaining/10)
                     ;
+                    } elseif ($job->status == 6) {
+                        $subject = 'Job Completion Notification: ' . $job->date . ' for ' . $job->customer_first_name;
+                        $message = 'Thank you! The Link below is for feedback.'.PHP_EOL.
+                        $this->Url->build(['controller' => 'Jobs', 'action' => 'Review', "?" => ["id" => $job->id], 'fullBase' => true]).PHP_EOL.
+                        PHP_EOL.'Please transfer to the bank account below to make a payment.'.PHP_EOL.
+                        'Account Name: Easy Peasy Removel'.PHP_EOL.
+                        'BSB: 000-000'.PHP_EOL.
+                        'Account Number: 00000000'.PHP_EOL.
+                        PHP_EOL.'Remain Amount: '.$this->Number->format($job->total_remaining)
+                    ;
+                    }else {
+                        $subject = 'Job status update: ' . $job->date . ' for ' . $job->customer_first_name;
+                        $message = 'Current status: '.PHP_EOL.
+                        $status;
+                    }
+                    // $subject = 'Job Completion Notification: ' . $job->date . ' for ' . $job->customer_first_name;
+                    // $message = 'Thank you! The Link below is for feedback.'.PHP_EOL.
+                    // $this->Url->build(['controller' => 'Jobs', 'action' => 'Review', "?" => ["id" => $job->id], 'fullBase' => true]).PHP_EOL.
+                    // PHP_EOL.'Please transfer to the bank account below to make a payment.'.PHP_EOL.
+                    // 'Account Name: Easy Peasy Removel'.PHP_EOL.
+                    // 'BSB: 000-000'.PHP_EOL.
+                    // 'Account Number: 00000000'.PHP_EOL.
+                    // PHP_EOL.'Remain Amount: '.$this->Number->format($job->total_remaining)
+                    // ;
                 ?>
                 <?php
                 if (isset($_POST['send'])) {
@@ -211,7 +271,7 @@ use Cake\Mailer\Mailer;
                 <a href="<?=$this->Url->build(['action' => 'index'])?>" class="form-control button" style="background-color: black;color: white"><i
                         class="fas fa-backward fa-sm text-white"></i> Back</a>
                 <hr class="sidebar-divider d-none d-md-block">
-                <a href="<?=$this->Url->build(['action' => 'edit', $job->id])?>" class="form-control button" style="background-color: black;color: white"><i
+                <a href="<?=$this->Url->build(['action' => 'edit', $job->id])?>" class="form-control button" style="background-color: #4169E1;color: white"><i
                         class="fas fa-edit fa-sm text-white"></i> Edit</a>
                 <hr class="sidebar-divider d-none d-md-block">
                 <a href="<?=$this->Url->build(['action' => 'delete', $job->id])?>" onclick="return confirm('Do you want to delete this job?')" class="form-control button" style="background-color: red;color: white"><i

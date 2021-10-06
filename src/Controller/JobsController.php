@@ -252,15 +252,12 @@ class JobsController extends AppController
                     ],[
                         'staff_member2_id' => $req['staff_member2_id'],
                         'date' => $req['date'],
-                    ],
-                    ['vehicle_id' => $req['vehicle_id'],
+                    ],[
+                        'vehicle_id' => $req['vehicle_id'],
                         'date' => $req['date'],
-                    ],
-                    [
-                    'staff_member1_id' => $req['staff_member1_id'],
-                    'staff_member2_id' => $req['staff_member1_id'],
-                    'vehicle_id' => $req['vehicle_id'],
-                    'date' => $req['date'],
+                    ],[
+                        'staff_member1_id' => $req['staff_member1_id'],
+                        'staff_member2_id' => $req['staff_member2_id'],
                     ],
                 ],
                     ])

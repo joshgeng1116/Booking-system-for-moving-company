@@ -42,36 +42,33 @@
             <div style="color: black" class="sidebar-brand-text mx-3">Easy Peasy Removal Admin</div>
         </a>
 
+        <hr class="sidebar-divider d-none d-md-block">
 
-        <!-- Heading -->
-        <div class="sidebar-heading">
-            Tables
-        </div>
 
         <!-- Nav Item - Charts -->
         <li class="nav-item">
             <a class="nav-link" href="<?=$this->Url->build(['controller'=>'Jobs','action'=>'index'])?>">
-                <i class="fas fa-fw fa-people-carry"></i>
-                <span style="color: black" size="1">Jobs</span></a>
+                <i class="fas fa-fw fa-people-carry" style='color:black;font-size:1.5em'></i>
+                <span style="color: black;font-size:20pt">Jobs</span></a>
         </li>
 
 
         <li class="nav-item">
             <a class="nav-link" href="<?=$this->Url->build(['controller'=>'Staffs','action'=>'index'])?>">
-                <i class="fas fa-user"></i>
-                <span style="color: black">Staffs</span></a>
+                <i class="fas fa-user" style='color:black;font-size:1.5em'></i>
+                <span style="color: black;font-size:20pt">Staffs</span></a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="<?=$this->Url->build(['controller'=>'Vehicles','action'=>'index'])?>">
-                <i class="fas fa-truck"></i>
-                <span style="color: black">Vehicles</span></a>
+                <i class="fas fa-truck" style='color:black;font-size:1.5em'></i>
+                <span style="color: black;font-size:20pt">Vehicles</span></a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="<?=$this->Url->build(['controller'=>'Allocation','action'=>'index'])?>">
-                <i class="fas fa-map"></i>
-                <span style="color: black">Allocation</span></a>
+                <i class="fas fa-map" style='color:black;font-size:1.5em'></i>
+                <span style="color: black;font-size:20pt">Allocation</span></a>
         </li>
 
         <!-- Divider -->
