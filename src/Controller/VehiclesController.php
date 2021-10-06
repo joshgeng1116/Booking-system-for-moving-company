@@ -73,6 +73,8 @@ class VehiclesController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $vehicle = $this->Vehicles->patchEntity($vehicle, $this->request->getData());
+            $vehicle->price_per_hour = $this->request->getData('price_per_hour');
+            $vehicle->average_hour = $this->request->getData('average_hour');
             if ($this->Vehicles->save($vehicle)) {
                 $this->Flash->success(__('The vehicle has been saved.'));
 

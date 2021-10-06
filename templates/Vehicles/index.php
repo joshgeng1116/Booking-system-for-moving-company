@@ -19,8 +19,10 @@ echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js',['blo
             <thead>
                 <tr>
                     <th><?= h('id') ?></th>
-                    <th><?= h('rego_number') ?></th>
-                    <th><?= h('vehicle_type') ?></th>
+                    <th><?= h('Rego Number') ?></th>
+                    <th><?= h('Vehicle Type') ?></th>
+                    <th><?= h('Price / Hour') ?></th>
+                    <th><?= h('Average Hours') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -42,25 +44,23 @@ echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js',['blo
                             12T
                         <?php endif;?>
                     </td>
+                    <td><?= h($vehicle->price_per_hour) ?></td>
+                    <td><?= h($vehicle->average_hour) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $vehicle->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $vehicle->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $vehicle->id], ['confirm' => __('Are you sure you want to delete # {0}?', $vehicle->id)]) ?>
+                    <div>
+                            <?= $this->Html->link(__('More Info'), ['action' => 'view', $vehicle->id]) ?>
+                        </div>
+                        <div>
+                            <?= $this->Html->link(__('Edit'), ['action' => 'edit', $vehicle->id]) ?>
+                        </div>
+                        <div>
+                            <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $vehicle->id], ['style'=>'color:red'], ['confirm' => __('Are you sure you want to delete # {0}?', $vehicle->id)]) ?>
+                        </div>
                     </td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
-    </div>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
     </div>
     <script>
         $(document).ready(function() {

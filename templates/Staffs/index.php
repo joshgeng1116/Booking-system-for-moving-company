@@ -37,32 +37,28 @@ echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js',['blo
                     <td><?= h($staff->phone_number) ?></td>
                     <td><?= h($staff->email_address) ?></td>
                     <td>
-                        <?php if($staff->type == 0):?>
+                        <?php if($staff->staff_type == 0):?>
                             Admin
-                        <?php elseif($staff->type == 1):?>
+                        <?php elseif($staff->staff_type == 1):?>
                             Driver
                         <?php endif;?>
                     </td>
                     <td><?= h($staff->password) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $staff->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $staff->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $staff->id], ['confirm' => __('Are you sure you want to delete # {0}?', $staff->id)]) ?>
+                        <div>
+                            <?= $this->Html->link(__('More Info'), ['action' => 'view', $staff->id]) ?>
+                        </div>
+                        <div>
+                            <?= $this->Html->link(__('Edit'), ['action' => 'edit', $staff->id]) ?>
+                        </div>
+                        <div>
+                            <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $staff->id], ['style'=>'color:red'], ['confirm' => __('Are you sure you want to delete # {0}?', $staff->id)]) ?>
+                        </div>
                     </td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
-    </div>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
     </div>
     <script>
         $(document).ready(function() {
