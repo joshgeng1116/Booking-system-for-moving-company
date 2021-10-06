@@ -37,16 +37,22 @@ class JobsController extends AppController
         $start_date = $this->request->getQuery('start_date');
         $end_date = $this->request->getQuery('end_date');
 
-        $this->paginate = [
-            'conditions' => [
-                'DATE(jobs.date) >=' => $start_date,
-                'DATE(jobs.date) <=' => $end_date,
-            ],
-        ];
+        if($start_date != null && $end_date != null) {
+            $this->paginate = [
+                'conditions' => [
+                    'DATE(jobs.date) >=' => $start_date,
+                    'DATE(jobs.date) <=' => $end_date,
+                ],
+            ];
 
-        $jobs = $this->paginate($this->Jobs);
+            $jobs = $this->paginate($this->Jobs);
 
-        $this->set(compact('jobs'));
+            $this->set(compact('jobs'));
+        }else{
+            $jobs = $this->paginate($this->Jobs);
+
+            $this->set(compact('jobs'));
+        }
     }
 
     /**

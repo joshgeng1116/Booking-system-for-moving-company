@@ -44,10 +44,10 @@ return [
              */
             //'port' => 'non_standard_port_number',
 
-            'username' => 'fit3047',
-            'password' => 'gjy25988',
+            'username' => 'teamfalconcake',
+            'password' => 'teamfalconcake',
 
-            'database' => 'fit3047',
+            'database' => 'teamfalconcake',
             /*
              * If not using the default 'public' schema with the PostgreSQL driver
              * set it here.
