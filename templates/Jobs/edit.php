@@ -124,7 +124,7 @@ use Cake\Mailer\Mailer;
                             </div>
                         </div>
                     </form>
-
+                    
                     <div class="col-md-auto">
                         <h3 class="mb-3" style="color: black">Actions :</h3>
                         <hr class="sidebar-divider d-none d-md-block">

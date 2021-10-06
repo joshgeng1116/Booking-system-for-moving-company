@@ -163,7 +163,7 @@ use Cake\Mailer\Mailer;
                             <hr class="sidebar-divider d-none d-md-block">
                             <div class="mb-3">
                                 <p style="color: gray(5);font-size: 20px" >Feedback Comments:</p>
-                                <p style="color: black;font-size: 20px" ><?= $this->Number->format($job->feedback_comment) ?></p>
+                                <p style="color: black;font-size: 20px" ><?= h($job->feedback_comment) ?></p>
                             </div>
                         </form>
                     <?php else:?>
@@ -189,7 +189,7 @@ use Cake\Mailer\Mailer;
                         $subject = 'Enquiry has been accepted: ' . $job->date . ' for ' . $job->customer_first_name;
                         $message = 'Thank you for making an enquiry! It has been accepted'.PHP_EOL.
                         PHP_EOL.'Please transfer to the bank account below to make a deposit.'.PHP_EOL.
-                        'Account Name: Easy Peasy Removel'.PHP_EOL.
+                        'Account Name: Easy Peasy Removal'.PHP_EOL.
                         'BSB: 000-000'.PHP_EOL.
                         'Account Number: 00000000'.PHP_EOL.
                         PHP_EOL.'Remain Amount: '.$this->Number->format($job->total_remaining/10)
@@ -199,7 +199,7 @@ use Cake\Mailer\Mailer;
                         $message = 'Thank you! The Link below is for feedback.'.PHP_EOL.
                         $this->Url->build(['controller' => 'Jobs', 'action' => 'Review', "?" => ["id" => $job->id], 'fullBase' => true]).PHP_EOL.
                         PHP_EOL.'Please transfer to the bank account below to make a payment.'.PHP_EOL.
-                        'Account Name: Easy Peasy Removel'.PHP_EOL.
+                        'Account Name: Easy Peasy Removal'.PHP_EOL.
                         'BSB: 000-000'.PHP_EOL.
                         'Account Number: 00000000'.PHP_EOL.
                         PHP_EOL.'Remain Amount: '.$this->Number->format($job->total_remaining)

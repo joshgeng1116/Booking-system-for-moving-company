@@ -29,7 +29,7 @@ echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js', ['bl
             </thead>
             <tbody>
             <?php foreach ($jobs as $job) :?>
-<!--                --><?php //if ($job->status != 6 || $job->total_remaining != 0) :?>
+                <?php if ($job->status != 6 || $job->total_remaining != 0) :?>
 
                     <tr>
                         <td><?= h($job->customer_first_name . ' ' . $job->customer_last_name) ?></td>
@@ -73,7 +73,7 @@ echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js', ['bl
                             </div>
                         </td>
                     </tr>
-<!--                --><?php //endif;?>
+                <?php endif;?>
             <?php endforeach; ?>
             </tbody>
         </table>

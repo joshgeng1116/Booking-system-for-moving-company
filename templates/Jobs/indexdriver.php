@@ -14,7 +14,7 @@ echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js',['blo
                 class="fas fa-plus fa-sm text-white-50"></i> New Job</a>
     </div>
     <div>
-        <?= $this->Form->create(null,['type'=>'get']); ?>
+        <?= $this->Form->create($jobs,['type'=>'get']); ?>
         <?= $this->Form->control('start_date',['class'=>'datepicker','value'=>$this->request->getQuery('start_date')]); ?>
         <?= $this->Form->control('end_date',['class'=>'datepicker','value'=>$this->request->getQuery('end_date')]); ?>
         <button>Search</button>
@@ -49,9 +49,7 @@ echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js',['blo
                     <td><?= h($job->customer_last_name) ?></td>
                     <td><?= h($job->customer_phone) ?></td>
                     <td><?= h($job->customer_email) ?></td>
-                    <td><?= $job->has('allocation') ? $this->Html->link($job->allocation->id, ['controller' => 'Allocation', 'action' => 'view', $job->allocation->id]) : '' ?>
-
-                    </td>
+                    <td><?= $job->has('allocation') ? $this->Html->link($job->allocation->id, ['controller' => 'Allocation', 'action' => 'view', $job->allocation->id]) : '' ?></td>
                     <td>
                         <?php if($job->status == 0):?>
                             Enquiry
