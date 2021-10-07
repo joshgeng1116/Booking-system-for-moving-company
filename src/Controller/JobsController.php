@@ -31,7 +31,7 @@ class JobsController extends AppController
     {
 
         $this->paginate = [
-            'contain' => ['Allocation'],
+            'contain' => ['Allocation', 'Allocation.Staffs'],
         ];
 
         $start_date = $this->request->getQuery('start_date');

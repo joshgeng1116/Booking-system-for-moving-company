@@ -76,7 +76,7 @@ class StaffsController extends AppController
         $staff = $this->Staffs->get($id, [
             'contain' => [],
         ]);
-       
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $staff = $this->Staffs->patchEntity($staff, $this->request->getData());
             $staff->staff_type = $this->request->getData('staff_type');
@@ -118,7 +118,7 @@ class StaffsController extends AppController
     }
 
     public function chaek($email,$password){
-        $staff_id = $Staffs->find()->where(['email_address'=>$email,'password'=>$password])->select(['id'])->first()
-        
+        $staff_id = $Staffs->find()->where(['email_address' => $email, 'password' => $password])->select(['id'])->first()
+
     }
 }

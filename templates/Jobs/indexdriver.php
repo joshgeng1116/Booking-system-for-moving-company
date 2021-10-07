@@ -49,7 +49,7 @@ echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js',['blo
                     <td><?= h($job->customer_last_name) ?></td>
                     <td><?= h($job->customer_phone) ?></td>
                     <td><?= h($job->customer_email) ?></td>
-                    <td><?= $job->has('allocation') ? $this->Html->link($job->allocation->id, ['controller' => 'Allocation', 'action' => 'view', $job->allocation->id]) : '' ?></td>
+                    <td><?= $job->has('allocation') ? $this->Html->link($job->allocation->staff->first_name, ['controller' => 'Allocation', 'action' => 'view', $job->allocation->id]) : '' ?></td>
                     <td>
                         <?php if($job->status == 0):?>
                             Enquiry
