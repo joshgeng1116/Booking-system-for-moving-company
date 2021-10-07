@@ -192,8 +192,6 @@ class JobsController extends AppController
             $this->Flash->error(__('The job could not be saved. Please, try again.'));
         }
         $allocation = $this->Jobs->Allocation->find('list', ['keyField' => 'id', 'valueField' => function ($e) {
-            $staffs =  $this->getTableLocator()->get('Staffs');
-            $vehicles = $this->getTableLocator()->get('Vehicles');
             return $this->get_name($e->staff_member1_id) . ' / ' . $this->get_name($e->staff_member2_id) . ' / ' . $this->get_rego($e->vehicle_id);
         }]);
         $this->set(compact('job', 'allocation'));

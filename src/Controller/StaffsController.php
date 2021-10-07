@@ -7,6 +7,8 @@ namespace App\Controller;
  * Staffs Controller
  *
  * @property \App\Model\Table\StaffsTable $Staffs
+ * @property \App\Model\Table\AllocationTable $Allocation
+ * @property \App\Model\Table\JobsTable $Jobs
  * @method \App\Model\Entity\Staff[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class StaffsController extends AppController
@@ -39,8 +41,10 @@ class StaffsController extends AppController
         $this->set(compact('staff'));
     }
 
-    public function get_name($id = null){
-        $staffs = $this->Staffs->find('list', ['condition' => ['id'=>$id], ]);
+    public function get_name($id = null)
+    {
+        $staffs = $this->Staffs->find('list', ['condition' => ['id' => $id], ]);
+
         return $staffs;
     }
 
@@ -76,7 +80,7 @@ class StaffsController extends AppController
         $staff = $this->Staffs->get($id, [
             'contain' => [],
         ]);
-       
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $staff = $this->Staffs->patchEntity($staff, $this->request->getData());
             $staff->staff_type = $this->request->getData('staff_type');
@@ -111,14 +115,56 @@ class StaffsController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-    public function login(){
-        $staffs = $this->paginate($this->Staffs);
-
-        $this->set(compact('staffs'));
+    public function login()
+    {
+        $staffs = $this->getTableLocator()->get('Staffs');
+        $email = $password = '';
+        if ($this->request->is('post')) {
+            $email = $this->request->getData('email');
+            $password = $this->request->getData('password');
+            $staff = $staffs->find()->where(['email_address' => $email, 'password' => $password])->select(['id'])->first();
+            if ($staff != null) {
+                $staff_type = $staffs->find()->where(['id' => $staff->get('id')])->select(['staff_type'])->first();
+                if ($staff_type->get('staff_type') == 0) {
+                    return $this->redirect(['controller' => 'Jobs', 'action' => 'index']);
+                } else {
+                    return $this->redirect(['controller' => 'Staffs', 'action' => 'dailyJobs',$staff->get('id')]);
+                }
+            } else {
+                return $this->redirect(['action' => 'login_failed']);
+            }
+        }
+        $this->set(compact('staffs', 'email', 'password'));
     }
 
-    public function chaek($email,$password){
-        $staff_id = $Staffs->find()->where(['email_address'=>$email,'password'=>$password])->select(['id'])->first()
-        
+    public function loginFailed()
+    {
+        $staffs = $this->getTableLocator()->get('Staffs');
+        $email = $password = '';
+        if ($this->request->is('post')) {
+            $email = $this->request->getData('email');
+            $password = $this->request->getData('password');
+            $staff = $staffs->find()->where(['email_address' => $email, 'password' => $password])->select(['id'])->first();
+            if ($staff != null) {
+                $staff_type = $staffs->find()->where(['id' => $staff->get('id')])->select(['staff_type'])->first();
+                if ($staff_type->get('staff_type') == 0) {
+                    return $this->redirect(['controller' => 'Jobs', 'action' => 'index']);
+                } else {
+                    return $this->redirect(['controller' => 'Staffs', 'action' => 'dailyJobs',$staff->get('id')]);
+                }
+            } else {
+                return $this->redirect(['action' => 'login_failed']);
+            }
+        }
+        $this->set(compact('staffs', 'email', 'password'));
+    }
+
+    public function dailyJobs($id = null)
+    {
+        $allocations = $this->getTableLocator()->get('Allocation');
+        $jobs = $this->getTableLocator()->get('Jobs');
+        $allocation = $allocations->find()->where(['or'=>['staff_member1_id'=>$id,'staff_member2_id'=>$id]])->first();
+        $allocation_id = $allocation->get('id');
+        $this->set(compact('jobs', 'allocation_id'));
     }
 }

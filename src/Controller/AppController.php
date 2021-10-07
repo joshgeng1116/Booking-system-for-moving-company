@@ -66,6 +66,6 @@ class WidgetController extends AppController
     {
         parent::beforeFilter($event);
 
-        $this->Security->setConfig('unlockedActions', ['edit']);
+        $this->Security->setConfig('unlockedActions', ['edit','login','view','check']);
     }
 }

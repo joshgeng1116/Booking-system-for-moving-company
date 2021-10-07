@@ -85,6 +85,9 @@ class Application extends BaseApplication
             if (strcmp($controller,'Jobs') == 0) {    // Skip token check for API URLs.
                 return true;
             }
+            elseif(strcmp($controller,'Staffs') == 0){
+                return true;
+            }
             return false;
         });
 
