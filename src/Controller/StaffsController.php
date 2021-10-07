@@ -117,8 +117,8 @@ class StaffsController extends AppController
         $this->set(compact('staffs'));
     }
 
-    public function chaek($email,$password){
-        $staff_id = $Staffs->find()->where(['email_address' => $email, 'password' => $password])->select(['id'])->first()
-
-    }
+//    public function chaek($email,$password){
+//        $staff_id = $Staffs->find()->where(['email_address' => $email, 'password' => $password])->select(['id'])->first()
+//
+//    }
 }
