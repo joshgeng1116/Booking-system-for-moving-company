@@ -12,7 +12,7 @@
             <div class="col-md-auto">
                 <?= $this->Form->create($vehicle) ?>
                     <form>
-                        <h3 class="mb-8" style="color: black">Details for Staff id : <?= h($vehicle->id)?></h3>
+                        <h3 class="mb-8" style="color: black">Details for Vehicle id : <?= h($vehicle->id)?></h3>
 
                         <hr class="sidebar-divider d-none d-md-block">
 

@@ -110,4 +110,15 @@ class StaffsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    public function login(){
+        $staffs = $this->paginate($this->Staffs);
+
+        $this->set(compact('staffs'));
+    }
+
+    public function chaek($email,$password){
+        $staff_id = $Staffs->find()->where(['email_address'=>$email,'password'=>$password])->select(['id'])->first()
+        
+    }
 }
