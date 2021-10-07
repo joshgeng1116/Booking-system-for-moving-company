@@ -31,7 +31,7 @@ class JobsController extends AppController
     {
 
         $this->paginate = [
-            'contain' => ['Allocation'],
+            'contain' => ['Allocation', 'Allocation.Staffs'],
         ];
 
         $start_date = $this->request->getQuery('start_date');
@@ -132,13 +132,25 @@ class JobsController extends AppController
 
     public function calendar()
     {
+        $sizeText = $this->request->getQuery('size');
+        $size = 0;
+        if($sizeText === "2T"){
+            $this->set($size=1);
+        }else if ($sizeText == "4T"){
+            $this->set($size=2);
+        }else if ($sizeText === "8T"){
+            $this->set($size=3);
+        }else if ($sizeText === "10T"){
+            $this->set($size=4);
+        }else if ($sizeText === "12T"){
+            $this->set($size=5);
+        }
         $this->loadModel('Allocation');
-        /*$allAllocations = $this->Allocation->find('all');*/
         $this->paginate = [
             'contain' => ['Staffs', 'Vehicles'],
         ];
         $allocation = $this->paginate($this->Allocation);
-        $this->set(compact('allocation'));
+        $this->set(compact('allocation', 'size'));
     }
 
     /**

@@ -30,7 +30,7 @@ echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js', ['bl
                 <tr>
                     <td><?= $this->Number->format($allocation->id) ?></td>
                     <td><?= $this->Number->format($allocation->staff_member1_id) ?></td>
-                    <td><?= $allocation->has('staff') ? $this->Html->link($allocation->staff->id, ['controller' => 'Staffs', 'action' => 'view', $allocation->staff->id]) : '' ?></td>
+                    <td><?= $allocation->has('staff') ? $this->Html->link($allocation->staff->first_name, ['controller' => 'Staffs', 'action' => 'view', $allocation->staff->id]) : '' ?></td>
                     <td><?= $allocation->has('vehicle') ? $this->Html->link($allocation->vehicle->id, ['controller' => 'Vehicles', 'action' => 'view', $allocation->vehicle->id]) : '' ?></td>
                     <td><?= h($allocation->date) ?></td>
                     <td class="actions">

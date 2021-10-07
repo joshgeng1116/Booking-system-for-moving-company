@@ -43,7 +43,7 @@ class StaffsController extends AppController
 
     public function get_name($id = null)
     {
-        $staffs = $this->Staffs->find('list', ['condition' => ['id' => $id], ]);
+        $staffs = $this->Staffs->find('list', ['condition' => ['id' => $id],]);
 
         return $staffs;
     }
@@ -128,7 +128,7 @@ class StaffsController extends AppController
                 if ($staff_type->get('staff_type') == 0) {
                     return $this->redirect(['controller' => 'Jobs', 'action' => 'index']);
                 } else {
-                    return $this->redirect(['controller' => 'Staffs', 'action' => 'dailyJobs',$staff->get('id')]);
+                    return $this->redirect(['controller' => 'Staffs', 'action' => 'dailyJobs', $staff->get('id')]);
                 }
             } else {
                 return $this->redirect(['action' => 'login_failed']);
@@ -150,7 +150,7 @@ class StaffsController extends AppController
                 if ($staff_type->get('staff_type') == 0) {
                     return $this->redirect(['controller' => 'Jobs', 'action' => 'index']);
                 } else {
-                    return $this->redirect(['controller' => 'Staffs', 'action' => 'dailyJobs',$staff->get('id')]);
+                    return $this->redirect(['controller' => 'Staffs', 'action' => 'dailyJobs', $staff->get('id')]);
                 }
             } else {
                 return $this->redirect(['action' => 'login_failed']);
@@ -163,7 +163,7 @@ class StaffsController extends AppController
     {
         $allocations = $this->getTableLocator()->get('Allocation');
         $jobs = $this->getTableLocator()->get('Jobs');
-        $allocation = $allocations->find()->where(['or'=>['staff_member1_id'=>$id,'staff_member2_id'=>$id]])->first();
+        $allocation = $allocations->find()->where(['or' => ['staff_member1_id' => $id, 'staff_member2_id' => $id]])->first();
         $allocation_id = $allocation->get('id');
         $this->set(compact('jobs', 'allocation_id'));
     }

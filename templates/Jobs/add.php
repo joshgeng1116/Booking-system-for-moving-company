@@ -235,13 +235,42 @@ echo $this->Html->script('API/addressFinder');
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 <script>
+ console.log("This works!");
     $(document).ready(function () {
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-            events: '<?= $this->URL->build(['controller' => 'Jobs', 'action' => 'calendar', '_ext' => 'json']) ?>'
+            initialView: 'dayGridMonth'
         });
         calendar.render();
+    });
+    let size = document.getElementById('size');
+    size.addEventListener("change", function(){
+        if(window.XMLHttpRequest){
+            let xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function(){
+                if(this.readyState === XMLHttpRequest.DONE){
+                    console.log(this.responseText);
+                    console.log(JSON.parse(this.responseText));
+                    let response = JSON.parse(this.responseText);
+                    if(this.status === 200){
+                        console.log(response);
+                        $(document).ready(function () {
+                            var calendarEl = document.getElementById('calendar');
+                            var calendar = new FullCalendar.Calendar(calendarEl, {
+                                initialView: 'dayGridMonth',
+                                events: response,
+                             });
+                            calendar.render();
+                        });
+                    }
+                }
+            };
+            let id = size.value;
+            let endpointtemp = "<?= $this->URL->build(["controller" => "Jobs", "action" => "calendar","?"=>["size"=>"SIZE_ID"], "_ext" => "json"]);?>";
+            endpointtemp = endpointtemp.replace("SIZE_ID", id);
+            xmlHttp.open("get",endpointtemp);
+            xmlHttp.send();
+        }
     });
 </script>
 
