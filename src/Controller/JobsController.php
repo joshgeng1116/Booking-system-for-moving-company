@@ -27,13 +27,14 @@ class JobsController extends AppController
         $this->set(compact('jobs'));
     }
 
-    public function indexdriver()
+    public function indexdriver($id)
     {
 
         $this->paginate = [
             'contain' => ['Allocation', 'Allocation.Staffs'],
         ];
 
+        $staff_id = $id;
         $start_date = $this->request->getQuery('start_date');
         $end_date = $this->request->getQuery('end_date');
 
@@ -47,11 +48,11 @@ class JobsController extends AppController
 
             $jobs = $this->paginate($this->Jobs);
 
-            $this->set(compact('jobs'));
+            $this->set(compact('jobs','staff_id'));
         }else{
             $jobs = $this->paginate($this->Jobs);
 
-            $this->set(compact('jobs'));
+            $this->set(compact('jobs','staff_id'));
         }
     }
 
