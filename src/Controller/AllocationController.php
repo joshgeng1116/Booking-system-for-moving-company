@@ -18,13 +18,20 @@ class AllocationController extends AppController
      */
     public function index()
     {
+        $staffs = $this->getTableLocator()->get('Staffs');
         $this->paginate = [
             'contain' => ['Staffs', 'Vehicles'],
         ];
         $allocation = $this->paginate($this->Allocation);
-
-        $this->set(compact('allocation'));
+        foreach ($allocation as $item){
+            $staff1 = $staffs->find()->where(['id'=>$item->staff_member1_id])->first();
+            $name1 = $staff1->get('first_name');
+            $staff2 = $staffs->find()->where(['id'=>$item->staff_member2_id])->first();
+            $name2 = $staff2->get('first_name');
+        }
+        $this->set(compact('allocation', 'name1','name2'));
     }
+
 
     /**
      * View method
@@ -60,9 +67,10 @@ class AllocationController extends AppController
             $this->Flash->error(__('The allocation could not be saved. Please, try again.'));
         }
         $staffs = $this->Allocation->Staffs->find('list', ['limit' => 200]);
-        $vehicles = $this->Allocation->Vehicles->find('list',['limit'=>200]);
+        $vehicles = $this->Allocation->Vehicles->find('list', ['limit' => 200]);
         $this->set(compact('allocation', 'staffs', 'vehicles'));
     }
+
     /**
      * Edit method
      *

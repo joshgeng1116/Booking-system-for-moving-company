@@ -18,27 +18,27 @@ echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js', ['bl
             <thead>
                 <tr>
                     <th><?= h('id') ?></th>
-                    <th><?= h('staff_member1_id') ?></th>
-                    <th><?= h('staff_member2_id') ?></th>
-                    <th><?= h('vehicle_id') ?></th>
-                    <th><?= h('date') ?></th>
+                    <th><?= h('Staff Member1') ?></th>
+                    <th><?= h('Staff Member2') ?></th>
+                    <th><?= h('Vehicle') ?></th>
+                    <th><?= h('Date') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($allocation as $allocation) : ?>
-                <tr>
-                    <td><?= $this->Number->format($allocation->id) ?></td>
-                    <td><?= $this->Number->format($allocation->staff_member1_id) ?></td>
-                    <td><?= $allocation->has('staff') ? $this->Html->link($allocation->staff->first_name, ['controller' => 'Staffs', 'action' => 'view', $allocation->staff->id]) : '' ?></td>
-                    <td><?= $allocation->has('vehicle') ? $this->Html->link($allocation->vehicle->id, ['controller' => 'Vehicles', 'action' => 'view', $allocation->vehicle->id]) : '' ?></td>
-                    <td><?= h($allocation->date) ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $allocation->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $allocation->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $allocation->id], ['confirm' => __('Are you sure you want to delete # {0}?', $allocation->id)]) ?>
-                    </td>
-                </tr>
+                        <tr>
+                            <td><?= $this->Number->format($allocation->id) ?></td>
+                            <td><?= $name1?></td>
+                            <td><?= $name2?></td>
+                            <td><?= $allocation->has('vehicle') ? $this->Html->link($allocation->vehicle->rego_number, ['controller' => 'Vehicles', 'action' => 'view', $allocation->vehicle->id]) : '' ?></td>
+                            <td><?= h($allocation->date) ?></td>
+                            <td class="actions">
+                                <?= $this->Html->link(__('View'), ['action' => 'view', $allocation->id]) ?>
+                                <?= $this->Html->link(__('Edit'), ['action' => 'edit', $allocation->id]) ?>
+                                <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $allocation->id], ['confirm' => __('Are you sure you want to delete # {0}?', $allocation->id)]) ?>
+                            </td>
+                        </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>

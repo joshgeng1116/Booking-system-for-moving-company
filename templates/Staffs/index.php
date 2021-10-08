@@ -24,7 +24,6 @@ echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js',['blo
                     <th><?= h('Phone Number') ?></th>
                     <th><?= h('Email Address') ?></th>
                     <th><?= h('Staff Type') ?></th>
-                    <th><?= h('Password') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -43,7 +42,6 @@ echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js',['blo
                             Driver
                         <?php endif;?>
                     </td>
-                    <td><?= h($staff->password) ?></td>
                     <td class="actions">
                         <div>
                             <?= $this->Html->link(__('More Info'), ['action' => 'view', $staff->id]) ?>
