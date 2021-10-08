@@ -22,8 +22,8 @@ echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js', ['bl
                 <th><?= h('Moving From') ?></th>
                 <th><?= h('Moving To') ?></th>
                 <th><?= h('Size') ?></th>
-                <th><?= h('date') ?></th>
-                <th><?= h('deposit_status') ?></th>
+                <th><?= h('Date') ?></th>
+                <th><?= h('Deposit Status') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
             </thead>
