@@ -10,6 +10,7 @@ namespace App\Controller;
  * @property \App\Model\Table\AllocationTable $Allocation
  * @method \App\Model\Entity\Job[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
+use Cake\I18n\FrozenTime;
 class JobsController extends AppController
 {
     /**
@@ -30,30 +31,15 @@ class JobsController extends AppController
     public function indexdriver($id)
     {
 
+        $staff_id = $id;
         $this->paginate = [
             'contain' => ['Allocation', 'Allocation.Staffs'],
         ];
-
-        $staff_id = $id;
-        $start_date = $this->request->getQuery('start_date');
-        $end_date = $this->request->getQuery('end_date');
-
-        if($start_date != null && $end_date != null) {
-            $this->paginate = [
-                'conditions' => [
-                    'DATE(jobs.date) >=' => $start_date,
-                    'DATE(jobs.date) <=' => $end_date,
-                ],
-            ];
-
-            $jobs = $this->paginate($this->Jobs);
-
-            $this->set(compact('jobs','staff_id'));
-        }else{
-            $jobs = $this->paginate($this->Jobs);
-
-            $this->set(compact('jobs','staff_id'));
-        }
+        $time = FrozenTime::now();
+        $time = $time->i18nFormat('dd/MM/yyyy');
+        $jobs = $this->paginate($this->Jobs);
+        $this->set(compact('jobs', 'time', 'staff_id'));
+        
     }
 
     /**
@@ -201,6 +187,29 @@ class JobsController extends AppController
                 $this->Flash->success(__('The job has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('The job could not be saved. Please, try again.'));
+        }
+        $allocation = $this->Jobs->Allocation->find('list', ['keyField' => 'id', 'valueField' => function ($e) {
+            return $this->get_name($e->staff_member1_id) . ' / ' . $this->get_name($e->staff_member2_id) . ' / ' . $this->get_rego($e->vehicle_id);
+        }]);
+        $this->set(compact('job', 'allocation'));
+    }
+
+    public function editdriver(){
+
+        $id = $this->request->getQuery('id');
+        $staff_id = $this->request->getQuery('staff_id');
+
+        $job = $this->Jobs->get($id, [
+            'contain' => [],
+        ]);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $job = $this->Jobs->patchEntity($job, $this->request->getData());
+            if ($this->Jobs->save($job)) {
+                $this->Flash->success(__('The job has been saved.'));
+
+                return $this->redirect(['action' => 'indexdriver', $staff_id]);
             }
             $this->Flash->error(__('The job could not be saved. Please, try again.'));
         }
