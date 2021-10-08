@@ -115,8 +115,14 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                 );
                 ?>
             </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">The Team</a>
+            <li class="nav-item active">
+            <?php
+                echo $this->Html->link(
+                    'Staff Login',
+                    '/Staffs/login',
+                    ['class' => 'nav-link', 'target' => '_self']
+                );
+                ?>
             </li>
         </ul>
 
