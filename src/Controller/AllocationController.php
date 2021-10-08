@@ -18,18 +18,13 @@ class AllocationController extends AppController
      */
     public function index()
     {
-        $staffs = $this->getTableLocator()->get('Staffs');
+        $this->loadModel('Staffs');
+        $staffs = $this->paginate($this->Staffs);
         $this->paginate = [
             'contain' => ['Staffs', 'Vehicles'],
         ];
         $allocation = $this->paginate($this->Allocation);
-        foreach ($allocation as $item){
-            $staff1 = $staffs->find()->where(['id'=>$item->staff_member1_id])->first();
-            $name1 = $staff1->get('first_name');
-            $staff2 = $staffs->find()->where(['id'=>$item->staff_member2_id])->first();
-            $name2 = $staff2->get('first_name');
-        }
-        $this->set(compact('allocation', 'name1','name2'));
+        $this->set(compact('allocation', 'staffs'));
     }
 
 

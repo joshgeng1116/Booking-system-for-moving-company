@@ -2,6 +2,7 @@
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Allocation[]|\Cake\Collection\CollectionInterface $allocation
+ * @var \App\Model\Entity\Staff[]|\Cake\Collection\CollectionInterface $staffs
  */
 echo $this->Html->css('vendor/datatables/dataTables.bootstrap4.min.css', ['block' => true]);
 echo $this->Html->script('/vendor/datatables/jquery.dataTables.min.js', ['block' => true]);
@@ -29,8 +30,22 @@ echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js', ['bl
                 <?php foreach ($allocation as $allocation) : ?>
                         <tr>
                             <td><?= $this->Number->format($allocation->id) ?></td>
-                            <td><?= $name1?></td>
-                            <td><?= $name2?></td>
+                            <td>
+                                <?php foreach ($staffs as $staff){
+                                    if($staff->id == $allocation->staff_member1_id){
+                                        echo $staff->first_name;
+                                    }
+                                }
+                                ?>
+                            </td>
+                            <td>
+                                <?php foreach ($staffs as $staff){
+                                    if($staff->id == $allocation->staff_member2_id){
+                                        echo $staff->first_name;
+                                    }
+                                }
+                                ?>
+                            </td>
                             <td><?= $allocation->has('vehicle') ? $this->Html->link($allocation->vehicle->rego_number, ['controller' => 'Vehicles', 'action' => 'view', $allocation->vehicle->id]) : '' ?></td>
                             <td><?= h($allocation->date) ?></td>
                             <td class="actions">
