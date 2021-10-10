@@ -1,4 +1,5 @@
 // Represent each form input as an object with needed attributes for form validation
+
 class Validation {
     constructor(validation_type, validation, min_length, max_length) {
         if (["regex", "dropdown", "date", "none"].includes(validation_type)) {
@@ -235,6 +236,8 @@ function validateInputtedField(event) {
     }
 
     function generateReviewMessage() {
+        html_tags_seen = false;
+        const html_validation_regex = new RegExp('^[^<>]*[^<>]*[^<>]$', 'm');
         $.each(all_form_sections, function (key, value) {
             let form_inputs_array = value.inputs;
             // console.log(form_inputs_array);
@@ -245,6 +248,10 @@ function validateInputtedField(event) {
                     //console.log("id: " + current_input_id);
                     //console.log(current_input_id.val());
                     //console.log($("#" + current_input_id).val());
+                    // Make sure no HTML tags are being use
+                    if (!html_validation_regex.test(current_input_id.val())) {
+                        alert("FAILED REGEX WILL NOT DO REVIEW.");
+                    }
                     ReviewMessageInserts[current_input_id] = "<a href=\"#" + current_input_id + "\">" + "<mark class='" + current_input_id + "_markup" + "'>" + $("#" + current_input_id).val() + "</mark></a>"; // TODO error here
                 })
 
