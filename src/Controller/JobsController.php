@@ -11,6 +11,7 @@ namespace App\Controller;
  * @method \App\Model\Entity\Job[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 use Cake\I18n\FrozenTime;
+
 class JobsController extends AppController
 {
     /**
@@ -39,7 +40,6 @@ class JobsController extends AppController
         $time = $time->i18nFormat('dd/MM/yyyy');
         $jobs = $this->paginate($this->Jobs);
         $this->set(compact('jobs', 'time', 'staff_id'));
-        
     }
 
     /**
@@ -121,16 +121,16 @@ class JobsController extends AppController
     {
         $sizeText = $this->request->getQuery('size');
         $size = 0;
-        if($sizeText === "2T"){
-            $this->set($size=1);
-        }else if ($sizeText == "4T"){
-            $this->set($size=2);
-        }else if ($sizeText === "8T"){
-            $this->set($size=3);
-        }else if ($sizeText === "10T"){
-            $this->set($size=4);
-        }else if ($sizeText === "12T"){
-            $this->set($size=5);
+        if ($sizeText == '2T') {
+            $this->set($size = 1);
+        } elseif ($sizeText == '4T') {
+            $this->set($size = 2);
+        } elseif ($sizeText === '8T') {
+            $this->set($size = 3);
+        } elseif ($sizeText === '10T') {
+            $this->set($size = 4);
+        } elseif ($sizeText === '12T') {
+            $this->set($size = 5);
         }
         $this->loadModel('Allocation');
         $this->paginate = [
@@ -196,7 +196,8 @@ class JobsController extends AppController
         $this->set(compact('job', 'allocation'));
     }
 
-    public function editdriver(){
+    public function editdriver()
+    {
 
         $id = $this->request->getQuery('id');
         $staff_id = $this->request->getQuery('staff_id');
@@ -219,17 +220,21 @@ class JobsController extends AppController
         $this->set(compact('job', 'allocation'));
     }
 
-    public function get_name($id){
+    public function get_name($id)
+    {
         $staffs =  $this->getTableLocator()->get('Staffs');
         $staff_name_obj1 = $staffs->find()->where(['id' => $id])->select(['first_name','last_name'])->first();
         $staff_name1 = $staff_name_obj1->first_name . ' ' . $staff_name_obj1->last_name;
+
         return $staff_name1;
     }
 
-    public function get_rego($id){
+    public function get_rego($id)
+    {
         $vehicles = $this->getTableLocator()->get('Vehicles');
         $vehicleObj = $vehicles->find()->where(['id' => $id])->select(['rego_number'])->first();
         $vehicle_rego = $vehicleObj->rego_number;
+
         return $vehicle_rego;
     }
 
