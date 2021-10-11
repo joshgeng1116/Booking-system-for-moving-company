@@ -261,6 +261,10 @@ function validateInputtedField(event) {
                     //console.log(current_input_id.val());
                     //console.log($("#" + current_input_id).val());
                     // Make sure no HTML tags are being use
+                    /* Utilised from https://stackoverflow.com/questions/822452/strip-html-from-text-javascript/47140708#47140708 */
+                    //const regex = /^[^<>]+[^<>]+$/;
+                    console.log("works 11 oct");
+
                     ReviewMessageInserts[current_input_id] = "<a href=\"#" + current_input_id + "\">" + "<mark class='" + current_input_id + "_markup" + "'>" + $("#" + current_input_id).val() + "</mark></a>"; // TODO error here
                 })
 
