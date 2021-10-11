@@ -93,6 +93,18 @@ class InputField {
 
                 }
 
+                // If year is more than one year in future, fail
+                if (chosen_year > (today_year + 1) ) {
+                    let year_bound = today_year + 1;
+                    let error_msg = "You cannot choose a date past the year " + year_bound + ".";
+                    date_specific_error.innerHTML = error_msg;
+
+                    return false;
+                }
+
+                date_specific_error.innerHTML = "You must choose a future date for the delivery to occur.";
+
+
                 return true;
             }
 
@@ -249,9 +261,6 @@ function validateInputtedField(event) {
                     //console.log(current_input_id.val());
                     //console.log($("#" + current_input_id).val());
                     // Make sure no HTML tags are being use
-                    if (!html_validation_regex.test(current_input_id.val())) {
-                        alert("FAILED REGEX WILL NOT DO REVIEW.");
-                    }
                     ReviewMessageInserts[current_input_id] = "<a href=\"#" + current_input_id + "\">" + "<mark class='" + current_input_id + "_markup" + "'>" + $("#" + current_input_id).val() + "</mark></a>"; // TODO error here
                 })
 
