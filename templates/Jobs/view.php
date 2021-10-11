@@ -141,12 +141,12 @@ use Cake\Mailer\Mailer;
                 <hr class="sidebar-divider d-none d-md-block">
                 <form>
                     <div class="mb-3">
-                        <p style="color: gray(5);font-size: 20px" >Total Paid:</p>
+                        <p style="color: gray(5);font-size: 20px" >Total Paid: ($)</p>
                         <p style="color: black;font-size: 20px" ><?= $this->Number->format($job->total_paid) ?></p>
                     </div>
                     <hr class="sidebar-divider d-none d-md-block">
                     <div class="mb-3">
-                        <p style="color: gray(5);font-size: 20px" >Total Remaining:</p>
+                        <p style="color: gray(5);font-size: 20px" >Total Remaining: ($)</p>
                         <p style="color: black;font-size: 20px" ><?= $this->Number->format($job->total_remaining) ?></p>
                     </div>
                 </form>
@@ -192,17 +192,17 @@ use Cake\Mailer\Mailer;
                         'Account Name: Easy Peasy Removal'.PHP_EOL.
                         'BSB: 000-000'.PHP_EOL.
                         'Account Number: 00000000'.PHP_EOL.
-                        PHP_EOL.'Remain Amount: '.$this->Number->format($job->total_remaining/10)
+                        PHP_EOL.'Remain Amount: $'.$this->Number->format($job->total_remaining/10)
                     ;
                     } elseif ($job->status == 6) {
                         $subject = 'Job Completion Notification: ' . $job->date . ' for ' . $job->customer_first_name;
                         $message = 'Thank you! The Link below is for feedback.'.PHP_EOL.
-                        $this->Url->build(['controller' => 'Jobs', 'action' => 'Review', "?" => ["id" => $job->id], 'fullBase' => true]).PHP_EOL.
+                        'https://fit3047team102.u21s2102.monash-ie.me/jobs/review?id='.$job->id.PHP_EOL.
                         PHP_EOL.'Please transfer to the bank account below to make a payment.'.PHP_EOL.
                         'Account Name: Easy Peasy Removal'.PHP_EOL.
                         'BSB: 000-000'.PHP_EOL.
                         'Account Number: 00000000'.PHP_EOL.
-                        PHP_EOL.'Remain Amount: '.$this->Number->format($job->total_remaining)
+                        PHP_EOL.'Remain Amount: $'.$this->Number->format($job->total_remaining)
                     ;
                     }else {
                         $subject = 'Job status update: ' . $job->date . ' for ' . $job->customer_first_name;

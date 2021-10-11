@@ -23,7 +23,6 @@ echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js', ['bl
                     <th><?= h('Staff Member2') ?></th>
                     <th><?= h('Vehicle') ?></th>
                     <th><?= h('Date') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -48,25 +47,10 @@ echo $this->Html->script('/vendor/datatables/dataTables.bootstrap4.min.js', ['bl
                             </td>
                             <td><?= $allocation->has('vehicle') ? $this->Html->link($allocation->vehicle->rego_number, ['controller' => 'Vehicles', 'action' => 'view', $allocation->vehicle->id]) : '' ?></td>
                             <td><?= h($allocation->date) ?></td>
-                            <td class="actions">
-                                <?= $this->Html->link(__('View'), ['action' => 'view', $allocation->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['action' => 'edit', $allocation->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $allocation->id], ['confirm' => __('Are you sure you want to delete # {0}?', $allocation->id)]) ?>
-                            </td>
                         </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
-    </div>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
     </div>
     <script>
         $(document).ready(function() {

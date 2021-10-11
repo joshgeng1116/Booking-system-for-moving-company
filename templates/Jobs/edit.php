@@ -108,13 +108,13 @@ use Cake\Mailer\Mailer;
                             <hr class="sidebar-divider d-none d-md-block">
                             <div class="mb-3">
                                 <?php
-                                    echo $this->Form->control('total_paid', [ "class" => "form-control", "label" => "Total Paid: ", 'placeholder'=>'0.00']);
+                                    echo $this->Form->control('total_paid', [ "class" => "form-control", "label" => "Total Paid: ($)", 'placeholder'=>'0.00']);
                                 ?>
                             </div>
                             <hr class="sidebar-divider d-none d-md-block">
                             <div class="mb-3">
                                 <?php
-                                    echo $this->Form->control('total_remaining', [ "class" => "form-control", "label" => "Total Remaining: ", 'placeholder'=>'0.00']);
+                                    echo $this->Form->control('total_remaining', [ "class" => "form-control", "label" => "Total Remaining: ($)", 'placeholder'=>'0.00']);
                                 ?>
                             </div>
                             <hr class="sidebar-divider d-none d-md-block">
@@ -124,7 +124,7 @@ use Cake\Mailer\Mailer;
                             </div>
                         </div>
                     </form>
-                    
+
                     <div class="col-md-auto">
                         <h3 class="mb-3" style="color: black">Actions :</h3>
                         <hr class="sidebar-divider d-none d-md-block">
