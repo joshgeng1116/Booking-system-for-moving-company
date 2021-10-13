@@ -173,9 +173,9 @@ class StaffsController extends AppController
                 $mailer->setFrom(['joshgeng1116@gmail.com' => 'Easy Peasy Removal Admin'])
                     ->setTo($email)
                     ->setSubject('Password reset link')
-                    ->deliver('' . $staff->id);
+                    ->deliver('Click the link below to reset your password :' . PHP_EOL . 'localhost/team102/staffs/reset-password/' . $staff->id);
 
-                return $this->redirect(['action' => 'sendEmailSuccessed']);
+                return $this->redirect(['action' => 'sendEmailSucceed']);
             } else {
                 return $this->redirect(['action' => 'sendEmailFailed']);
             }
@@ -195,9 +195,9 @@ class StaffsController extends AppController
                 $mailer->setFrom(['joshgeng1116@gmail.com' => 'Easy Peasy Removal Admin'])
                     ->setTo($email)
                     ->setSubject('Password reset link')
-                    ->deliver('' . $staff->id);
+                    ->deliver('Click the link below to reset your password :' . PHP_EOL . 'localhost/team102/staffs/reset-password/' . $staff->id);
 
-                return $this->redirect(['action' => 'sendEmailSuccessed']);
+                return $this->redirect(['action' => 'sendEmailSucceed']);
             } else {
                 return $this->redirect(['action' => 'sendEmailFailed']);
             }
@@ -205,7 +205,7 @@ class StaffsController extends AppController
         $this->set(compact('staffs', 'email'));
     }
 
-    public function sendEmailSuccessed()
+    public function sendEmailSucceed()
     {
         $staffs = $this->getTableLocator()->get('Staffs');
         $email = '';
@@ -217,9 +217,9 @@ class StaffsController extends AppController
                 $mailer->setFrom(['joshgeng1116@gmail.com' => 'Easy Peasy Removal Admin'])
                     ->setTo($email)
                     ->setSubject('Password reset link')
-                    ->deliver('' . $staff->id);
+                    ->deliver('Click the link below to reset your password :' . PHP_EOL . 'localhost/team102/staffs/reset-password/' . $staff->id);
 
-                return $this->redirect(['action' => 'sendEmailSuccessed']);
+                return $this->redirect(['action' => 'sendEmailSucceed']);
             } else {
                 return $this->redirect(['action' => 'sendEmailFailed']);
             }
