@@ -29,5 +29,8 @@ echo $this->Html->css('login');
         <hr class="sidebar-divider d-none d-md-block">
         <input type="submit" name="login" style="background-color:#3CB371; color: white" type="submit" class="fadeIn fourth" value="Login">
     </form>
+      <div id="formFooter">
+          <a href="<?= $this->Url->build(['action' => 'sendResetEmail'])?>" class="underlineHover">Forgot Password?</a>
+      </div>
   </div>
 </div>

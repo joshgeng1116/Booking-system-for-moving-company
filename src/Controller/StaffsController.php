@@ -11,6 +11,8 @@ namespace App\Controller;
  * @property \App\Model\Table\JobsTable $Jobs
  * @method \App\Model\Entity\Staff[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
+use Cake\Mailer\Mailer;
+
 class StaffsController extends AppController
 {
     /**
@@ -157,5 +159,91 @@ class StaffsController extends AppController
             }
         }
         $this->set(compact('staffs', 'email', 'password'));
+    }
+
+    public function sendResetEmail()
+    {
+        $staffs = $this->getTableLocator()->get('Staffs');
+        $email = '';
+        if ($this->request->is('post')) {
+            $email = $this->request->getData('email');
+            $staff = $staffs->find()->where(['email_address' => $email])->select(['id'])->first();
+            if ($staff != null) {
+                $mailer = new Mailer('default');
+                $mailer->setFrom(['joshgeng1116@gmail.com' => 'Easy Peasy Removal Admin'])
+                    ->setTo($email)
+                    ->setSubject('Password reset link')
+                    ->deliver('' . $staff->id);
+
+                return $this->redirect(['action' => 'sendEmailSuccessed']);
+            } else {
+                return $this->redirect(['action' => 'sendEmailFailed']);
+            }
+        }
+        $this->set(compact('staffs', 'email'));
+    }
+
+    public function sendEmailFailed()
+    {
+        $staffs = $this->getTableLocator()->get('Staffs');
+        $email = '';
+        if ($this->request->is('post')) {
+            $email = $this->request->getData('email');
+            $staff = $staffs->find()->where(['email_address' => $email])->select(['id'])->first();
+            if ($staff != null) {
+                $mailer = new Mailer('default');
+                $mailer->setFrom(['joshgeng1116@gmail.com' => 'Easy Peasy Removal Admin'])
+                    ->setTo($email)
+                    ->setSubject('Password reset link')
+                    ->deliver('' . $staff->id);
+
+                return $this->redirect(['action' => 'sendEmailSuccessed']);
+            } else {
+                return $this->redirect(['action' => 'sendEmailFailed']);
+            }
+        }
+        $this->set(compact('staffs', 'email'));
+    }
+
+    public function sendEmailSuccessed()
+    {
+        $staffs = $this->getTableLocator()->get('Staffs');
+        $email = '';
+        if ($this->request->is('post')) {
+            $email = $this->request->getData('email');
+            $staff = $staffs->find()->where(['email_address' => $email])->select(['id'])->first();
+            if ($staff != null) {
+                $mailer = new Mailer('default');
+                $mailer->setFrom(['joshgeng1116@gmail.com' => 'Easy Peasy Removal Admin'])
+                    ->setTo($email)
+                    ->setSubject('Password reset link')
+                    ->deliver('' . $staff->id);
+
+                return $this->redirect(['action' => 'sendEmailSuccessed']);
+            } else {
+                return $this->redirect(['action' => 'sendEmailFailed']);
+            }
+        }
+        $this->set(compact('staffs', 'email'));
+    }
+
+    public function resetPassword($id = null)
+    {
+        $staff = $this->Staffs->get($id, [
+            'contain' => [],
+        ]);
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $staff = $this->Staffs->patchEntity($staff, $this->request->getData());
+            $staff->staff_type = $this->request->getData('staff_type');
+            $staff->password = $this->request->getData('password');
+            if ($this->Staffs->save($staff)) {
+                $this->Flash->success(__('The staff has been saved.'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('The staff could not be saved. Please, try again.'));
+        }
+        $this->set(compact('staff'));
     }
 }

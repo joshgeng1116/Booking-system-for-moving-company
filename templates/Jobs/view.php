@@ -236,7 +236,7 @@ use Cake\Mailer\Mailer;
                         <?php
                     } else {
                         $mailer = new Mailer('default');
-                        $mailer->setFrom(['joshgeng1116@gmail.com' => 'My Site'])
+                        $mailer->setFrom(['joshgeng1116@gmail.com' => 'Easy Peasy Removal'])
                             ->setTo($recipient)
                             ->setSubject($subject)
                             ->deliver($message);

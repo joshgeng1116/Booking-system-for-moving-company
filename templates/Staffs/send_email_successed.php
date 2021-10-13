@@ -15,25 +15,18 @@ echo $this->Html->css('login');
 <div class="wrapper fadeInDown" style="background-color:black;">
     <div id="formContent" style="background-color:#f5c71a;">
         <div class="fadeIn first">
-            <h1>Login For Easy Peasy Removal Staffs</h1>
+            <h1>Send Reset Password Email</h1>
         </div>
         <form class='form-group col' method='post'>
-            <div class="alert alert-danger text-center">
-                <?php echo 'Wrong email address or password!'?>
+            <div class="alert alert-success text-center">
+                <?php echo 'A reset password link has been send!'?>
             </div>
             <div class='col-xs-1'>
                 <p style="color: gray(5);font-size: 20px" >Email:</p>
                 <input class="form-control" name="email" type="email" placeholder="email" value="<?php echo $email ?>"/>
             </div>
-            <div class='col-xs-1'>
-                <p style="color: gray(5);font-size: 20px" >Password:</p>
-                <input class="form-control" name="password" type="password" placeholder="password" value="<?php echo $password ?>"/>
-            </div>
             <hr class="sidebar-divider d-none d-md-block">
-            <input type="submit" name="login" style="background-color:#3CB371; color: white" type="submit" class="fadeIn fourth" value="Login">
+            <input type="submit" name="login" style="background-color:#3CB371; color: white" type="submit" class="fadeIn fourth" value="Send reset email">
         </form>
-        <div id="formFooter">
-            <a href="<?= $this->Url->build(['action' => 'sendResetEmail'])?>" class="underlineHover">Forgot Password?</a>
-        </div>
     </div>
 </div>
