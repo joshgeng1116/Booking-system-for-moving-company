@@ -41,12 +41,12 @@
 
                     <hr class="sidebar-divider d-none d-md-block">
 
-                    <?php if($staff->type == 0):?>
+                    <?php if($staff->staff_type == 0):?>
                         <div class="col-md-auto">
                         <p style="color: gray(5);font-size: 20px" >Staff's Type:</p>
                         <p style="color: black;font-size: 20px" >Admin</p>
                         </div>
-                    <?php elseif($staff->type == 1):?>
+                    <?php elseif($staff->staff_type == 1):?>
                         <div class="col-md-auto">
                         <p style="color: gray(5);font-size: 20px" >Staff's Type:</p>
                         <p style="color: black;font-size: 20px" >Driver</p>

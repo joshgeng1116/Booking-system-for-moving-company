@@ -78,6 +78,17 @@ class StaffsTable extends Table
             ->requirePresence('email_address', 'create')
             ->notEmptyString('email_address');
 
+        $validator
+            ->scalar('password')
+            ->maxLength('password', 100)
+            ->requirePresence('password', 'create')
+            ->notEmptyString('password');
+
+        $validator
+            ->sameAs('retype_password', 'password', 'Password match failed!');
+
+
+
         return $validator;
     }
 }
