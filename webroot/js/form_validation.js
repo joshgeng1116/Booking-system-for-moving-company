@@ -17,6 +17,7 @@ class Validation {
 const phone_specific_error = document.getElementsByClassName("phone_specific_error")[0];
 const date_specific_error = document.getElementsByClassName("date_specific_error")[0];
 
+const html_safety_regex = /^[^<^>]*$/;
 
 const validation_pureText = new Validation("regex", /^[a-zA-Z ']+$/, 1, 255);
 const validation_specialText = new Validation("regex", /^[\w \-,\./']+$/, 1, 255);
@@ -248,6 +249,7 @@ function validateInputtedField(event) {
     }
 
     function generateReviewMessage() {
+        let safe_to_send = true;
         html_tags_seen = false;
         const html_validation_regex = new RegExp('^[^<>]*[^<>]*[^<>]$', 'm');
         $.each(all_form_sections, function (key, value) {
@@ -263,9 +265,19 @@ function validateInputtedField(event) {
                     // Make sure no HTML tags are being use
                     /* Utilised from https://stackoverflow.com/questions/822452/strip-html-from-text-javascript/47140708#47140708 */
                     //const regex = /^[^<>]+[^<>]+$/;
-                    console.log("works 11 oct");
+                    let value_to_test = $('#' + current_input_id).val();
+                    console.log(value_to_test);
+                    console.log(html_safety_regex.test(value_to_test));
 
-                    ReviewMessageInserts[current_input_id] = "<a href=\"#" + current_input_id + "\">" + "<mark class='" + current_input_id + "_markup" + "'>" + $("#" + current_input_id).val() + "</mark></a>"; // TODO error here
+                    if (!html_safety_regex.test(value_to_test)) {
+                        safe_to_send = false;
+                    }
+
+                    if (safe_to_send) {
+                        ReviewMessageInserts[current_input_id] = "<a href=\"#" + current_input_id + "\">" + "<mark class='" + current_input_id + "_markup" + "'>" + $("#" + current_input_id).val() + "</mark></a>"; // TODO error here
+                    } else {
+                        return `Please make sure you are not using any < or > characters.`;
+                    }
                 })
 
                 //console.log(ReviewMessageInserts);
