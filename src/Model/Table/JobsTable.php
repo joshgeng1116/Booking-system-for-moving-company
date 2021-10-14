@@ -64,24 +64,29 @@ class JobsTable extends Table
             ->scalar('customer_first_name')
             ->maxLength('customer_first_name', 255)
             ->requirePresence('customer_first_name', 'create')
-            ->notEmptyString('customer_first_name');
+            ->notEmptyString('customer_first_name')
+            ->regex('customer_first_name', '/^[a-zA-Z \-\']+$/', 'Names may only consist of valid alphabet characters, spaces, dashes and apostrophes.');
 
         $validator
             ->scalar('customer_last_name')
             ->maxLength('customer_last_name', 255)
             ->requirePresence('customer_last_name', 'create')
-            ->notEmptyString('customer_last_name');
+            ->notEmptyString('customer_last_name')
+            ->regex('customer_last_name', '/^[a-zA-Z \-\']+$/', 'Names may only consist of valid alphabet characters, spaces, dashes and apostrophes.');
+
 
         $validator
             ->integer('customer_phone')
             ->requirePresence('customer_phone', 'create')
-            ->notEmptyString('customer_phone');
+            ->notEmptyString('customer_phone')
+            ->regex('customer_phone', '/^(0|\+?61)\d{9}$/', 'Phone number must begin with 0, 61 or +61. Then enter remaining nine digits immmediately.');
 
         $validator
             ->scalar('customer_email')
             ->maxLength('customer_email', 255)
             ->requirePresence('customer_email', 'create')
-            ->notEmptyString('customer_email');
+            ->notEmptyString('customer_email')
+            ->email('customer_email', false, 'Email is not of valid format.');
 
         $validator
             ->notEmptyString('status');
@@ -90,19 +95,24 @@ class JobsTable extends Table
             ->scalar('moving_from')
             ->maxLength('moving_from', 255)
             ->requirePresence('moving_from', 'create')
-            ->notEmptyString('moving_from');
+            ->notEmptyString('moving_from')
+            ->regex('moving_from', '/^[\w \-,\.\/ \']+$/', 'Make sure you don\'t use any disallowed special characters.');
 
         $validator
             ->scalar('moving_to')
             ->maxLength('moving_to', 255)
             ->requirePresence('moving_to', 'create')
-            ->notEmptyString('moving_to');
+            ->notEmptyString('moving_to')
+            ->regex('moving_to', '/^[\w \-,\.\/ \']+$/', 'Make sure you don\'t use any disallowed special characters.');
+
 
         $validator
             ->scalar('list_of_item')
             ->maxLength('list_of_item', 255)
             ->requirePresence('list_of_item', 'create')
-            ->notEmptyString('list_of_item');
+            ->notEmptyString('list_of_item')
+            ->regex('list_of_item', '/^[\w \-,\.\/ \'\n]+$/', 'Make sure you don\'t use any disallowed special characters.');
+
 
         $validator
             ->scalar('size')
@@ -110,6 +120,7 @@ class JobsTable extends Table
             ->requirePresence('size', 'create')
             ->notEmptyString('size');
 
+        // TODO validate future dates, and dates not past the current year + 1
         $validator
             ->date('date')
             ->requirePresence('date', 'create')
@@ -120,11 +131,14 @@ class JobsTable extends Table
 
         $validator
             ->numeric('total_paid')
-            ->allowEmptyString('total_paid');
+            ->allowEmptyString('total_paid')
+            ->range('total_paid', [0, 4294967296], 'Ensure number entered is positive and does not exceed maximum amount of 4,294,967,296.00');
 
         $validator
             ->numeric('total_remaining')
-            ->allowEmptyString('total_remaining');
+            ->allowEmptyString('total_remaining')
+            ->range('total_remaining', [0, 4294967296], 'Ensure number entered is positive and does not exceed maximum amount of 4,294,967,296.00');
+
 
         return $validator;
     }

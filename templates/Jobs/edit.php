@@ -8,6 +8,9 @@
  */
 use Cake\Mailer\Mailer;
 ?>
+<?php
+echo $this->Html->css('info_edit.css');
+?>
 <div class="row">
     <div class="column-responsive column-100">
         <div class="jobs view content">

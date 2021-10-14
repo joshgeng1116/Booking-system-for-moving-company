@@ -10,6 +10,9 @@ $this->disableAutoLayout();
 ?>
 
 <?php
+echo $this->Html->css('info_edit.css');
+?>
+<?php
 $this->disableAutoLayout();
 echo $this->Html->css('main.min');
 echo $this->Html->css('validation.css');

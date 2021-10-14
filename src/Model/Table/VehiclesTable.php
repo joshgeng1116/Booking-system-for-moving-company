@@ -62,15 +62,33 @@ class VehiclesTable extends Table
 
         $validator
             ->scalar('rego_number')
-            ->maxLength('rego_number', 255)
+            ->maxLength('rego_number', 8, 'Registration plate\'s do not have more than eight characters or numbers.
+      ')
             ->requirePresence('rego_number', 'create')
+            ->regex('rego_number', '/^[\w]+$/', 'Only letters and number are used in a number plate.')
             ->notEmptyString('rego_number');
+
 
         $validator
             ->scalar('vehicle_type')
             ->maxLength('vehicle_type', 255)
             ->requirePresence('vehicle_type', 'create')
             ->notEmptyString('vehicle_type');
+
+        // TODO price per hour validation noot working
+        $validator
+            ->nonNegativeInteger('price_per_hour', 'Price per hour must be a positive number')
+            ->greaterThan('price_per_hour', 0, 'Price per hour must be greater than zero dollars an hour.')
+            ->range('price_per_hour', [0, 2147483647], 'Price per hour cannot exceed $2,147,483,647. Enter a smaller number please.
+      ')
+            ->numeric('price_per_hour', 'Only numbers allowed');
+
+        $validator
+            ->nonNegativeInteger('average_hour', 'Price per hour must be a positive number')
+            ->greaterThan('average_hour', 0, 'Price per hour must be greater than zero dollars an hour.')
+            ->range('average_hour', [0, 2147483647], 'Price per hour cannot exceed $2,147,483,647. Enter a smaller number please.
+      ')
+            ->numeric('average_hour', 'Only numbers allowed');
 
         return $validator;
     }

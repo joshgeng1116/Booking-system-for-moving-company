@@ -4,6 +4,9 @@
  * @var \App\Model\Entity\Vehicle $vehicle
  */
 ?>
+<?php
+echo $this->Html->css('info_edit.css');
+?>
 <div class="row">
     <div class="column-responsive column-100">
         <body class="jobs view content">
