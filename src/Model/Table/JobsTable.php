@@ -76,7 +76,7 @@ class JobsTable extends Table
 
 
         $validator
-            ->integer('customer_phone')
+            ->scalar('customer_phone')
             ->requirePresence('customer_phone', 'create')
             ->notEmptyString('customer_phone')
             ->regex('customer_phone', '/^(0|\+?61)\d{9}$/', 'Phone number must begin with 0, 61 or +61. Then enter remaining nine digits immmediately.');
