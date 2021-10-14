@@ -71,7 +71,6 @@ class StaffsTable extends Table
 
 
         $validator
-            ->scalar('phone_number')
             ->requirePresence('phone_number', 'create')
             ->notEmptyString('phone_number')
             ->regex('phone_number', '/^(0|\+?61)\d{9}$/', 'Phone number must begin with 0, 61 or +61. Then enter remaining nine digits immmediately.');

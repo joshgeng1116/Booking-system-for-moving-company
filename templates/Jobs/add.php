@@ -178,7 +178,7 @@ echo $this->Html->script('main.min');
                     <br>
                     <div class="row mx-auto">
                         <div class="alert alert-warning text-center mx-auto" role="alert">
-                            Make sure that the truck is NOT unavailable (red) on the date you choose!
+                            Red marked dates are unavailable!
                         </div>
                     </div>
 
